@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import type React from 'react'
 
 import { Button } from '@/components/button'
 import { usePathname, useRouter } from 'next/navigation'
@@ -22,7 +22,7 @@ const GoBack: React.FC<GoBackProps> = ({ removeSearchParams }: GoBackProps): Rea
   }
 
   return (
-    <Button aria-label="Click to go to the previous page" onClick={redirect}>
+    <Button aria-label='Click to go to the previous page' onClick={redirect}>
       Go back
     </Button>
   )

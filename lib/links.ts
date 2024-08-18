@@ -1,9 +1,9 @@
-type LinkProps = {
+export type LinkProps = {
   label: string
   url: string
 }
 
-const links: LinkProps[] = [
+export const links: LinkProps[] = [
   {
     label: 'Home',
     url: '/'
@@ -21,5 +21,3 @@ const links: LinkProps[] = [
     url: '/blog'
   }
 ]
-
-export { links, type LinkProps }

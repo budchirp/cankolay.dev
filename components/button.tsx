@@ -1,4 +1,5 @@
-import React, { type ComponentProps } from 'react'
+import type React from 'react'
+import type { ComponentProps } from 'react'
 
 import { cn } from '@/lib/cn'
 import { cva, type VariantProps } from 'class-variance-authority'
@@ -27,28 +28,26 @@ const buttonVariants = cva(
   }
 )
 
-type ButtonProps = {} & ComponentProps<'button'> &
-  VariantProps<typeof buttonVariants> & {
-    children?: React.ReactNode
-  }
+export type ButtonProps = {
+  children?: React.ReactNode
+} & ComponentProps<'button'> &
+  VariantProps<typeof buttonVariants>
 
-const Button: React.ForwardRefExoticComponent<
-  ButtonProps & React.RefAttributes<HTMLButtonElement>
-> = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    { children, disabled, className, variant, color, ...props }: ButtonProps,
-    ref
-  ): React.ReactNode => {
-    if (!children) disabled = true
+export const Button: React.FC<ButtonProps> = ({
+  children,
+  disabled,
+  className,
+  variant,
+  color,
+  ...props
+}: ButtonProps): React.ReactNode => {
+  if (!children) disabled = true
 
-    return (
-      <button {...props} ref={ref} className={cn(buttonVariants({ className, variant, color }))}>
-        {disabled && <Loader2 className={cn('animate-spin text-xs', children ? 'mr-2' : '')} />}
-        {children ?? ''}
-      </button>
-    )
-  }
-)
+  return (
+    <button {...props} className={cn(buttonVariants({ className, variant, color }))}>
+      {disabled && <Loader2 className={cn('animate-spin text-xs', children ? 'mr-2' : '')} />}
+      {children ?? ''}
+    </button>
+  )
+}
 Button.displayName = 'Button'
-
-export { Button, type ButtonProps }

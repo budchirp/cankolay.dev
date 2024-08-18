@@ -1,4 +1,5 @@
-import React, { type ComponentProps } from 'react'
+import type React from 'react'
+import type { ComponentProps } from 'react'
 
 import { cn } from '@/lib/cn'
 import { cva, type VariantProps } from 'class-variance-authority'
@@ -20,18 +21,19 @@ const boxVariants = cva(['rounded-3xl'], {
   }
 })
 
-type BoxProps = {} & ComponentProps<'div'> & VariantProps<typeof boxVariants>
+export type BoxProps = {} & ComponentProps<'div'> & VariantProps<typeof boxVariants>
 
-const Box: React.ForwardRefExoticComponent<BoxProps & React.RefAttributes<HTMLDivElement>> =
-  React.forwardRef<HTMLDivElement, BoxProps>(
-    ({ children, className, padding, variant, ...props }: BoxProps, ref): React.ReactNode => {
-      return (
-        <div {...props} ref={ref} className={cn(boxVariants({ className, padding, variant }))}>
-          {children}
-        </div>
-      )
-    }
+export const Box: React.FC<BoxProps> = ({
+  children,
+  className,
+  padding,
+  variant,
+  ...props
+}: BoxProps): React.ReactNode => {
+  return (
+    <div {...props} className={cn(boxVariants({ className, padding, variant }))}>
+      {children}
+    </div>
   )
+}
 Box.displayName = 'Box'
-
-export { Box, type BoxProps }

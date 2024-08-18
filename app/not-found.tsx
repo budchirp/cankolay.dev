@@ -1,4 +1,4 @@
-import React from 'react'
+import type React from 'react'
 
 import { VerticalPage } from '@/components/vertical-page'
 import { Container } from '@/components/container'
@@ -8,7 +8,7 @@ import { genMetadata } from '@/lib/gen-metadata'
 import type { ErrorProps } from '@/types/error'
 import type { Metadata } from 'next'
 
-const metadata: Metadata = genMetadata({ title: 'Page not found' })
+export const metadata: Metadata = genMetadata({ title: 'Page not found' })
 
 const NotFound: React.FC<ErrorProps> = (): React.ReactNode => {
   return (
@@ -20,5 +20,4 @@ const NotFound: React.FC<ErrorProps> = (): React.ReactNode => {
   )
 }
 
-export { metadata }
 export default NotFound

@@ -8,7 +8,7 @@ type GenMetadataProps = {
   other?: Metadata
 }
 
-const genMetadata = ({ title, description, other }: GenMetadataProps): Metadata => {
+export const genMetadata = ({ title, description, other }: GenMetadataProps): Metadata => {
   const { openGraph, twitter, ...rest } = other ?? { openGraph: {} }
 
   return {
@@ -27,5 +27,3 @@ const genMetadata = ({ title, description, other }: GenMetadataProps): Metadata 
     ...rest
   } satisfies Metadata
 }
-
-export { genMetadata }

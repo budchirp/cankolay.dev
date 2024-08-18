@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import type React from 'react'
 
 import { VerticalPage } from '@/components/vertical-page'
 import { Container } from '@/components/container'
@@ -10,7 +10,7 @@ import { genMetadata } from '@/lib/gen-metadata'
 import type { ErrorProps } from '@/types/error'
 import type { Metadata } from 'next'
 
-const metadata: Metadata = genMetadata({ title: 'Error' })
+export const metadata: Metadata = genMetadata({ title: 'Error' })
 
 const Error: React.FC<ErrorProps> = ({ reset }: ErrorProps): React.ReactNode => {
   return (
@@ -22,5 +22,4 @@ const Error: React.FC<ErrorProps> = ({ reset }: ErrorProps): React.ReactNode => 
   )
 }
 
-export { metadata }
 export default Error

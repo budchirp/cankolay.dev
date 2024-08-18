@@ -1,13 +1,11 @@
-import React from 'react'
+import type React from 'react'
 
-type LayoutProps = {
+export type LayoutProps = {
   children: React.ReactNode
 }
 
-type DynamicLayoutProps = {
+export type DynamicLayoutProps = {
   params: {
     [key: string]: string
   }
 } & LayoutProps
-
-export type { LayoutProps, DynamicLayoutProps }

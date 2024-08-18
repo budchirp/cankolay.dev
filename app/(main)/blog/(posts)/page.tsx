@@ -1,4 +1,4 @@
-import React from 'react'
+import type React from 'react'
 
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
@@ -15,11 +15,11 @@ import type { DynamicPageProps } from '@/types/page'
 import type { BlogPost } from '@/types/post'
 import type { Metadata } from 'next'
 
-const metadata: Metadata = genMetadata({ title: 'Blog' })
+export const metadata: Metadata = genMetadata({ title: 'Blog' })
 
-const Page: React.FC<DynamicPageProps> = async (
-  { searchParams }: DynamicPageProps
-): Promise<JSX.Element> => {
+const Page: React.FC<DynamicPageProps> = async ({
+  searchParams
+}: DynamicPageProps): Promise<JSX.Element> => {
   const post: Post = new Post()
   const allPosts: BlogPost[] = await post.getAll()
 
@@ -43,10 +43,11 @@ const Page: React.FC<DynamicPageProps> = async (
     posts: paginatedPosts,
     page,
     totalPages
-  }: { posts: BlogPost[]; page: number; totalPages: number } = await new Post().paginate(
-    posts,
-    Number(searchParams?.page || 0) || 0
-  )
+  }: {
+    posts: BlogPost[]
+    page: number
+    totalPages: number
+  } = await new Post().paginate(posts, Number(searchParams?.page || 0) || 0)
   posts = paginatedPosts
 
   if (!posts || posts.length < 1) {
@@ -65,52 +66,52 @@ const Page: React.FC<DynamicPageProps> = async (
   }
 
   return (
-    <div className="grid gap-4">
+    <div className='grid gap-4'>
       <form action={search}>
         <Input
           defaultValue={searchText || ''}
-          id="search"
-          type="text"
-          name="search"
+          id='search'
+          type='text'
+          name='search'
           icon={<Search />}
-          placeholder="Search posts..."
+          placeholder='Search posts...'
         />
-        <input type="submit" hidden />
+        <input type='submit' hidden />
       </form>
 
-      <div className="mansonry">
+      <div className='mansonry'>
         {posts.map(
           (post: BlogPost): React.ReactNode => (
             <article key={post.slug}>
-              <Box className="relative mb-4 h-min overflow-hidden last:mb-0" padding="none">
-                <div className="border-primary relative flex h-min max-h-48 w-full items-center justify-center overflow-hidden rounded-t-2xl border-b md:max-h-64">
-                  <Link aria-label="Go to the blog post" href={'/blog/' + post.slug}>
+              <Box className='relative mb-4 h-min overflow-hidden last:mb-0' padding='none'>
+                <div className='border-primary relative flex h-min max-h-48 w-full items-center justify-center overflow-hidden rounded-t-2xl border-b md:max-h-64'>
+                  <Link aria-label='Go to the blog post' href={'/blog/' + post.slug}>
                     <img
-                      className="w-full object-cover transition duration-500 ease-out hover:scale-125"
+                      className='w-full object-cover transition duration-500 ease-out hover:scale-125'
                       alt={post.title}
                       src={post.imageUrl}
                     />
                   </Link>
                 </div>
 
-                <div className="grid w-full gap-2 p-4">
+                <div className='grid w-full gap-2 p-4'>
                   <div>
-                    <div className="flex items-center">
-                      <Calendar className="mr-1 h-4 w-4 text-xs" />
-                      <p className="text-secondary text-sm font-medium">{post.formattedDate}</p>
+                    <div className='flex items-center'>
+                      <Calendar className='mr-1 h-4 w-4 text-xs' />
+                      <p className='text-secondary text-sm font-medium'>{post.formattedDate}</p>
                     </div>
 
-                    <Link href="/blog/[slug]" as={`/blog/${post.slug}`}>
-                      <h1 className="hover:text-secondary break-all text-xl font-bold transition duration-300">
+                    <Link href='/blog/[slug]' as={`/blog/${post.slug}`}>
+                      <h1 className='hover:text-secondary break-all text-xl font-bold transition duration-300'>
                         {post.title}
                       </h1>
                     </Link>
 
-                    <p className="text-secondary">{post.description}</p>
+                    <p className='text-secondary'>{post.description}</p>
                   </div>
 
-                  <Link aria-label="Go to the blog post" href={'/blog/' + post.slug}>
-                    <Button className="w-full">Read more</Button>
+                  <Link aria-label='Go to the blog post' href={'/blog/' + post.slug}>
+                    <Button className='w-full'>Read more</Button>
                   </Link>
                 </div>
               </Box>
@@ -119,14 +120,14 @@ const Page: React.FC<DynamicPageProps> = async (
         )}
       </div>
 
-      <div className="flex h-min w-full items-center justify-between gap-1">
+      <div className='flex h-min w-full items-center justify-between gap-1'>
         <Link
           className={cn(
             'text-lg font-bold transition duration-300',
             nextDisabled ? 'text-tertiary' : 'text-primary hover:text-secondary'
           )}
           aria-disabled={prevDisabled}
-          aria-label="Previous page"
+          aria-label='Previous page'
           href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
             !prevDisabled ? page - 1 : page
           }`}
@@ -134,7 +135,7 @@ const Page: React.FC<DynamicPageProps> = async (
           Prev
         </Link>
 
-        <span className="font-medium">
+        <span className='font-medium'>
           page {page} out of {totalPages}
         </span>
 
@@ -144,7 +145,7 @@ const Page: React.FC<DynamicPageProps> = async (
             nextDisabled ? 'text-tertiary' : 'text-primary hover:text-secondary'
           )}
           aria-disabled={nextDisabled}
-          aria-label="Next page"
+          aria-label='Next page'
           href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
             !nextDisabled ? page + 1 : page
           }`}
@@ -156,5 +157,4 @@ const Page: React.FC<DynamicPageProps> = async (
   )
 }
 
-export { metadata }
 export default Page

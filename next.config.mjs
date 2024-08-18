@@ -1,12 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+export default {
   poweredByHeader: false,
   reactStrictMode: true,
   swcMinify: true,
   compress: true,
-  experimental: {
-    serverActions: true
-  }
+  transpilePackages: ['next-mdx-remote']
 }
-
-export default nextConfig

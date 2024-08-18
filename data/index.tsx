@@ -7,15 +7,12 @@ import {
   SiLua,
   SiNeovim,
   SiTailwindcss,
-  SiExpress,
   SiMongodb,
   SiGnubash,
-  SiSvelte,
   SiNestjs,
   SiC,
-  SiCplusplus,
-  SiGo,
-  SiReddit
+  SiReddit,
+  SiKotlin
 } from 'react-icons/si'
 import { FaCss3, FaLinux, FaReact } from 'react-icons/fa'
 import { Hexagon, Instagram, Mail, Send, Terminal } from 'lucide-react'
@@ -25,7 +22,7 @@ const data = {
   username: 'budchirp',
   description: 'Hello, World!',
   githubUsername: 'budchirp',
-  projectSources: ['budchirp', 'OxygeNvim'],
+  projectSources: ['budchirp', 'OxygeNvim', 'KapacitorSync'],
   keywords: [
     'budchirp',
     'who is budchirp',
@@ -62,16 +59,12 @@ const data = {
         icon: <SiLua />
       },
       {
-        name: 'Go',
-        icon: <SiGo />
+        name: 'Kotlin',
+        icon: <SiKotlin />
       },
       {
         name: 'C',
         icon: <SiC />
-      },
-      {
-        name: 'C++',
-        icon: <SiCplusplus />
       },
       {
         name: 'Bash',
@@ -98,10 +91,6 @@ const data = {
         icon: <FaReact />
       },
       {
-        name: 'Svelte',
-        icon: <SiSvelte />
-      },
-      {
         name: 'CSS',
         icon: <FaCss3 />
       },
@@ -118,10 +107,6 @@ const data = {
       {
         name: 'NestJS',
         icon: <SiNestjs />
-      },
-      {
-        name: 'Express.js',
-        icon: <SiExpress />
       }
     ],
     Database: [
@@ -132,7 +117,7 @@ const data = {
     ]
   },
   journey: {
-    2023: ['Started learning C, C++ and Go', 'Started learning Svelte and Astro'],
+    2023: ['Started learning C and Kotlin'],
     2022: ['Learned Lua'],
     2021: ['Learned Typescript', 'Learned basic React', 'Learned TailwindCSS'],
     2020: ['Learned Javascript, PHP', 'Learned Python'],

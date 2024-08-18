@@ -5,7 +5,7 @@ import readingTime from 'reading-time'
 
 import type { BlogPost, PostBody, RawPost } from '@/types/post'
 
-class Post {
+export class Post {
   static path: string = process.cwd() + '/posts'
 
   async getAll(): Promise<BlogPost[] | []> {
@@ -13,9 +13,11 @@ class Post {
 
     const posts: BlogPost[] = await Promise.all(
       postFiles
-        .filter((file: string) => path.extname(file) === '.md' || path.extname(file) === '.mdx')
-        .sort((a: string, b: string) => a.localeCompare(b, 'en', { numeric: true }))
-        .map(async (file: string) => {
+        .filter(
+          (file: string): boolean => path.extname(file) === '.md' || path.extname(file) === '.mdx'
+        )
+        .sort((a: string, b: string): number => a.localeCompare(b, 'en', { numeric: true }))
+        .map(async (file: string): Promise<BlogPost> => {
           const fileContent: string = await fs.readFile(Post.path + '/' + file, 'utf-8')
 
           const { data: metaData, content }: { data: RawPost; content: PostBody } = matter(
@@ -31,7 +33,7 @@ class Post {
 
           formattedDate = `${dd < 10 ? `0${dd}` : dd}/${mm < 10 ? `0${mm}` : mm}/${yyyy}`
 
-          let newMetaData: Omit<BlogPost, 'body'> = {
+          const newMetaData: Omit<BlogPost, 'body'> = {
             ...metaData,
             id: metaData.slug,
             tags: metaData.tags.split(', '),
@@ -51,8 +53,8 @@ class Post {
 
   async paginate(
     posts: BlogPost[],
-    page: number = 0,
-    limit: number = 10
+    page = 0,
+    limit = 10
   ): Promise<{ posts: BlogPost[] | []; page: number; totalPages: number }> {
     const totalPages: number = Math.ceil(posts.length / limit) - 1 || 0
 
@@ -60,14 +62,16 @@ class Post {
       return { posts: [], page: 0, totalPages: 0 }
     }
 
-    return { posts: posts.slice(limit * page, limit * page + limit), page, totalPages }
+    return {
+      posts: posts.slice(limit * page, limit * page + limit),
+      page,
+      totalPages
+    }
   }
 
   async getBySlug(slug: string): Promise<BlogPost | null> {
-    const posts = await this.getAll()
+    const posts: BlogPost[] | null = await this.getAll()
 
-    return (posts.find((post: BlogPost) => post.slug == slug) as BlogPost) || null
+    return posts.find((post: BlogPost): boolean => post.slug == slug) as BlogPost
   }
 }
-
-export { Post }

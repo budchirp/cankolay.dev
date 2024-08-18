@@ -56,20 +56,20 @@
   }
 
   .min-h-screen_ {
-    min-height: calc(100lvh - theme('spacing.16'));
+    min-height: calc(100lvh - theme("spacing.16"));
   }
 
   .h-screen_ {
-    height: calc(100lvh - theme('spacing.16'));
+    height: calc(100lvh - theme("spacing.16"));
   }
 
   .masonry {
     @apply h-full w-full;
-    column-gap: theme('gap.4');
+    column-gap: theme("gap.4");
     columns: 1 auto;
     break-inside: avoid;
 
-    > * {
+    >* {
       break-inside: avoid;
     }
 
@@ -77,7 +77,7 @@
       columns: 2 auto;
     }
 
-    @screen xl {
+@screen lg {
       columns: 3 auto;
     }
   }
@@ -97,7 +97,7 @@ body {
   @apply text-primary bg-primary scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-700 dark:scrollbar-thumb-gray-900;
 }
 
-[data-bright-theme='github-dark'] {
+[data-bright-theme="github-dark"] {
   @apply !rounded-xl !bg-gray-800 !px-0 !py-1;
 }
 

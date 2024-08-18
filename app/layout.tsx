@@ -1,18 +1,19 @@
-import React from 'react'
+import type React from 'react'
 
-import { BackdropProvider } from '@/providers/backdrop'
 import { ThemeProvider } from '@/providers/theme'
 import { Header } from '@/components/ui/header'
+
 import { Footer } from '@/components/ui/footer'
 import data from '@/data'
 import { Lexend } from 'next/font/google'
 
+import type { NextFontWithVariable } from 'next/dist/compiled/@next/font'
 import type { LayoutProps } from '@/types/layout'
 import type { Metadata } from 'next'
 
 import '@/styles/globals.css'
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(data.siteUrl),
   keywords: data.keywords,
   creator: data.username,
@@ -66,25 +67,25 @@ const metadata: Metadata = {
   }
 }
 
-const lexend = Lexend({ subsets: ['latin'], variable: '--font-main' })
+const lexend: NextFontWithVariable = Lexend({
+  subsets: ['latin'],
+  variable: '--font-main'
+})
 
 const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.ReactNode => {
   return (
-    <html suppressHydrationWarning lang="en-US">
+    <html suppressHydrationWarning lang='en-US'>
       <body className={lexend.variable}>
         <ThemeProvider>
-          <BackdropProvider>
-            <Header />
+          <Header />
 
-            <main className="min-h-screen_">{children}</main>
+          <main className='min-h-screen_'>{children}</main>
 
-            <Footer />
-          </BackdropProvider>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
   )
 }
 
-export { metadata }
 export default RootLayout
