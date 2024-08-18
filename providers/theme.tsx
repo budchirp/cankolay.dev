@@ -10,11 +10,7 @@ type ThemeProviderProps = {
 const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children
 }: ThemeProviderProps): React.ReactNode => {
-  return (
-    <NextThemeProvider disableTransitionOnChange attribute='class'>
-      {children}
-    </NextThemeProvider>
-  )
+  return <NextThemeProvider attribute='class'>{children}</NextThemeProvider>
 }
 
 export { ThemeProvider }

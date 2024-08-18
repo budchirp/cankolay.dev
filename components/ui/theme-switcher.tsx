@@ -17,6 +17,7 @@ import {
 } from '@headlessui/react'
 import { useTheme } from 'next-themes'
 import { Backdrop } from '@/components/backdrop'
+import { createPortal } from 'react-dom'
 
 export type Theme = 'dark' | 'light' | 'system'
 
@@ -45,7 +46,7 @@ export const ThemeSwitcher: React.FC = (): React.ReactNode => {
       {({ open }): React.ReactElement => {
         return (
           <>
-            <Backdrop show={open} />
+            {mounted && createPortal(<Backdrop show={open} />, document.body)}
 
             <ListboxButton as={Fragment}>
               <Button
@@ -60,56 +61,53 @@ export const ThemeSwitcher: React.FC = (): React.ReactNode => {
 
             <Transition
               show={open}
-              as={Fragment}
-              enter='transition ease-out duration-150'
-              enterFrom='opacity-0 scale-90'
-              enterTo='opacity-100 scale-100'
-              leave='transition ease-in duration-150'
-              leaveFrom='opacity-100 scale-100'
-              leaveTo='opacity-0 scale-90'
+              as='div'
+              className={cn(
+                'w-screen h-screen_ flex justify-center items-center origin-[75%_0%] md:origin-[95%_0%] bottom-0 z-[100] mx-auto inset-0 fixed',
+                'transition-all scale-100 opacity-100',
+                'data-[closed]:scale-90 data-[closed]:opacity-0',
+                'data-[enter]:ease-out data-[enter]:duration-400',
+                'data-[leave]:ease-in data-[leave]:duration-200'
+              )}
             >
-              <div className='fixed inset-x-0 top-20 z-[100] flex w-screen origin-[75%_0%] justify-center md:origin-[90%_0%]'>
-                <Container className='relative flex items-center justify-end'>
-                  <ListboxOptions
-                    static
-                    as={Box}
-                    variant='primary'
-                    padding='none'
-                    className='top-0 w-36 overflow-hidden'
-                  >
-                    {(Object.keys(themes) as Theme[]).map((theme: Theme): React.ReactNode => {
-                      const [label, Icon] = themes[theme]
+              <Container className='absolute top-20 flex h-min items-center justify-end'>
+                <ListboxOptions
+                  static
+                  as={Box}
+                  variant='primary'
+                  padding='none'
+                  className='top-0 w-36 overflow-hidden'
+                >
+                  {(Object.keys(themes) as Theme[]).map((theme: Theme): React.ReactNode => {
+                    const [label, Icon] = themes[theme]
 
-                      return (
-                        <ListboxOption
-                          key={theme}
-                          className={({ selected }): string =>
-                            cn(
-                              'border-primary flex h-min w-full cursor-pointer items-center border-b px-4 py-2 transition duration-300 last:border-none',
-                              selected ? 'bg-secondary' : 'bg-primary hover:bg-secondary'
-                            )
-                          }
-                          value={theme}
-                        >
-                          {({ selected }): React.ReactElement => (
-                            <p
-                              className={cn(
-                                'flex h-full w-full items-center gap-2 font-medium transition duration-300',
-                                selected
-                                  ? 'text-accent-primary'
-                                  : 'text-primary hover:text-secondary'
-                              )}
-                            >
-                              <Icon />
-                              <span>{label}</span>
-                            </p>
-                          )}
-                        </ListboxOption>
-                      )
-                    })}
-                  </ListboxOptions>
-                </Container>
-              </div>
+                    return (
+                      <ListboxOption
+                        key={theme}
+                        className={({ selected }): string =>
+                          cn(
+                            'border-primary flex h-min w-full cursor-pointer items-center border-b px-4 py-2 transition duration-300 last:border-none',
+                            selected ? 'bg-secondary' : 'bg-primary hover:bg-secondary'
+                          )
+                        }
+                        value={theme}
+                      >
+                        {({ selected }): React.ReactElement => (
+                          <p
+                            className={cn(
+                              'flex h-full w-full items-center gap-2 font-medium transition duration-300',
+                              selected ? 'text-accent-primary' : 'text-primary hover:text-secondary'
+                            )}
+                          >
+                            <Icon />
+                            <span>{label}</span>
+                          </p>
+                        )}
+                      </ListboxOption>
+                    )
+                  })}
+                </ListboxOptions>
+              </Container>
             </Transition>
           </>
         )

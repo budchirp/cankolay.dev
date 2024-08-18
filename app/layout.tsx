@@ -9,33 +9,26 @@ import { Lexend } from 'next/font/google'
 
 import type { NextFontWithVariable } from 'next/dist/compiled/@next/font'
 import type { LayoutProps } from '@/types/layout'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 
 import '@/styles/globals.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL(data.siteUrl),
+  generator: 'Next.js',
+  applicationName: data.username,
   keywords: data.keywords,
   creator: data.username,
   publisher: data.username,
   authors: [{ name: data.username, url: data.siteUrl }],
   description: data.description,
-  manifest: '/manifest.json',
+  manifest: `${data.siteUrl}/manifest.json`,
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION || ''
   },
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FFFFFF' },
-    { media: '(prefers-color-scheme: dark)', color: '#0b0a0e' }
-  ],
   title: {
     default: 'About me',
     template: `%s - ${data.username}`
-  },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5
   },
   formatDetection: {
     email: false,
@@ -55,7 +48,7 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    siteName: `${data.username}'s website`,
+    siteName: data.username,
     locale: 'en_US',
     type: 'website',
     description: data.description,
@@ -65,6 +58,16 @@ export const metadata: Metadata = {
       template: `%s - ${data.username}`
     }
   }
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#FFFFFF' },
+    { media: '(prefers-color-scheme: dark)', color: '#0b0a0e' }
+  ]
 }
 
 const lexend: NextFontWithVariable = Lexend({

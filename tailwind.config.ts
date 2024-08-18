@@ -3,11 +3,8 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 
 import type { Config } from 'tailwindcss'
 
-const config: Config = {
+export default {
   darkMode: 'class',
-  experimental: {
-    optimizeUniversalDefaults: true
-  },
   content: ['./components/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
@@ -24,9 +21,12 @@ const config: Config = {
           900: '#0b0a0e',
           800: '#0e0d12',
           700: '#121118',
-          690: '#1a1b1e' // used for borders
+          690: '#1a1b1e'
         },
         accent: colors.rose
+      },
+      transitionDuration: {
+        400: '400ms'
       },
       typography: (theme: any) => ({
         DEFAULT: {
@@ -56,18 +56,18 @@ const config: Config = {
             },
             h1: {
               marginTop: '0.75rem',
-              marginBottom: `0.25rem`,
+              marginBottom: '0.25rem',
               fontSize: '1.5rem',
               fontWeight: 'bold'
             },
             h2: {
               marginTop: '0.5rem',
-              marginBottom: `0.25rem`,
+              marginBottom: '0.25rem',
               fontSize: '1.25rem',
               fontWeight: 'bold'
             },
             h3: {
-              marginTop: '0.25rem',
+              marginTop: 'duration-400`0.25rem',
               marginBotton: '0.25rem',
               fontSize: '1.125rem',
               fontWeight: 'semibold'
@@ -238,7 +238,10 @@ const config: Config = {
       mono: defaultTheme.fontFamily.mono
     }
   },
-  plugins: [require('@tailwindcss/typography'), require('tailwind-scrollbar')]
-}
-
-export default config
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('tailwind-scrollbar')({
+      nocompatible: true
+    })
+  ]
+} as Config

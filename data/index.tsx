@@ -125,7 +125,7 @@ const data = {
   },
   contact: {
     Email: {
-      link: `mailto:budchirp@gmail.com`,
+      link: 'mailto:budchirp@gmail.com',
       icon: <Mail />
     },
     Telegram: {

@@ -10,14 +10,19 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const posts_sitemap: MetadataRoute.Sitemap = posts.map(
     (post: BlogPost): MetadataRoute.Sitemap[number] => ({
       url: `${data.siteUrl}/blog/${post.slug}`,
-      lastModified: post.date.toISOString()
-    })
+      lastModified: post.date,
+      changeFrequency: 'weekly',
+      priority: 0.5,
+      images: [post.imageUrl]
+    }as any satisfies MetadataRoute.Sitemap[number])
   )
 
   const routes_sitemap: MetadataRoute.Sitemap = links.map(
     (link: LinkProps): MetadataRoute.Sitemap[number] => ({
       url: `${data.siteUrl}${link.url}`,
-      lastModified: new Date().toISOString()
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 1
     })
   )
 

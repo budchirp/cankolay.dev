@@ -15,7 +15,7 @@ export const Footer: React.FC = (): React.ReactNode => {
 
         <Link
           aria-label='Github'
-          href={'https://github.com/' + data.githubUsername}
+          href={`https://github.com/${data.githubUsername}`}
           rel='noreferrer'
           target='_blank'
         >

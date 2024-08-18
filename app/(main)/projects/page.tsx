@@ -19,29 +19,24 @@ const Page: React.FC = async (): Promise<JSX.Element> => {
   const colors: { [key: string]: { color: string; url: string } } = await colorsResponse.json()
 
   const reposWithSources: { [key: string]: any[] } = {}
-
   await Promise.all(
     data.projectSources.map(async (source: string): Promise<void> => {
       const response = await fetch(`https://api.github.com/users/${source}/repos`)
 
       reposWithSources[source] = await response.json()
     })
-  ).then((): void => {
-    data.projectSources.map((source: string): void => {
-      reposWithSources[source] = reposWithSources[source]
-    })
-  })
+  )
 
   if (!reposWithSources || Object.keys(reposWithSources).length < 1) {
     notFound()
   }
 
   return (
-    <div className='grid gap-2'>
+    <div className='grid gap-4'>
       {Object.keys(reposWithSources).map((source: any, index: number): React.ReactNode => {
         return (
           <div className='grid gap-2' key={index}>
-            <span className='text-secondary text-md font-medium'>{source}/</span>
+            <span className='text-tertiary text-lg font-medium'>{source}/</span>
 
             <div className='masonry'>
               {reposWithSources[source].map((repo: any, index: number): React.ReactNode => {

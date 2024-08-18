@@ -18,7 +18,8 @@
         "useExhaustiveDependencies": "off"
       },
       "style": {
-        "useNodejsImportProtocol": "off"
+        "useNodejsImportProtocol": "off",
+        "noInferrableTypes": "off"
       }
     }
   },

@@ -85,7 +85,7 @@ const Page: React.FC<DynamicPageProps> = async ({
             <article key={post.slug}>
               <Box className='relative mb-4 h-min overflow-hidden last:mb-0' padding='none'>
                 <div className='border-primary relative flex h-min max-h-48 w-full items-center justify-center overflow-hidden rounded-t-2xl border-b md:max-h-64'>
-                  <Link aria-label='Go to the blog post' href={'/blog/' + post.slug}>
+                  <Link aria-label='Go to the blog post' href={`/blog/${post.slug}`}>
                     <img
                       className='w-full object-cover transition duration-500 ease-out hover:scale-125'
                       alt={post.title}
@@ -110,7 +110,7 @@ const Page: React.FC<DynamicPageProps> = async ({
                     <p className='text-secondary'>{post.description}</p>
                   </div>
 
-                  <Link aria-label='Go to the blog post' href={'/blog/' + post.slug}>
+                  <Link aria-label='Go to the blog post' href={`/blog/${post.slug}`}>
                     <Button className='w-full'>Read more</Button>
                   </Link>
                 </div>

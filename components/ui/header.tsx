@@ -1,7 +1,7 @@
 'use client'
 
 import type React from 'react'
-import { Fragment, useContext, useEffect, type ReactElement } from 'react'
+import { useState, useEffect } from 'react'
 
 import { ThemeSwitcher } from '@/components/ui/theme-switcher'
 import { Container } from '@/components/container'
@@ -15,6 +15,7 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { Menu as MenuIcon, X } from 'lucide-react'
 import { Backdrop } from '@/components/backdrop'
+import { createPortal } from 'react-dom'
 
 type HeaderLinkProps = {
   pathname: string
@@ -31,7 +32,7 @@ const HeaderLink: React.FC<HeaderLinkProps> = ({
     <Link
       className={cn(
         'hover:text-primary text-lg leading-6 transition-all duration-300 hover:font-bold',
-        url == pathname ? 'text-primary font-bold' : 'text-tertiary font-medium'
+        url === pathname ? 'text-primary font-bold' : 'text-tertiary font-medium'
       )}
       href={url}
     >
@@ -42,6 +43,12 @@ const HeaderLink: React.FC<HeaderLinkProps> = ({
 
 export const Header: React.FC = (): React.ReactNode => {
   const pathname: string = usePathname()
+
+  const [mounted, setMounted] = useState<boolean>(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <Menu>
@@ -54,14 +61,7 @@ export const Header: React.FC = (): React.ReactNode => {
 
         return (
           <>
-            <header
-              className={cn(
-                'bg-primary border-primary sticky top-0 z-[125] flex h-16 w-full items-center justify-center border-b backdrop-blur-sm transition-all delay-[50ms] lg:backdrop-blur',
-                open
-                  ? '!bg-opacity-100 duration-200 ease-in'
-                  : '!bg-opacity-25 duration-500 ease-out lg:duration-300'
-              )}
-            >
+            <header className='bg-primary border-primary sticky top-0 z-[125] flex h-16 w-full !bg-opacity-25 items-center justify-center border-b backdrop-blur-sm'>
               <Container className='flex h-full items-center justify-between gap-2'>
                 <Logo />
 
@@ -97,44 +97,43 @@ export const Header: React.FC = (): React.ReactNode => {
               </Container>
             </header>
 
-            <Backdrop show={open} onChange={close} />
+            {mounted && createPortal(<Backdrop show={open} onChange={close} />, document.body)}
 
             <Transition
               show={open}
-              as={Fragment}
-              enter='transition ease-out duration-200'
-              enterFrom='opacity-0 scale-90'
-              enterTo='opacity-100 scale-100'
-              leave='transition ease-in duration-200'
-              leaveFrom='opacity-100 scale-100'
-              leaveTo='opacity-0 scale-90'
+              as='div'
+              className={cn(
+                'w-screen h-screen_ flex justify-center items-center origin-[90%_0%] bottom-0 z-[100] mx-auto inset-0 fixed',
+                'transition-all scale-100 opacity-100',
+                'data-[closed]:scale-90 data-[closed]:opacity-0',
+                'data-[enter]:ease-out data-[enter]:duration-400',
+                'data-[leave]:ease-in data-[leave]:duration-200'
+              )}
             >
-              <div className='fixed inset-x-0 top-20 z-[100] mx-auto flex h-min w-screen origin-[90%_0%] justify-center md:hidden'>
-                <Container className='relative flex h-min items-center justify-center'>
-                  <MenuItems
-                    as={Box}
-                    static
-                    variant='primary'
-                    className='top-0 grid w-full gap-2 overflow-hidden sm:max-w-screen-xs'
-                  >
-                    <h2 className='text-2xl font-bold'>Links</h2>
+              <Container className='absolute top-20 flex h-min items-center justify-center'>
+                <MenuItems
+                  as={Box}
+                  static
+                  variant='primary'
+                  className='top-0 grid w-full gap-2 overflow-hidden sm:max-w-screen-xs'
+                >
+                  <h2 className='text-2xl font-bold'>Links</h2>
 
-                    <div className='grid gap-1'>
-                      {links.map(
-                        (link: LinkProps, index: number): React.ReactNode => (
-                          <MenuItem
-                            as={HeaderLink}
-                            pathname={pathname}
-                            label={link.label}
-                            url={link.url}
-                            key={index}
-                          />
-                        )
-                      )}
-                    </div>
-                  </MenuItems>
-                </Container>
-              </div>
+                  <div className='grid gap-1'>
+                    {links.map(
+                      (link: LinkProps, index: number): React.ReactNode => (
+                        <MenuItem
+                          as={HeaderLink}
+                          pathname={pathname}
+                          label={link.label}
+                          url={link.url}
+                          key={index}
+                        />
+                      )
+                    )}
+                  </div>
+                </MenuItems>
+              </Container>
             </Transition>
           </>
         )

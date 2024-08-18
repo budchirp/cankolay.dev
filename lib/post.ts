@@ -6,7 +6,7 @@ import readingTime from 'reading-time'
 import type { BlogPost, PostBody, RawPost } from '@/types/post'
 
 export class Post {
-  static path: string = process.cwd() + '/posts'
+  static path: string = `${process.cwd()}/posts`
 
   async getAll(): Promise<BlogPost[] | []> {
     const postFiles: string[] = await fs.readdir(Post.path)
@@ -18,20 +18,16 @@ export class Post {
         )
         .sort((a: string, b: string): number => a.localeCompare(b, 'en', { numeric: true }))
         .map(async (file: string): Promise<BlogPost> => {
-          const fileContent: string = await fs.readFile(Post.path + '/' + file, 'utf-8')
+          const fileContent: string = await fs.readFile(`${Post.path}/${file}`, 'utf-8')
 
           const { data: metaData, content }: { data: RawPost; content: PostBody } = matter(
             fileContent
           ) as any
 
-          let formattedDate: string
-
           const date: Date = new Date(metaData.date)
           const yyyy: number = date.getFullYear()
           const mm: number = date.getMonth()
           const dd: number = date.getDay()
-
-          formattedDate = `${dd < 10 ? `0${dd}` : dd}/${mm < 10 ? `0${mm}` : mm}/${yyyy}`
 
           const newMetaData: Omit<BlogPost, 'body'> = {
             ...metaData,
@@ -39,7 +35,7 @@ export class Post {
             tags: metaData.tags.split(', '),
             readingTime: readingTime(content).text,
             date,
-            formattedDate
+            formattedDate: `${dd < 10 ? `0${dd}` : dd}/${mm < 10 ? `0${mm}` : mm}/${yyyy}`
           }
 
           return { ...newMetaData, body: content } as BlogPost
@@ -72,6 +68,6 @@ export class Post {
   async getBySlug(slug: string): Promise<BlogPost | null> {
     const posts: BlogPost[] | null = await this.getAll()
 
-    return posts.find((post: BlogPost): boolean => post.slug == slug) as BlogPost
+    return posts.find((post: BlogPost): boolean => post.slug === slug) as BlogPost
   }
 }

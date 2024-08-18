@@ -77,7 +77,7 @@
       columns: 2 auto;
     }
 
-@screen lg {
+    @screen lg {
       columns: 3 auto;
     }
   }
@@ -93,8 +93,12 @@
   @apply appearance-none scroll-smooth font-main antialiased outline-none selection:bg-accent-300/90 selection:text-black/90;
 }
 
+html {
+  @apply scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-track-gray-900 scrollbar-thumb-gray-700;
+}
+
 body {
-  @apply text-primary bg-primary scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-700 dark:scrollbar-thumb-gray-900;
+  @apply text-primary bg-primary;
 }
 
 [data-bright-theme="github-dark"] {

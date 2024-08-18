@@ -17,10 +17,10 @@ export const Backdrop: React.FC<BackdropProps> = ({
       as='div'
       onClick={onChange}
       className={cn(
-        'transition-all duration-300 bg-primary !bg-opacity-75 !backdrop-blur h-screen_ fixed inset-0 z-[75] mt-16 w-screen',
+        'transition-all bg-primary !bg-opacity-25 !backdrop-blur-sm h-screen_ fixed inset-0 z-[75] mt-16 w-screen',
         'data-[closed]:!backdrop-blur-none data-[closed]:!bg-opacity-0',
-        'data-[enter]:ease-out data-[enter]:duration-500',
-        'data-[leave]:ease-in data-[leave]:duration-300'
+        'data-[enter]:ease-out data-[enter]:duration-400',
+        'data-[leave]:ease-in data-[leave]:duration-200'
       )}
     />
   )
