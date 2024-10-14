@@ -2,10 +2,9 @@ import type React from 'react'
 
 import { ThemeProvider } from '@/providers/theme'
 import { Header } from '@/components/ui/header'
-
 import { Footer } from '@/components/ui/footer'
-import data from '@/data'
 import { Lexend } from 'next/font/google'
+import data from '@/data'
 
 import type { NextFontWithVariable } from 'next/dist/compiled/@next/font'
 import type { LayoutProps } from '@/types/layout'
@@ -16,7 +15,7 @@ import '@/styles/globals.css'
 export const metadata: Metadata = {
   metadataBase: new URL(data.siteUrl),
   generator: 'Next.js',
-  applicationName: data.username,
+  applicationName: `${data.name}'s website`,
   keywords: data.keywords,
   creator: data.username,
   publisher: data.username,
@@ -28,7 +27,7 @@ export const metadata: Metadata = {
   },
   title: {
     default: 'About me',
-    template: `%s - ${data.username}`
+    template: `%s - ${data.name}`
   },
   formatDetection: {
     email: false,
@@ -44,18 +43,18 @@ export const metadata: Metadata = {
     description: data.description,
     title: {
       default: 'About me',
-      template: `%s - ${data.username}`
+      template: `%s - ${data.name}`
     }
   },
   openGraph: {
-    siteName: data.username,
+    siteName: `${data.name}'s website`,
     locale: 'en_US',
     type: 'website',
     description: data.description,
     url: data.siteUrl,
     title: {
       default: 'About me',
-      template: `%s - ${data.username}`
+      template: `%s - ${data.name}`
     }
   }
 }

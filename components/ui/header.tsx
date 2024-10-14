@@ -61,7 +61,7 @@ export const Header: React.FC = (): React.ReactNode => {
 
         return (
           <>
-            <header className='bg-primary border-primary sticky top-0 z-[125] flex h-16 w-full !bg-opacity-25 items-center justify-center border-b backdrop-blur-sm'>
+            <header className='bg-primary sticky top-0 z-[125] flex h-16 w-full !bg-opacity-25 items-center justify-center backdrop-blur-sm'>
               <Container className='flex h-full items-center justify-between gap-2'>
                 <Logo />
 
@@ -97,13 +97,13 @@ export const Header: React.FC = (): React.ReactNode => {
               </Container>
             </header>
 
-            {mounted && createPortal(<Backdrop show={open} onChange={close} />, document.body)}
+            {mounted && createPortal(<Backdrop open={open} onClose={close} />, document.body)}
 
             <Transition
               show={open}
               as='div'
               className={cn(
-                'w-screen h-screen_ flex justify-center items-center origin-[90%_0%] bottom-0 z-[100] mx-auto inset-0 fixed',
+                'w-screen h-screen_ flex justify-center items-center origin-[90%_0%] bottom-0 z-[125] mx-auto inset-0 fixed',
                 'transition-all scale-100 opacity-100',
                 'data-[closed]:scale-90 data-[closed]:opacity-0',
                 'data-[enter]:ease-out data-[enter]:duration-400',

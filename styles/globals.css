@@ -69,7 +69,7 @@
     columns: 1 auto;
     break-inside: avoid;
 
-    >* {
+    > * {
       break-inside: avoid;
     }
 

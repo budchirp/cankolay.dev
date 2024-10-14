@@ -66,6 +66,11 @@ const Page: React.FC<DynamicPageProps> = async ({
   return (
     <>
       <Heading
+        cover={
+          <div className='relative flex h-min max-h-96 w-full items-center justify-center overflow-hidden rounded-2xl mb-2'>
+            <img className='w-full h-full object-cover' alt={post.title} src={post.imageUrl} />
+          </div>
+        }
         description={
           <div>
             <span className='text-secondary flex items-center gap-1 font-medium'>

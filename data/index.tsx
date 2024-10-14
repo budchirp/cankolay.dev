@@ -12,7 +12,9 @@ import {
   SiNestjs,
   SiC,
   SiReddit,
-  SiKotlin
+  SiKotlin,
+  SiSpotify,
+  SiInstagram
 } from 'react-icons/si'
 import { FaCss3, FaLinux, FaReact } from 'react-icons/fa'
 import { Hexagon, Instagram, Mail, Send, Terminal } from 'lucide-react'
@@ -117,6 +119,8 @@ const data = {
     ]
   },
   journey: {
+    2025: ['🔜'],
+    2024: ['Started learning Rust'],
     2023: ['Started learning C and Kotlin'],
     2022: ['Learned Lua'],
     2021: ['Learned Typescript', 'Learned basic React', 'Learned TailwindCSS'],
@@ -125,7 +129,7 @@ const data = {
   },
   contact: {
     Email: {
-      link: 'mailto:budchirp@gmail.com',
+      link: 'mailto:contact@cankolay.com',
       icon: <Mail />
     },
     Telegram: {
@@ -138,15 +142,15 @@ const data = {
     },
     Instagram: {
       link: 'https://instagram.com/budchirp',
-      icon: <Instagram />
+      icon: <SiInstagram />
     },
     X: {
       link: 'https://x.com/budchirp',
       icon: '𝕏'
     },
-    Reddit: {
-      link: 'https://reddit.com/u/budchirp',
-      icon: <SiReddit />
+    Spotify: {
+      link: 'https://open.spotify.com/user/31wftauusuaf5n2kditdubtkymqy?si=e41555e6d2304993',
+      icon: <SiSpotify />
     }
   }
 }

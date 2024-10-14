@@ -10,7 +10,7 @@ export const metadata: Metadata = genMetadata({ title: 'About me' })
 
 const Page: React.FC = (): React.ReactNode => {
   return (
-    <div className='mt-16 grid gap-4'>
+    <div className='mt-12 grid gap-4'>
       <div>
         <p className='text-accent-primary text-3xl font-bold'>{data.name}</p>
 
