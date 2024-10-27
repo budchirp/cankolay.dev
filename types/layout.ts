@@ -5,7 +5,7 @@ export type LayoutProps = {
 }
 
 export type DynamicLayoutProps = {
-  params: {
+  params: Promise<{
     [key: string]: string
-  }
+  }>
 } & LayoutProps

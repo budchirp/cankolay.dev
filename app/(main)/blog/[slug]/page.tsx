@@ -16,11 +16,8 @@ import type { DynamicPageProps } from '@/types/page'
 import type { BlogPost } from '@/types/post'
 import type { Metadata } from 'next'
 
-export const generateMetadata = async ({
-  params: { slug }
-}: DynamicPageProps): Promise<Metadata> => {
-  const post: BlogPost | null | undefined = await new Post().getBySlug(slug)
-
+export const generateMetadata = async ({ params }: DynamicPageProps): Promise<Metadata> => {
+  const post = await new Post().getBySlug((await params).slug)
   if (!post) {
     notFound()
   }
@@ -43,10 +40,9 @@ export const generateMetadata = async ({
 }
 
 const Page: React.FC<DynamicPageProps> = async ({
-  params: { slug }
+  params
 }: DynamicPageProps): Promise<JSX.Element> => {
-  const post: BlogPost | null | undefined = await new Post().getBySlug(slug)
-
+  const post = await new Post().getBySlug((await params).slug)
   if (!post) {
     notFound()
   }
@@ -94,15 +90,8 @@ const Page: React.FC<DynamicPageProps> = async ({
 }
 
 export const generateStaticParams = async (): Promise<{ [key: string]: any }[]> => {
-  const posts: BlogPost[] | [] = await new Post().getAll()
-
-  return posts.map(
-    (
-      post: BlogPost
-    ): {
-      slug: string
-    } => ({ slug: post.slug })
-  )
+  const posts = await new Post().getAll()
+  return posts.map((post: BlogPost) => ({ slug: post.slug }))
 }
 
 export default Page

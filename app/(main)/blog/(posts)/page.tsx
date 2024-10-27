@@ -18,15 +18,15 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = genMetadata({ title: 'Blog' })
 
 const Page: React.FC<DynamicPageProps> = async ({
-  searchParams
+  searchParams: _searchParams
 }: DynamicPageProps): Promise<JSX.Element> => {
   const post: Post = new Post()
   const allPosts: BlogPost[] = await post.getAll()
 
   let posts: BlogPost[] = []
 
+  const searchParams = await _searchParams
   const searchText: string | null | undefined = decodeURIComponent(searchParams.search || '')
-
   if (searchText) {
     const miniSearch = new MiniSearch({
       fields: ['title', 'description', 'tags'],
@@ -128,9 +128,8 @@ const Page: React.FC<DynamicPageProps> = async ({
           )}
           aria-disabled={prevDisabled}
           aria-label='Previous page'
-          href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
-            !prevDisabled ? page - 1 : page
-          }`}
+          href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${!prevDisabled ? page - 1 : page
+            }`}
         >
           Prev
         </Link>
@@ -146,9 +145,8 @@ const Page: React.FC<DynamicPageProps> = async ({
           )}
           aria-disabled={nextDisabled}
           aria-label='Next page'
-          href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
-            !nextDisabled ? page + 1 : page
-          }`}
+          href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${!nextDisabled ? page + 1 : page
+            }`}
         >
           Next
         </Link>

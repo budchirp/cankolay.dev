@@ -1,6 +1,6 @@
 export type DynamicPageProps = {
-  params: {
+  params: Promise<{
     [key: string]: string
-  }
-  searchParams: { [key: string]: string | null | undefined }
+  }>
+  searchParams: Promise<{ [key: string]: string | null | undefined }>
 }

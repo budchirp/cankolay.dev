@@ -10,7 +10,7 @@ import type { NextFontWithVariable } from 'next/dist/compiled/@next/font'
 import type { LayoutProps } from '@/types/layout'
 import type { Metadata, Viewport } from 'next'
 
-import '@/styles/globals.css'
+import '@/app/styles.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL(data.siteUrl),
