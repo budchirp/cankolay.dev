@@ -42,7 +42,7 @@ const HeaderLink: React.FC<HeaderLinkProps> = ({
 }
 
 export const Header: React.FC = (): React.ReactNode => {
-  const pathname: string = usePathname()
+  const pathname = usePathname()
 
   const [mounted, setMounted] = useState<boolean>(false)
 

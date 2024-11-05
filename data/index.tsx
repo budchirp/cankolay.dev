@@ -11,13 +11,19 @@ import {
   SiGnubash,
   SiNestjs,
   SiC,
-  SiReddit,
   SiKotlin,
   SiSpotify,
-  SiInstagram
+  SiInstagram,
+  SiExpress,
+  SiLaravel,
+  SiCplusplus,
+  SiRust,
+  SiJetpackcompose,
+  SiKtor,
+  SiSqlite
 } from 'react-icons/si'
-import { FaCss3, FaLinux, FaReact } from 'react-icons/fa'
-import { Hexagon, Instagram, Mail, Send, Terminal } from 'lucide-react'
+import { FaAndroid, FaCss3, FaGit, FaLinux, FaReact } from 'react-icons/fa'
+import { Hexagon, Instagram, Mail, Send, Syringe, Terminal } from 'lucide-react'
 
 const data = {
   name: 'Can Kolay',
@@ -38,7 +44,11 @@ const data = {
     'can kolay projects'
   ],
   siteUrl: (process.env.APP_URL || 'http://localhost:3000') as string,
-  skills: {
+  about: <p>
+    <p><span className='text-secondary line-through'>Almost</span> full-stack developer</p>
+    <p>Amateur guitar player</p>
+  </p>,
+  technologies: {
     Languages: [
       {
         name: 'Javascript',
@@ -69,14 +79,26 @@ const data = {
         icon: <SiC />
       },
       {
+        name: 'C++',
+        icon: <SiCplusplus />
+      },
+      {
+        name: 'Rust',
+        icon: <SiRust />
+      },
+      {
         name: 'Bash',
         icon: <SiGnubash />
       }
     ],
-    Development: [
+    Tools: [
       {
         name: 'Linux',
         icon: <FaLinux />
+      },
+      {
+        name: 'Git',
+        icon: <FaGit />
       },
       {
         name: 'Neovim',
@@ -87,6 +109,18 @@ const data = {
         icon: <Terminal />
       }
     ],
+    Database: [
+      {
+        name: 'MongoDB',
+        icon: <SiMongodb />
+      },
+      {
+        name: "SQLite",
+        icon: <SiSqlite />
+      }
+    ]
+  },
+  stacks: {
     Frontend: [
       {
         name: 'React',
@@ -103,29 +137,44 @@ const data = {
     ],
     Backend: [
       {
-        name: 'Node.js',
-        icon: <Hexagon />
+        name: 'Laravel',
+        icon: <SiLaravel />
+      },
+      {
+        name: 'Express.js',
+        icon: <SiExpress />
       },
       {
         name: 'NestJS',
         icon: <SiNestjs />
       }
     ],
-    Database: [
+
+    Mobile: [
       {
-        name: 'MongoDB',
-        icon: <SiMongodb />
+        name: 'Android',
+        icon: <FaAndroid />
+      },
+      {
+        name: 'Jetpack Compose',
+        icon: <SiJetpackcompose />
+      },
+      {
+        name: 'Ktor',
+        icon: <SiKtor />
+      },
+      {
+        name: 'Hilt',
+        icon: <Syringe />
       }
     ]
   },
   journey: {
-    2025: ['🔜'],
-    2024: ['Started learning Rust'],
+    2024: ['Started learning Rust and C++'],
     2023: ['Started learning C and Kotlin'],
-    2022: ['Learned Lua'],
-    2021: ['Learned Typescript', 'Learned basic React', 'Learned TailwindCSS'],
-    2020: ['Learned Javascript, PHP', 'Learned Python'],
-    2019: ['Learned HTML, CSS']
+    2022: ['Learned Typescript', 'Learned basic React', 'Learned TailwindCSS', 'Learned Lua'],
+    2021: ['Learned Javascript, PHP', 'Learned Python'],
+    2020: ['Learned HTML, CSS']
   },
   contact: {
     Email: {

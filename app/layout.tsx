@@ -6,7 +6,6 @@ import { Footer } from '@/components/ui/footer'
 import { Lexend } from 'next/font/google'
 import data from '@/data'
 
-import type { NextFontWithVariable } from 'next/dist/compiled/@next/font'
 import type { LayoutProps } from '@/types/layout'
 import type { Metadata, Viewport } from 'next'
 
@@ -22,9 +21,6 @@ export const metadata: Metadata = {
   authors: [{ name: data.username, url: data.siteUrl }],
   description: data.description,
   manifest: `${data.siteUrl}/manifest.json`,
-  verification: {
-    google: process.env.GOOGLE_SITE_VERIFICATION || ''
-  },
   title: {
     default: 'About me',
     template: `%s - ${data.name}`
@@ -69,7 +65,7 @@ export const viewport: Viewport = {
   ]
 }
 
-const lexend: NextFontWithVariable = Lexend({
+const lexend = Lexend({
   subsets: ['latin'],
   variable: '--font-main'
 })

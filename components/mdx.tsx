@@ -11,6 +11,6 @@ Code.className = '!bg-gray-800'
 Code.codeClassName = '!bg-gray-800'
 
 export const components = {
-  a: (props: any): React.ReactNode => <Link href={props.href}>{props.children}</Link>,
+  a: (props: any) => <Link href={props.href}>{props.children}</Link>,
   pre: Code
 }

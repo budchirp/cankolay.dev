@@ -28,7 +28,7 @@ export const themes: { [key in Theme]: [string, LucideIcon] } = {
 }
 
 export const ThemeSwitcher: React.FC = (): React.ReactNode => {
-  const { theme, setTheme } = useTheme() as any
+  const { theme, setTheme } = useTheme()
 
   const [mounted, setMounted] = useState<boolean>(false)
 

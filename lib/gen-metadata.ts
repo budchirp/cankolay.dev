@@ -25,5 +25,5 @@ export const genMetadata = ({ title, description, other }: GenMetadataProps): Me
       ...openGraph
     },
     ...rest
-  } satisfies Metadata
+  }
 }

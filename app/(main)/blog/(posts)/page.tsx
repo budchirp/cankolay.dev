@@ -79,7 +79,7 @@ const Page: React.FC<DynamicPageProps> = async ({
         <input type='submit' hidden />
       </form>
 
-      <div className='mansonry'>
+      <div className='masonry'>
         {posts.map(
           (post: BlogPost): React.ReactNode => (
             <article key={post.slug}>

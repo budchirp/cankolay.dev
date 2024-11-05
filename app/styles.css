@@ -65,25 +65,26 @@
 
   .masonry {
     @apply h-full w-full;
-    column-gap: theme("gap.4");
-    columns: 1 auto;
-    break-inside: avoid;
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: theme("spacing.4");
 
-    > * {
+    >* {
       break-inside: avoid;
     }
 
     @screen md {
-      columns: 2 auto;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
 
     @screen lg {
-      columns: 3 auto;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     }
   }
 
   .masonry-2 {
-    columns: 2 auto !important;
+    @apply h-full w-full;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
