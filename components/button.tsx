@@ -7,7 +7,7 @@ import { Loader2 } from 'lucide-react'
 
 const buttonVariants = cva(
   [
-    'flex ease-out disabled:opacity-75 disabled:animate-pulse active:scale-95 cursor-pointer items-center justify-center font-medium transition duration-300'
+    'flex ease-out disabled:opacity-75 dark:disabled:opacity-50 disabled:animate-pulse active:scale-95 cursor-pointer items-center justify-center font-medium transition duration-300'
   ],
   {
     variants: {

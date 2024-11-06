@@ -12,7 +12,7 @@ import { type LinkProps, links } from '@/lib/links'
 import { cn } from '@/lib/cn'
 import { Transition, Menu, MenuItems, MenuItem, MenuButton } from '@headlessui/react'
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { Menu as MenuIcon, X } from 'lucide-react'
 import { Backdrop } from '@/components/backdrop'
 import { createPortal } from 'react-dom'
@@ -52,7 +52,7 @@ export const Header: React.FC = (): React.ReactNode => {
 
   return (
     <Menu>
-      {({ open, close }): React.ReactElement => {
+      {({ open, close }) => {
         useEffect((): void => {
           close()
 
@@ -61,7 +61,7 @@ export const Header: React.FC = (): React.ReactNode => {
 
         return (
           <>
-            <header className='bg-primary sticky top-0 z-[125] flex h-16 w-full !bg-opacity-25 items-center justify-center backdrop-blur-sm'>
+            <header className='bg-primary sticky top-0 z-[125] flex h-16 w-full !bg-opacity-25 items-center justify-center backdrop-blur'>
               <Container className='flex h-full items-center justify-between gap-2'>
                 <Logo />
 
@@ -97,7 +97,11 @@ export const Header: React.FC = (): React.ReactNode => {
               </Container>
             </header>
 
-            {mounted && createPortal(<Backdrop open={open} onClose={close} />, document.body)}
+            {mounted &&
+              createPortal(
+                <Backdrop open={open} onClose={close} />,
+                document.querySelector('#main') as Element
+              )}
 
             <Transition
               show={open}
@@ -120,17 +124,15 @@ export const Header: React.FC = (): React.ReactNode => {
                   <h2 className='text-2xl font-bold'>Links</h2>
 
                   <div className='grid gap-1'>
-                    {links.map(
-                      (link: LinkProps, index: number): React.ReactNode => (
-                        <MenuItem
-                          as={HeaderLink}
-                          pathname={pathname}
-                          label={link.label}
-                          url={link.url}
-                          key={index}
-                        />
-                      )
-                    )}
+                    {links.map((link, index) => (
+                      <MenuItem
+                        as={HeaderLink}
+                        pathname={pathname}
+                        label={link.label}
+                        url={link.url}
+                        key={index}
+                      />
+                    ))}
                   </div>
                 </MenuItems>
               </Container>

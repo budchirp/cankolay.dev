@@ -43,10 +43,11 @@ export const ThemeSwitcher: React.FC = (): React.ReactNode => {
 
   return (
     <Listbox value={theme} onChange={(value: Theme): any => setTheme(value)}>
-      {({ open }): React.ReactElement => {
+      {({ open }) => {
         return (
           <>
-            {mounted && createPortal(<Backdrop open={open} />, document.body)}
+            {mounted &&
+              createPortal(<Backdrop open={open} />, document.querySelector('#main') as Element)}
 
             <ListboxButton as={Fragment}>
               <Button
@@ -78,13 +79,13 @@ export const ThemeSwitcher: React.FC = (): React.ReactNode => {
                   padding='none'
                   className='top-0 w-36 overflow-hidden'
                 >
-                  {(Object.keys(themes) as Theme[]).map((theme: Theme): React.ReactNode => {
+                  {(Object.keys(themes) as Theme[]).map((theme) => {
                     const [label, Icon] = themes[theme]
 
                     return (
                       <ListboxOption
                         key={theme}
-                        className={({ selected }): string =>
+                        className={({ selected }) =>
                           cn(
                             'border-primary flex h-min w-full cursor-pointer items-center border-b px-4 py-2 transition duration-300 last:border-none',
                             selected ? 'bg-secondary' : 'bg-primary hover:bg-secondary'
@@ -92,7 +93,7 @@ export const ThemeSwitcher: React.FC = (): React.ReactNode => {
                         }
                         value={theme}
                       >
-                        {({ selected }): React.ReactElement => (
+                        {({ selected }) => (
                           <p
                             className={cn(
                               'flex h-full w-full items-center gap-2 font-medium transition duration-300',

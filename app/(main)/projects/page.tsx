@@ -13,7 +13,7 @@ import { cn } from '@/lib/cn'
 export const metadata: Metadata = genMetadata({ title: 'Projects' })
 
 const Page: React.FC = async (): Promise<JSX.Element> => {
-  const colorsResponse: Response = await fetch(
+  const colorsResponse = await fetch(
     'https://raw.githubusercontent.com/ozh/github-colors/master/colors.json'
   )
   const colors: { [key: string]: { color: string; url: string } } = await colorsResponse.json()
@@ -33,19 +33,19 @@ const Page: React.FC = async (): Promise<JSX.Element> => {
 
   return (
     <div className='grid gap-4'>
-      {Object.keys(reposWithSources).map((source: any, index: number): React.ReactNode => {
+      {Object.keys(reposWithSources).map((source, index) => {
         return (
           <div className='grid gap-2' key={index}>
             <span className='text-tertiary text-lg font-medium'>{source}/</span>
 
             <div className='masonry'>
-              {reposWithSources[source].map((repo: any, index: number): React.ReactNode => {
-                const currentColor: string | null = colors[repo.language]?.color ?? null
+              {reposWithSources[source].map((repo, index) => {
+                const currentColor = colors[repo.language]?.color ?? null
 
                 return (
                   <Box
                     key={index}
-                    className='hover:bg-tertiary group mb-4 grid h-max w-full gap-1 transition duration-300 last:mb-0'
+                    className='hover:bg-tertiary group grid h-max w-full gap-1 transition duration-300'
                   >
                     <Link
                       href={repo.html_url}

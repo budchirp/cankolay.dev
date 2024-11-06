@@ -44,10 +44,14 @@ const data = {
     'can kolay projects'
   ],
   siteUrl: (process.env.APP_URL || 'http://localhost:3000') as string,
-  about: <p>
-    <p><span className='text-secondary line-through'>Almost</span> full-stack developer</p>
-    <p>Amateur guitar player</p>
-  </p>,
+  about: (
+    <p>
+      <p>
+        <span className='text-secondary line-through'>Almost</span> full-stack developer
+      </p>
+      <p>Amateur guitar player</p>
+    </p>
+  ),
   technologies: {
     Languages: [
       {
@@ -115,7 +119,7 @@ const data = {
         icon: <SiMongodb />
       },
       {
-        name: "SQLite",
+        name: 'SQLite',
         icon: <SiSqlite />
       }
     ]

@@ -8,7 +8,7 @@ import type { BlogPost } from '@/types/post'
 export class Post {
   static path = `${process.cwd()}/posts`
 
-  async getAll(): Promise<BlogPost[] | []> {
+  async getAll(): Promise<BlogPost[]> {
     const postFiles = await fs.readdir(Post.path)
 
     const posts: BlogPost[] = await Promise.all(

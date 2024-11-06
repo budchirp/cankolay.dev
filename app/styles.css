@@ -16,11 +16,11 @@
   }
 
   .border-primary {
-    @apply border-gray-100/50 dark:border-gray-690/90;
+    @apply border-gray-200 dark:border-gray-690/90;
   }
 
   .border-secondary {
-    @apply border-gray-200/50 dark:border-gray-690/90;
+    @apply border-gray-300 dark:border-gray-690/90;
   }
 
   .text-primary {
@@ -56,11 +56,11 @@
   }
 
   .min-h-screen_ {
-    min-height: calc(100lvh - theme("spacing.16"));
+    min-height: calc(100svh - theme("spacing.32"));
   }
 
   .h-screen_ {
-    height: calc(100lvh - theme("spacing.16"));
+    height: calc(100svh - theme("spacing.32"));
   }
 
   .masonry {
@@ -69,7 +69,7 @@
     grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: theme("spacing.4");
 
-    >* {
+    > * {
       break-inside: avoid;
     }
 
@@ -92,14 +92,6 @@
   -webkit-tap-highlight-color: transparent;
 
   @apply appearance-none scroll-smooth font-main antialiased outline-none selection:bg-accent-300/90 selection:text-black/90;
-}
-
-html {
-  @apply scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-track-gray-900 scrollbar-thumb-gray-700;
-}
-
-body {
-  @apply text-primary bg-primary;
 }
 
 [data-bright-theme="github-dark"] {

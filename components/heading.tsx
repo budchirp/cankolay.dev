@@ -18,7 +18,10 @@ export const Heading: React.FC<HeadingProps> = ({
   return (
     <div
       {...props}
-      className={cn('border-primary mb-4 mt-12 grid w-full gap-1 border-b-4 pb-2', className)}
+      className={cn(
+        'border-gray-100 dark:border-gray-700 mb-4 mt-12 grid w-full gap-1 border-b-4 pb-2',
+        className
+      )}
     >
       {cover}
 

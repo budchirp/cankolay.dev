@@ -12,7 +12,7 @@ export const metadata: Metadata = genMetadata({ title: 'Contact me' })
 const Page: React.FC = (): React.ReactNode => {
   return (
     <div className='masonry'>
-      {Object.keys(data.contact).map((platform: string, index: number): React.ReactNode => {
+      {Object.keys(data.contact).map((platform, index) => {
         /* @ts-ignore */
         const contact = data.contact[platform]
 

@@ -10,16 +10,16 @@ export const metadata: Metadata = genMetadata({ title: 'Loading posts...' })
 
 const Loading: React.FC = (): React.ReactNode => {
   return (
-    <div className='mansonry'>
-      {[...Array(10)].map((_: any, index: number): React.ReactNode => {
+    <div className='masonry'>
+      {[...Array(12)].map((_, index) => {
         return (
-          <Box key={index} padding='none' className='mb-4 last:mb-0'>
+          <Box key={index} padding='none'>
             <div className='bg-tertiary h-48 w-full animate-pulse rounded-t-2xl' />
 
-            <div className='grid gap-2 p-4'>
+            <div className='grid gap-4 p-4'>
               <div className='bg-tertiary h-3 w-8/12 animate-pulse rounded' />
 
-              <div className='grid gap-1'>
+              <div className='grid gap-2'>
                 <div className='bg-tertiary h-3 w-full animate-pulse rounded' />
                 <div className='bg-tertiary h-3 w-full animate-pulse rounded' />
               </div>
