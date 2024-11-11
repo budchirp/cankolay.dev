@@ -19,11 +19,14 @@ export default {
         gray: {
           ...colors.gray,
           900: '#0b0a0e',
-          800: '#0e0d12',
+          800: '#100f15',
           700: '#121118',
           690: '#1a1b1e'
         },
         accent: colors.rose
+      },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite'
       },
       transitionDuration: {
         400: '400ms'
