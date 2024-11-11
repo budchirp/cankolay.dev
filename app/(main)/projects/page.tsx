@@ -3,12 +3,12 @@ import type React from 'react'
 import { Button } from '@/components/button'
 import { Box } from '@/components/box'
 import { genMetadata } from '@/lib/gen-metadata'
-import data from '@/data'
+import { cn } from '@/lib/cn'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import data from '@/data'
 
 import type { Metadata } from 'next'
-import { cn } from '@/lib/cn'
 
 export const metadata: Metadata = genMetadata({ title: 'Projects' })
 

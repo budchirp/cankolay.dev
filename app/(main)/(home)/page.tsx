@@ -5,14 +5,19 @@ import { genMetadata } from '@/lib/gen-metadata'
 import data from '@/data'
 
 import type { Metadata } from 'next'
-import type { ReactNode } from 'react'
 
 export const metadata: Metadata = genMetadata({ title: 'About me' })
 
 const Page: React.FC = (): React.ReactNode => {
-  const SkillChip = ({ icon, name }: { icon: ReactNode; name: string }) => {
+  const SkillChip = ({
+    icon,
+    name
+  }: {
+    icon: React.ReactNode
+    name: string
+  }) => {
     return (
-      <Box padding='none' className='flex items-center rounded-full gap-3 p-2 md:p-3'>
+      <Box padding='small' className='flex items-center rounded-full gap-3 md:p-3'>
         <span className='flex h-10 w-10 items-center justify-center rounded-full bg-accent-700 p-1 text-xl text-gray-50'>
           {icon}
         </span>
@@ -24,10 +29,10 @@ const Page: React.FC = (): React.ReactNode => {
   return (
     <div className='mt-12 grid gap-8'>
       <div className='grid gap-4'>
-        <div>
+        <div className='grid gap-2'>
           <p className='text-accent-primary text-3xl font-bold'>{data.name}</p>
 
-          <p className='text-lg'>{data.about}</p>
+          <div className='text-md'>{data.about}</div>
         </div>
 
         <div className='grid gap-1'>
@@ -82,7 +87,7 @@ const Page: React.FC = (): React.ReactNode => {
                   {/* @ts-ignore */}
                   {data.journey[key].map((text, index) => (
                     <div key={index} className='flex gap-2'>
-                      <span className='text-primary-600'>-</span>
+                      <span className='text-tertiary'>-</span>
                       <p className='text-primary'>{text}</p>
                     </div>
                   ))}

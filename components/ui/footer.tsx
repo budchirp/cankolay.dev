@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 export const Footer: React.FC = (): React.ReactNode => {
   return (
-    <footer className='bg-primary !bg-opacity-25 backdrop-blur mt-4 flex h-16 w-full items-center justify-center'>
+    <footer className='bg-primary !bg-opacity-25 backdrop-blur-sm border-t border-primary flex h-16 w-full items-center justify-center'>
       <Container className='flex h-full items-center justify-between gap-2'>
         <Logo />
 

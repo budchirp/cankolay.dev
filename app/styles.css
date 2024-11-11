@@ -44,7 +44,7 @@
   }
 
   .text-accent-primary {
-    @apply text-accent-600 dark:text-accent-400;
+    @apply text-accent-600 dark:text-accent-500;
   }
 
   .text-accent-secondary {
@@ -56,11 +56,11 @@
   }
 
   .min-h-screen_ {
-    min-height: calc(100svh - theme("spacing.32"));
+    min-height: calc(100vh - theme("spacing.16"));
   }
 
   .h-screen_ {
-    height: calc(100svh - theme("spacing.32"));
+    height: calc(100vh - theme("spacing.16"));
   }
 
   .masonry {

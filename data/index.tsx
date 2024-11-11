@@ -45,12 +45,10 @@ const data = {
   ],
   siteUrl: (process.env.APP_URL || 'http://localhost:3000') as string,
   about: (
-    <p>
-      <p>
-        <span className='text-secondary line-through'>Almost</span> full-stack developer
-      </p>
+    <>
+      <p>Full-Stack developer</p>
       <p>Amateur guitar player</p>
-    </p>
+    </>
   ),
   technologies: {
     Languages: [
@@ -200,10 +198,6 @@ const data = {
     X: {
       link: 'https://x.com/budchirp',
       icon: '𝕏'
-    },
-    Spotify: {
-      link: 'https://open.spotify.com/user/31wftauusuaf5n2kditdubtkymqy?si=e41555e6d2304993',
-      icon: <SiSpotify />
     }
   }
 }

@@ -61,7 +61,7 @@ export const Header: React.FC = (): React.ReactNode => {
 
         return (
           <>
-            <header className='bg-primary sticky top-0 z-[125] flex h-16 w-full !bg-opacity-25 items-center justify-center backdrop-blur'>
+            <header className='bg-primary fixed top-0 z-[125] flex h-16 w-full !bg-opacity-25 items-center justify-center backdrop-blur-sm'>
               <Container className='flex h-full items-center justify-between gap-2'>
                 <Logo />
 
@@ -137,6 +137,8 @@ export const Header: React.FC = (): React.ReactNode => {
                 </MenuItems>
               </Container>
             </Transition>
+
+            <div className='h-16' />
           </>
         )
       }}

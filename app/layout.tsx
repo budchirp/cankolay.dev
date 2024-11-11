@@ -5,13 +5,13 @@ import { ThemeProvider } from '@/providers/theme'
 import { Header } from '@/components/ui/header'
 import { Footer } from '@/components/ui/footer'
 import { Lexend } from 'next/font/google'
+import { cn } from '@/lib/cn'
 import data from '@/data'
 
 import type { LayoutProps } from '@/types/layout'
 import type { Metadata, Viewport } from 'next'
 
 import '@/app/styles.css'
-import { cn } from '@/lib/cn'
 
 export const metadata: Metadata = {
   metadataBase: new URL(data.siteUrl),
@@ -81,21 +81,29 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
         className='scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-track-gray-900 scrollbar-thumb-gray-700'
       >
         <body
-          className={cn('relative w-full text-primary bg-primary min-h-screen_', lexend.variable)}
+          className={cn(
+            'relative overflow-x-hidden w-full h-full text-primary bg-primary',
+            lexend.variable
+          )}
         >
           <ThemeProvider>
             <div className='absolute inset-0 overflow-hidden'>
-              <div className='absolute z-0 top-[16rem] left-[12rem] size-96 opacity-50 bg-accent-500 rounded-full blur-[128px]' />
-              <div className='absolute z-0 top-[32rem] right-[16rem] size-96 opacity-50 bg-accent-600 rounded-full blur-[128px]' />
-              <div className='absolute z-0 top-[64rem] left-[24rem] size-96 opacity-50 bg-accent-800 rounded-full blur-[128px]' />
+              <div className='absolute z-0 top-[10%] left-[15%] size-96 opacity-25 bg-accent-500 rounded-full blur-[128px]' />
+              <div className='absolute z-0 top-[35%] right-[20%] size-96 opacity-25 bg-accent-600 rounded-full blur-[128px]' />
+              <div className='absolute z-0 top-[50%] left-[25%] size-96 opacity-25 bg-accent-800 rounded-full blur-[128px]' />
+              <div className='absolute z-0 top-[80%] right-[10%] size-96 opacity-25 bg-accent-700 rounded-full blur-[128px]' />
             </div>
 
-            <div id='main' className='relative z-10'>
+            <div id='main' className='relative h-full w-full z-10'>
               <Header />
 
-              <main className='min-h-screen_'>{children}</main>
+              <div className='grid gap-4 w-full h-full'>
+                <div className='w-full min-h-screen_'>
+                  <main>{children}</main>
+                </div>
 
-              <Footer />
+                <Footer />
+              </div>
             </div>
           </ThemeProvider>
         </body>

@@ -4,7 +4,7 @@ import type { ComponentProps } from 'react'
 import { cn } from '@/lib/cn'
 import { cva, type VariantProps } from 'class-variance-authority'
 
-const boxVariants = cva(['rounded-3xl'], {
+const boxVariants = cva(['w-full rounded-3xl'], {
   variants: {
     variant: {
       primary: 'bg-primary border border-primary',
@@ -12,6 +12,7 @@ const boxVariants = cva(['rounded-3xl'], {
     },
     padding: {
       default: 'px-4 py-3',
+      small: 'p-2',
       none: ''
     }
   },
