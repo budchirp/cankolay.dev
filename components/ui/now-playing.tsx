@@ -17,8 +17,12 @@ export const NowPlaying: React.FC = () => {
 
   useEffect(() => {
     const fetchNowPlaying = async () => {
-      const response = await fetch('/api/now-playing')
-      updateSong(await response.json())
+      try {
+        const response = await fetch('/api/now-playing')
+        updateSong(await response.json())
+      } catch {
+        updateSong(null)
+      }
     }
 
     const interval = setInterval(() => {

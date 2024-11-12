@@ -35,7 +35,7 @@ export const GET = async (request: NextRequest) => {
   try {
     const referer = request.headers.get('referer')
     if (!referer || !referer.startsWith(process.env.APP_URL || '')) {
-      return new Response('Forbidden', { status: 403 })
+      return NextResponse.json({ message: 'Forbidden' }, { status: 403 })
     }
 
     const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
@@ -46,7 +46,7 @@ export const GET = async (request: NextRequest) => {
     })
 
     if (response.status === 204 || response.status > 400) {
-      return
+      return NextResponse.json({ message: 'Playing nothing' })
     }
 
     const json = await response.json()
@@ -71,7 +71,7 @@ export const GET = async (request: NextRequest) => {
 
       isPlaying: json?.is_playing
     })
-  } catch {
-    return
+  } catch (error) {
+    return NextResponse.json({ message: (error as Error).message }, { status: 500 })
   }
 }

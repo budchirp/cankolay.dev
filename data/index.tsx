@@ -43,7 +43,7 @@ const data = {
     'contact can kolay',
     'can kolay projects'
   ],
-  siteUrl: (process.env.APP_URL || 'http://localhost:3000') as string,
+  siteUrl: process.env.APP_URL || '',
   about: (
     <>
       <p>Full-Stack developer</p>
