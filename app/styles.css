@@ -69,7 +69,7 @@
     grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: theme("spacing.4");
 
-    > * {
+    >* {
       break-inside: avoid;
     }
 
@@ -91,7 +91,7 @@
 * {
   -webkit-tap-highlight-color: transparent;
 
-  @apply appearance-none scroll-smooth font-main antialiased outline-none selection:bg-accent-300/90 selection:text-black/90;
+  @apply appearance-none scroll-smooth transition-all duration-300 font-main antialiased outline-none selection:bg-accent-300/90 selection:text-black/90;
 }
 
 [data-bright-theme="github-dark"] {

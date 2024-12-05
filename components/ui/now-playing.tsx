@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import type { NowPlayingType } from '@/types/now-playing'
+import data from '@/data'
 
 export const NowPlaying: React.FC = () => {
   const [song, updateSong] = useState<NowPlayingType | null>(null)
@@ -36,44 +37,46 @@ export const NowPlaying: React.FC = () => {
     <Container className='grid gap-4'>
       <div className='h-1 bg-secondary w-full' />
 
-      <Box padding='small' variant='primary' className='w-full overflow-hidden h-full relative'>
-        <div className='absolute inset-0 select-noneh-full w-1/4 blur-3xl opacity-75'>
-          {song && <img src={song?.albumCover} alt='album' className='object-fill size-full' />}
+      <Box padding='small' variant='primary' className='relative overflow-hidden'>
+        <div className='absolute left-0 top-0 select-none xs:h-full xs:w-1/4 w-full h-3/4 blur-3xl opacity-75'>
+          {song?.albumCover && (
+            <img src={song?.albumCover} alt='album' className='object-fill size-full' />
+          )}
         </div>
 
-        <div className='flex gap-2 z-10 h-full w-full relative items-center'>
-          <div className='size-16'>
-            <div className='border flex items-center justify-center size-16 overflow-hidden border-primary rounded-2xl'>
-              {song ? (
+        <div className='flex flex-col xs:flex-row xs:gap-2 z-10 size-full relative'>
+          <div className='xs:size-16 p-2 xs:p-0 size-full'>
+            <div className='border border-primary aspect-square rounded-2xl flex xs:size-16 select-none items-center justify-center'>
+              {song?.albumCover ? (
                 <Link href={song?.link || ''}>
                   <img
-                    className='size-16 object-cover rounded-2xl transition duration-500 ease-out hover:scale-125'
+                    className='aspect-square xs:object-cover xs:size-16 rounded-2xl transition duration-500 ease-out hover:scale-90'
                     src={song?.albumCover}
                     alt='album'
                   />
                 </Link>
               ) : (
-                <VolumeX className='size-8' />
+                <VolumeX className='xs:size-8 size-16' />
               )}
             </div>
           </div>
 
-          <div className='flex h-full gap-1 justify-between py-1 flex-col pe-2 w-full'>
-            <div className='flex justify-center flex-col gap-1'>
-              <Link href={song?.link || ''} className='flex gap-1 items-center overflow-hidden'>
+          <div className='flex gap-2 size-full justify-between flex-col xs:pe-2 xs:py-1 xs:ps-0 p-2'>
+            <div className='grid gap-1'>
+              <Link href={song?.link || ''} className='flex items-center gap-1'>
                 <Disc3 className={cn('size-4', song?.isPlaying && 'animate-spin-slow')} />
-                <h2 className='text-lg font-bold leading-none truncate'>
+                <h2 className='text-lg font-bold leading-none text-ellipsis'>
                   {song?.title || 'Playing nothing'}
                 </h2>
               </Link>
 
-              <h3 className='font-medium text-ellipsis leading-none text-tertiary'>
-                {song?.artist}
+              <h3 className='font-medium leading-none text-tertiary'>
+                {song?.artist || data.username}
               </h3>
             </div>
 
             <div className='flex items-center justify-between gap-2'>
-              <span className='text-sm leading-none text-secondary'>
+              <span className='text-sm leading-none select-none text-secondary'>
                 {formatTime(song?.elapsedTime)}
               </span>
 
@@ -86,7 +89,7 @@ export const NowPlaying: React.FC = () => {
                 />
               </div>
 
-              <span className='text-sm leading-none text-secondary'>
+              <span className='text-sm leading-none select-none text-secondary'>
                 {formatTime(song?.totalTime)}
               </span>
             </div>
