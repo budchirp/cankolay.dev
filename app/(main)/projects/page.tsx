@@ -12,7 +12,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = genMetadata({ title: 'Projects' })
 
-const Page: React.FC = async (): Promise<JSX.Element> => {
+const Page: React.FC = async () => {
   const colorsResponse = await fetch(
     'https://raw.githubusercontent.com/ozh/github-colors/master/colors.json'
   )

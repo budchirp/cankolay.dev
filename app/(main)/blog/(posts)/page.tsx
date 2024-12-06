@@ -19,7 +19,7 @@ export const metadata: Metadata = genMetadata({ title: 'Blog' })
 
 const Page: React.FC<DynamicPageProps> = async ({
   searchParams: _searchParams
-}: DynamicPageProps): Promise<JSX.Element> => {
+}: DynamicPageProps) => {
   const post = new Post()
   const allPosts = await post.getAll()
 
@@ -120,9 +120,8 @@ const Page: React.FC<DynamicPageProps> = async ({
           )}
           aria-disabled={prevDisabled}
           aria-label='Previous page'
-          href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
-            !prevDisabled ? page - 1 : page
-          }`}
+          href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${!prevDisabled ? page - 1 : page
+            }`}
         >
           Prev
         </Link>
@@ -138,9 +137,8 @@ const Page: React.FC<DynamicPageProps> = async ({
           )}
           aria-disabled={nextDisabled}
           aria-label='Next page'
-          href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
-            !nextDisabled ? page + 1 : page
-          }`}
+          href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${!nextDisabled ? page + 1 : page
+            }`}
         >
           Next
         </Link>

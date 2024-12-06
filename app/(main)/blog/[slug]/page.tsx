@@ -39,9 +39,7 @@ export const generateMetadata = async ({ params }: DynamicPageProps): Promise<Me
   })
 }
 
-const Page: React.FC<DynamicPageProps> = async ({
-  params
-}: DynamicPageProps): Promise<JSX.Element> => {
+const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) => {
   const post = await new Post().getBySlug((await params).slug)
   if (!post) {
     notFound()
