@@ -64,14 +64,14 @@ export const ThemeSwitcher: React.FC = (): React.ReactNode => {
               show={open}
               as='div'
               className={cn(
-                'w-screen h-screen_ flex justify-center items-center origin-[75%_0%] md:origin-[95%_0%] bottom-0 z-[100] mx-auto inset-0 fixed',
+                'w-screen h-screen_ flex justify-center items-center origin-[75%_0%] md:origin-[95%_0%] z-[100] mx-auto inset-0 fixed',
                 'transition-all scale-100 opacity-100',
                 'data-[closed]:scale-90 data-[closed]:opacity-0',
                 'data-[enter]:ease-out data-[enter]:duration-400',
                 'data-[leave]:ease-in data-[leave]:duration-200'
               )}
             >
-              <Container className='absolute top-20 flex h-min items-center justify-end'>
+              <Container className='fixed top-20 flex h-min items-center justify-end'>
                 <ListboxOptions
                   static
                   as={Box}

@@ -1,11 +1,12 @@
+import type { NowPlayingType } from '@/types/now-playing'
 import { type NextRequest, NextResponse } from 'next/server'
 
 const getSpotifyAccessToken = async (): Promise<string> => {
-  const clientId = process.env.SPOTIFY_CLIENT_ID
+  const clientID = process.env.SPOTIFY_CLIENT_ID
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
   const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN
 
-  if (!clientId || !clientSecret || !refreshToken) {
+  if (!clientID || !clientSecret || !refreshToken) {
     throw new Error('Missing Spotify Client ID, Client Secret, or Refresh Token')
   }
 
@@ -13,7 +14,7 @@ const getSpotifyAccessToken = async (): Promise<string> => {
   body.append('grant_type', 'refresh_token')
   body.append('refresh_token', refreshToken)
 
-  const basic = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
+  const basic = Buffer.from(`${clientID}:${clientSecret}`).toString('base64')
   const response = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     headers: {
@@ -70,7 +71,7 @@ export const GET = async (request: NextRequest) => {
       percentage,
 
       isPlaying: json?.is_playing
-    })
+    } as NowPlayingType)
   } catch (error) {
     return NextResponse.json({ message: (error as Error).message }, { status: 500 })
   }

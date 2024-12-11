@@ -78,11 +78,10 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
       <html
         suppressHydrationWarning
         lang='en-US'
-        className='scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-track-gray-900 scrollbar-thumb-gray-700'
       >
         <body
           className={cn(
-            'relative overflow-x-hidden w-full h-full text-primary bg-primary',
+            'relative overflow-x-hidden size-full text-primary bg-primary',
             lexend.variable
           )}
         >
@@ -94,12 +93,12 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
               <div className='absolute z-0 top-[80%] right-[10%] size-96 opacity-25 bg-accent-700 rounded-full blur-[128px]' />
             </div>
 
-            <div id='main' className='relative h-full w-full z-10'>
+            <div id='main' className='relative size-full z-10'>
               <Header />
 
-              <div className='grid gap-4 w-full h-full'>
+              <div className='grid gap-4 size-full'>
                 <div className='w-full min-h-screen_'>
-                  <main>{children}</main>
+                  <main className='size-full'>{children}</main>
                 </div>
 
                 <Footer />

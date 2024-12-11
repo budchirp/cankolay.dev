@@ -91,7 +91,11 @@
 * {
   -webkit-tap-highlight-color: transparent;
 
-  @apply appearance-none scroll-smooth transition-all duration-300 font-main antialiased outline-none selection:bg-accent-300/90 selection:text-black/90;
+  @apply appearance-none scroll-smooth transition-all duration-300 font-main antialiased outline-none selection:bg-accent-300/90 selection:text-black/90 scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-700;
+}
+
+::-webkit-scrollbar {
+  position: absolute
 }
 
 [data-bright-theme="github-dark"] {

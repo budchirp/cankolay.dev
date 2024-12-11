@@ -61,8 +61,8 @@ export const Header: React.FC = (): React.ReactNode => {
 
         return (
           <>
-            <header className='bg-primary fixed top-0 z-[125] flex h-16 w-full !bg-opacity-25 items-center justify-center backdrop-blur-sm'>
-              <Container className='flex h-full items-center justify-between gap-2'>
+            <header className='bg-primary fixed top-0 z-[125] flex h-16 w-full !bg-opacity-50 items-center justify-center backdrop-blur'>
+              <Container className='flex items-center justify-between gap-2'>
                 <Logo />
 
                 <div className='flex h-full items-center gap-2'>
@@ -107,14 +107,14 @@ export const Header: React.FC = (): React.ReactNode => {
               show={open}
               as='div'
               className={cn(
-                'w-screen h-screen_ flex justify-center items-center origin-[90%_0%] bottom-0 z-[125] mx-auto inset-0 fixed',
+                'w-screen h-screen_ flex justify-center items-center origin-[90%_0%] z-[125] mx-auto inset-0 fixed',
                 'transition-all scale-100 opacity-100',
                 'data-[closed]:scale-90 data-[closed]:opacity-0',
                 'data-[enter]:ease-out data-[enter]:duration-400',
                 'data-[leave]:ease-in data-[leave]:duration-200'
               )}
             >
-              <Container className='absolute top-20 flex h-min items-center justify-center'>
+              <Container className='fixed top-20 flex h-min items-center justify-center'>
                 <MenuItems
                   as={Box}
                   static

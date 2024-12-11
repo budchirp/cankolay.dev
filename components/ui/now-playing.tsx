@@ -1,37 +1,106 @@
 'use client'
 
 import type React from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { Box } from '@/components/box'
 import { Container } from '@/components/container'
 import { cn } from '@/lib/cn'
 import { formatTime } from '@/lib/time'
-import { Disc3, VolumeX } from 'lucide-react'
+import { Disc3, VolumeX, X } from 'lucide-react'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 
-import type { NowPlayingType } from '@/types/now-playing'
 import data from '@/data'
+import type { NowPlayingType } from '@/types/now-playing'
+import type { LyricsType } from '@/types/lyrics'
+import { Button } from '../button'
+import { createPortal } from 'react-dom'
+import { Backdrop } from '../backdrop'
+import { Transition } from '@headlessui/react'
+import { VerticalPage } from '../vertical-page'
 
 export const NowPlaying: React.FC = () => {
+  const [mounted, setMounted] = useState<boolean>(false)
+  useEffect((): void => {
+    setMounted(true)
+  }, [])
+
+  const [error, setError] = useState<boolean>(false)
+
   const [song, updateSong] = useState<NowPlayingType | null>(null)
+
+  const [lastScrollTime, setLastScrollTime] = useState<number>(0);
+  const [showLyricsScreen, setShowLyricsScreen] = useState<boolean>(false)
+  const [lyrics, updateLyrics] = useState<LyricsType[] | null>(null)
+
+  const activeLyricRef = useRef<HTMLParagraphElement | null>(null);
+  const previousTitleRef = useRef<string | null>(null)
 
   useEffect(() => {
     const fetchNowPlaying = async () => {
       try {
         const response = await fetch('/api/now-playing')
+        if (!response.ok) {
+          throw new Error('Failed to fetch song')
+        }
+
         updateSong(await response.json())
       } catch {
+        setError(true)
+
         updateSong(null)
       }
     }
 
-    const interval = setInterval(() => {
-      fetchNowPlaying()
-    }, 1000)
+    const interval = setInterval(fetchNowPlaying, 1000)
+    fetchNowPlaying()
 
     return () => clearInterval(interval)
   }, [])
+
+  useEffect(() => {
+    if (song && showLyricsScreen) {
+      const currentTitle = song.title
+      const previousTitle = previousTitleRef.current
+
+      if (currentTitle === previousTitleRef.current) return
+
+      updateLyrics(null)
+
+      const fetchLyrics = async () => {
+        try {
+          const response = await fetch('/api/lyrics', {
+            method: 'POST',
+            body: JSON.stringify({
+              song: [song.title, song.artist].join(' ')
+            })
+          })
+          if (!response.ok) {
+            throw new Error('Failed to fetch lyrics')
+          }
+
+          updateLyrics(await response.json())
+        } catch {
+          setError(false)
+
+          updateLyrics(null)
+        } finally {
+          previousTitleRef.current = currentTitle
+        }
+      }
+
+      fetchLyrics()
+    }
+  }, [song])
+
+  useEffect(() => {
+    const now = Date.now();
+
+    if (now - lastScrollTime > 3000 && activeLyricRef.current) {
+      activeLyricRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setLastScrollTime(now); // Update the last scroll time
+    }
+  }, [song?.elapsedTime]);
 
   return (
     <Container className='grid gap-4'>
@@ -96,6 +165,78 @@ export const NowPlaying: React.FC = () => {
           </div>
         </div>
       </Box>
+
+      {song?.title && (
+        <Button
+          color='secondary'
+          aria-label='Show lyrics'
+          onClick={() => {
+            setShowLyricsScreen(true)
+          }}
+        >
+          Show lyrics
+        </Button>
+      )}
+
+      {mounted &&
+        createPortal(
+          <Backdrop open={showLyricsScreen} />,
+          document.querySelector('#main') as Element
+        )}
+
+      <Transition
+        show={showLyricsScreen}
+        as='div'
+        className={cn(
+          'w-screen h-screen_ flex justify-center items-center origin-[50%_0%] z-[125] mx-auto inset-0 fixed',
+          'transition-all scale-100 opacity-100',
+          'data-[closed]:scale-90 data-[closed]:opacity-0',
+          'data-[enter]:ease-out data-[enter]:duration-400',
+          'data-[leave]:ease-in data-[leave]:duration-200'
+        )}
+      >
+        <Container className='fixed top-16 h-full bottom-0 overflow-y-scroll'>
+          <div className='relative py-4 h-full'>
+            <Button
+              className='absolute right-0 top-4'
+              aria-label='Close lyrics screen'
+              variant='round'
+              color='secondary'
+              onClick={() => {
+                setShowLyricsScreen(false)
+              }}
+            >
+              <X />
+            </Button>
+
+            {error && <VerticalPage title='Oops' items={["No", "lyrics", "for", "this", "song"]} />}
+
+            {!error && !song && (
+              <VerticalPage title='No vibe dude' items={['Playing', 'nothing', 'rn']} />
+            )}
+
+            {!error && song && !lyrics && (
+              <VerticalPage title='⏳' items={['Loading', 'the', 'lyrics']} />
+            )}
+
+            {!error &&
+              song &&
+              lyrics &&
+              lyrics?.map((lyric) => (
+                <p
+                  className={cn(
+                    'text-2xl leading-10',
+                    song?.elapsedTime >= lyric.time ? 'font-bold' : 'text-tertiary'
+                  )}
+                  key={lyric.time}
+                  ref={song?.elapsedTime >= lyric.time ? activeLyricRef : null}
+                >
+                  {lyric.text}
+                </p>
+              ))}
+          </div>
+        </Container>
+      </Transition>
     </Container>
   )
 }
