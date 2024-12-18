@@ -22,13 +22,16 @@ import {
   SiKtor,
   SiSqlite
 } from 'react-icons/si'
-import { FaAndroid, FaCss3, FaGit, FaLinux, FaReact } from 'react-icons/fa'
+import { FaAndroid, FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
 import { Hexagon, Instagram, Mail, Send, Syringe, Terminal } from 'lucide-react'
+
+const email = 'contact@cankolay.com'
 
 const data = {
   name: 'Can Kolay',
   username: 'budchirp',
   description: 'Hello, World!',
+  email,
   githubUsername: 'budchirp',
   projectSources: ['budchirp', 'OxygeNvim', 'KapacitorSync'],
   keywords: [
@@ -75,6 +78,10 @@ const data = {
       {
         name: 'Kotlin',
         icon: <SiKotlin />
+      },
+      {
+        name: 'Java',
+        icon: <FaJava />
       },
       {
         name: 'C',
@@ -173,14 +180,14 @@ const data = {
   },
   journey: {
     2024: ['Started learning Rust and C++'],
-    2023: ['Started learning C and Kotlin'],
+    2023: ['Started learning C, Java and Kotlin'],
     2022: ['Learned Typescript', 'Learned basic React', 'Learned TailwindCSS', 'Learned Lua'],
     2021: ['Learned Javascript, PHP', 'Learned Python'],
     2020: ['Learned HTML, CSS']
   },
   contact: {
     Email: {
-      link: 'mailto:contact@cankolay.com',
+      link: `mailto:${email}`,
       icon: <Mail />
     },
     Telegram: {
