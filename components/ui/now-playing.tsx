@@ -2,22 +2,22 @@
 
 import type React from 'react'
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 import { Box } from '@/components/box'
 import { Container } from '@/components/container'
+import { Backdrop } from '@/components/backdrop'
+import { Transition } from '@headlessui/react'
+import { VerticalPage } from '@/components/vertical-page'
+import { Button } from '@/components/button'
 import { cn } from '@/lib/cn'
 import { formatTime } from '@/lib/time'
 import { Disc3, VolumeX, X } from 'lucide-react'
 import Link from 'next/link'
-
 import data from '@/data'
+
 import type { NowPlayingType } from '@/types/now-playing'
 import type { LyricsType } from '@/types/lyrics'
-import { Button } from '../button'
-import { createPortal } from 'react-dom'
-import { Backdrop } from '../backdrop'
-import { Transition } from '@headlessui/react'
-import { VerticalPage } from '../vertical-page'
 
 export const NowPlaying: React.FC = () => {
   const [mounted, setMounted] = useState<boolean>(false)
@@ -29,11 +29,11 @@ export const NowPlaying: React.FC = () => {
 
   const [song, updateSong] = useState<NowPlayingType | null>(null)
 
-  const [lastScrollTime, setLastScrollTime] = useState<number>(0);
+  const [lastScrollTime, setLastScrollTime] = useState<number>(0)
   const [showLyricsScreen, setShowLyricsScreen] = useState<boolean>(false)
   const [lyrics, updateLyrics] = useState<LyricsType[] | null>(null)
 
-  const activeLyricRef = useRef<HTMLParagraphElement | null>(null);
+  const activeLyricRef = useRef<HTMLParagraphElement | null>(null)
   const previousTitleRef = useRef<string | null>(null)
 
   useEffect(() => {
@@ -94,13 +94,16 @@ export const NowPlaying: React.FC = () => {
   }, [song])
 
   useEffect(() => {
-    const now = Date.now();
+    const now = Date.now()
 
     if (now - lastScrollTime > 3000 && activeLyricRef.current) {
-      activeLyricRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setLastScrollTime(now); // Update the last scroll time
+      activeLyricRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      })
+      setLastScrollTime(now) // Update the last scroll time
     }
-  }, [song?.elapsedTime]);
+  }, [song?.elapsedTime])
 
   return (
     <Container className='grid gap-4'>
@@ -209,7 +212,7 @@ export const NowPlaying: React.FC = () => {
               <X />
             </Button>
 
-            {error && <VerticalPage title='Oops' items={["No", "lyrics", "for", "this", "song"]} />}
+            {error && <VerticalPage title='Oops' items={['No', 'lyrics', 'for', 'this', 'song']} />}
 
             {!error && !song && (
               <VerticalPage title='No vibe dude' items={['Playing', 'nothing', 'rn']} />
@@ -228,6 +231,17 @@ export const NowPlaying: React.FC = () => {
                     'text-2xl leading-10',
                     song?.elapsedTime >= lyric.time ? 'font-bold' : 'text-tertiary'
                   )}
+                  style={
+                    // :)
+                    song?.artist.toLowerCase() === 'korn'
+                      ? {
+                          fontFamily: 'var(--font-korn)',
+                          fontSize: '64px',
+                          fontWeight: 300,
+                          lineHeight: '4rem'
+                        }
+                      : {}
+                  }
                   key={lyric.time}
                   ref={song?.elapsedTime >= lyric.time ? activeLyricRef : null}
                 >

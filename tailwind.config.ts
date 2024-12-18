@@ -55,24 +55,26 @@ export default {
             },
             'h1, h2, h3, h4': {
               color: theme('colors.gray.900'),
-              letterSpacing: '-0.025em'
+            },
+            'h5, h6': {
+              color: theme('colors.gray.800'),
             },
             h1: {
-              marginTop: '0.75rem',
-              marginBottom: '0.25rem',
+              marginTop: '1.25rem',
+              marginBottom: '0.5rem',
               fontSize: '1.5rem',
-              fontWeight: 'bold'
+              fontWeight: '900'
             },
             h2: {
-              marginTop: '0.5rem',
+              marginTop: '1rem',
               marginBottom: '0.25rem',
               fontSize: '1.25rem',
               fontWeight: 'bold'
             },
             h3: {
-              marginTop: 'duration-400`0.25rem',
-              marginBotton: '0.25rem',
-              fontSize: '1.125rem',
+              marginTop: '0.75rem',
+              marginBotton: 0,
+              fontSize: '1rem',
               fontWeight: 'semibold'
             },
             h4: {
@@ -80,14 +82,6 @@ export default {
               marginBottom: '0.25rem',
               fontSize: '1rem',
               fontWeight: 'medium'
-            },
-            'h2 small, h3 small, h4 small': {
-              fontFamily: theme('fontFamily.mono').join(', '),
-              color: theme('colors.gray.800'),
-              fontWeight: 500
-            },
-            'h2 code, h3 code': {
-              font: 'inherit'
             },
             li: {
               color: theme('colors.gray.900'),
@@ -97,20 +91,28 @@ export default {
               margin: 0,
               lineHeight: 1.5
             },
+            "ol, ul": {
+              marginTop: "0.5rem"
+            },
+            "ul > * > ul": {
+              marginTop: "0.25rem"
+            },
+            "ol > * > ol": {
+              marginTop: "0.25rem"
+            },
             ul: {
               listStyleType: 'none',
-              paddingLeft: '0.5rem',
               padding: 0,
-              margin: 0
+              margin: 0,
+              color: theme('colors.gray.700')
             },
             'ul > li': {
-              display: 'flex',
-              alignItems: 'center',
               position: 'relative',
-              paddingLeft: '1.25rem'
+              paddingLeft: '1rem'
             },
             'ul > li::before': {
               content: '""',
+              marginTop: "0.5rem",
               width: '0.50rem',
               height: '0.50rem',
               position: 'absolute',
@@ -119,13 +121,21 @@ export default {
               backgroundColor: theme('colors.gray.200')
             },
             ol: {
+              paddingTop: 0,
+              paddingBottom: 0,
+              margin: 0,
               fontSize: '0.75rem',
               fontWeight: 'normal',
               color: theme('colors.gray.700')
             },
-            'ol > li > ol': {
-              margin: '0',
-              padding: '0'
+            "ol > li": {
+              margin: 0,
+              padding: 0,
+              position: 'relative',
+            },
+            "ol > li::marker": {
+              paddingLeft: "0.5rem",
+              color: theme('colors.gray.200')
             },
             a: {
               color: theme('colors.gray.900'),
@@ -149,7 +159,15 @@ export default {
               color: theme('colors.gray.900'),
               fontWeight: 'black'
             },
+            pre: {
+              fontFamily: theme('fontFamily.mono').join(', '),
+              borderRadius: theme('borderRadius.2xl'),
+              width: '100%',
+              background: 'transparent !important',
+              padding: '0 !important'
+            },
             kbd: {
+              fontFamily: theme('fontFamily.mono').join(', '),
               backgroundColor: theme('colors.gray.50'),
               borderWidth: '1px',
               borderColor: theme('colors.gray.200'),
@@ -157,20 +175,22 @@ export default {
               color: theme('colors.gray.800'),
               fontWeight: 'semibold',
               fontSize: '0.875rem',
-              fontVariantLigatures: 'none',
               borderRadius: '0.75rem',
               margin: '0 1px',
               paddingLeft: '0.50rem',
               paddingRight: '0.50rem'
             },
             code: {
+              fontFamily: theme('fontFamily.mono').join(', '),
               borderWidth: '1px',
               borderColor: theme('colors.gray.200'),
               color: theme('colors.gray.800'),
               backgroundColor: theme('colors.gray.50'),
               borderRadius: '0.75rem',
               paddingLeft: '0.50rem',
-              paddingRight: '0.50rem'
+              paddingRight: '0.50rem',
+              paddingTop: '0.25rem',
+              paddingBottom: '0.25rem'
             }
           }
         },
@@ -186,23 +206,14 @@ export default {
               backgroundColor: theme('colors.gray.690'),
               borderColor: theme('colors.gray.690')
             },
-            h1: {
-              color: theme('colors.gray.50')
-            },
-            h2: {
-              color: theme('colors.gray.100')
-            },
-            h3: {
-              color: theme('colors.gray.100')
-            },
-            h4: {
-              color: theme('colors.gray.100')
-            },
             'h1, h2, h3, h4': {
               color: theme('colors.gray.50')
             },
+            'h5, h6': {
+              color: theme('colors.gray.100'),
+            },
             'h2 small, h3 small, h4 small': {
-              color: theme('colors.gray.100')
+              color: theme('colors.gray.200')
             },
             'ul > li': {
               color: theme('colors.gray.50')
@@ -210,11 +221,11 @@ export default {
             'ul > li::before': {
               backgroundColor: theme('colors.gray.500')
             },
-            ol: {
-              color: theme('colors.gray.100')
-            },
             'ol > li': {
               color: theme('colors.gray.50')
+            },
+            "ol > li::marker": {
+              color: theme('colors.gray.500')
             },
             a: {
               color: theme('colors.gray.50')
@@ -230,7 +241,7 @@ export default {
             code: {
               borderColor: theme('colors.gray.690'),
               color: theme('colors.gray.50'),
-              backgroundColor: theme('colors.gray.100')
+              backgroundColor: theme('colors.gray.900')
             }
           }
         }

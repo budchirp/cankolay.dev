@@ -91,17 +91,13 @@
 * {
   -webkit-tap-highlight-color: transparent;
 
-  @apply appearance-none scroll-smooth transition-all duration-300 font-main antialiased outline-none selection:bg-accent-300/90 selection:text-black/90 scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-700;
+  @apply appearance-none scroll-smooth font-main antialiased outline-none selection:bg-accent-300/90 selection:text-black/90 scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-700;
 }
 
 ::-webkit-scrollbar {
-  position: absolute
+  position: absolute;
 }
 
-[data-bright-theme="github-dark"] {
-  @apply !rounded-xl !bg-gray-800 !px-0 !py-1;
-}
-
-pre {
-  @apply !rounded-2xl !bg-gray-800 !p-0;
+[data-bright-theme] {
+  @apply !rounded-2xl !bg-gray-800 !px-0 !py-1 !w-full;
 }

@@ -6,6 +6,7 @@ import { Header } from '@/components/ui/header'
 import { Footer } from '@/components/ui/footer'
 import { Lexend } from 'next/font/google'
 import { cn } from '@/lib/cn'
+import localFont from 'next/font/local'
 import data from '@/data'
 
 import type { LayoutProps } from '@/types/layout'
@@ -18,9 +19,10 @@ export const metadata: Metadata = {
   generator: 'Next.js',
   applicationName: `${data.name}'s website`,
   keywords: data.keywords,
-  creator: data.username,
-  publisher: data.username,
-  authors: [{ name: data.username, url: data.siteUrl }],
+  creator: data.name,
+  publisher: data.name,
+  referrer: "origin",
+  authors: [{ name: data.name, url: data.siteUrl }],
   description: data.description,
   manifest: `${data.siteUrl}/manifest.json`,
   title: {
@@ -35,9 +37,14 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    nocache: false
+    googleBot: {
+      index: true,
+      follow: true
+    }
   },
   twitter: {
+    card: 'summary',
+    creator: data.name,
     description: data.description,
     title: {
       default: 'About me',
@@ -50,6 +57,8 @@ export const metadata: Metadata = {
     type: 'website',
     description: data.description,
     url: data.siteUrl,
+    countryName: 'Türkiye',
+    emails: [data.email],
     title: {
       default: 'About me',
       template: `%s - ${data.name}`
@@ -60,6 +69,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  minimumScale: 1,
   maximumScale: 5,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#FFFFFF' },
@@ -72,17 +82,20 @@ const lexend = Lexend({
   variable: '--font-main'
 })
 
+const korn = localFont({
+  src: "./korn.ttf",
+  variable: "--font-korn"
+})
+
 const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.ReactNode => {
   return (
     <ViewTransitions>
-      <html
-        suppressHydrationWarning
-        lang='en-US'
-      >
+      <html suppressHydrationWarning lang='en-US'>
         <body
           className={cn(
             'relative overflow-x-hidden size-full text-primary bg-primary',
-            lexend.variable
+            lexend.variable,
+            korn.variable
           )}
         >
           <ThemeProvider>

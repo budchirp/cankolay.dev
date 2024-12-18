@@ -97,4 +97,6 @@ const Page: React.FC = async () => {
   )
 }
 
+export const revalidate = 3600
+
 export default Page

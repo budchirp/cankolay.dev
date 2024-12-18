@@ -7,6 +7,7 @@ import { Heading } from '@/components/heading'
 import { Book, Calendar, User } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { compileMDX } from 'next-mdx-remote/rsc'
+import Image from 'next/image'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
@@ -62,7 +63,14 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
       <Heading
         cover={
           <div className='relative flex h-min max-h-96 w-full items-center justify-center overflow-hidden rounded-2xl mb-2'>
-            <img className='w-full h-full object-cover' alt={post.title} src={post.imageUrl} />
+            <Image
+              className='w-full h-auto object-cover aspect-video'
+              width={640}
+              height={360}
+              sizes='100vw'
+              alt={post.title}
+              src={post.imageUrl}
+            />
           </div>
         }
         description={
@@ -82,7 +90,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
         {post.title}
       </Heading>
 
-      <article className='prose dark:prose-dark'>{content}</article>
+      <article className='prose dark:prose-dark !max-w-full'>{content}</article>
     </>
   )
 }
