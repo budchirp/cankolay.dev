@@ -99,10 +99,10 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
         {owner}/{reponame}
       </Heading>
 
-      <div className='flex w-full'>
-        <div className='w-3/4 border-r-4 border-secondary pe-4 me-4'>{content}</div>
+      <div className='flex md:flex-row flex-col-reverse w-full'>
+        <div className='md:w-3/4 w-full md:border-r-4 md:border-t-0 border-t-4 border-secondary md:pe-4 md:pt-0 pt-4 md:me-4 md:mt-0 mt-4'>{content}</div>
 
-        <div className='grid gap-4 h-min w-1/4'>
+        <div className='grid gap-4 h-min md:w-1/4 w-full'>
           <p className='text-tertiary'>{repo.description}</p>
 
           <div className='grid gap-1'>
@@ -112,7 +112,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
 
               return (
                 <div className='flex gap-1 items-center' key={index}>
-                  <Icon className='p-1' size={24} />
+                  <Icon size={16} />
 
                   <span>{value}</span>
                 </div>
