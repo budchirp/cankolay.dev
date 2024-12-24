@@ -4,9 +4,14 @@ import matter from 'gray-matter'
 import readingTime from 'reading-time'
 
 import type { BlogPost } from '@/types/post'
+import { Hourglass } from '../hourglass'
 
 export class Post {
   static path = `${process.cwd()}/posts`
+
+  async get(slug: string): Promise<BlogPost | undefined | null> {
+    return (await this.getAll()).find((post) => post.slug === slug)
+  }
 
   async getAll(): Promise<BlogPost[]> {
     const postFiles = await fs.readdir(Post.path)
@@ -20,18 +25,13 @@ export class Post {
             await fs.readFile(`${Post.path}/${file}`, 'utf-8')
           ) as any
 
-          const date = new Date(metaData.date)
-          const yyyy = date.getFullYear()
-          const mm = date.getMonth()
-          const dd = date.getDay()
-
           const newMetaData: Omit<BlogPost, 'body'> = {
             ...metaData,
             id: metaData.slug,
             tags: metaData.tags.split(', '),
             readingTime: readingTime(content).text,
-            date,
-            formattedDate: `${dd < 10 ? `0${dd}` : dd}/${mm < 10 ? `0${mm}` : mm}/${yyyy}`
+            date: new Date(metaData.date),
+            formattedDate: Hourglass.formatDate(metaData.date)
           }
 
           return { ...newMetaData, body: content } as BlogPost
@@ -56,9 +56,5 @@ export class Post {
       page,
       totalPages
     }
-  }
-
-  async getBySlug(slug: string): Promise<BlogPost | undefined> {
-    return (await this.getAll()).find((post) => post.slug === slug)
   }
 }

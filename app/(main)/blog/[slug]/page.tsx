@@ -1,62 +1,26 @@
 import type React from 'react'
 
-import { components } from '@/components/mdx'
-import { genMetadata } from '@/lib/gen-metadata'
 import { Post } from '@/lib/post'
+import { MetadataManager } from '@/lib/metadata-manager'
 import { Heading } from '@/components/heading'
 import { Book, Calendar, User } from 'lucide-react'
+import { markdownToReact } from '@/lib/markdown'
 import { notFound } from 'next/navigation'
-import { compileMDX } from 'next-mdx-remote/rsc'
 import Image from 'next/image'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeSlug from 'rehype-slug'
-import remarkGfm from 'remark-gfm'
-import remarkToc from 'remark-toc'
 
 import type { DynamicPageProps } from '@/types/page'
 import type { BlogPost } from '@/types/post'
 import type { Metadata } from 'next'
 
-export const generateMetadata = async ({ params }: DynamicPageProps): Promise<Metadata> => {
-  const post = await new Post().getBySlug((await params).slug)
-  if (!post) {
-    notFound()
-  }
-
-  return genMetadata({
-    title: `${post.title} - Blog`,
-    description: post.description,
-    other: {
-      openGraph: {
-        type: 'article',
-        publishedTime: post.date.toISOString(),
-        images: [
-          {
-            url: post.imageUrl
-          }
-        ]
-      }
-    }
-  })
-}
-
 const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) => {
-  const post = await new Post().getBySlug((await params).slug)
+  const { slug } = await params
+
+  const post = await new Post().get(slug)
   if (!post) {
     notFound()
   }
 
-  const { content } = await compileMDX({
-    source: post.body,
-    components,
-    options: {
-      parseFrontmatter: false,
-      mdxOptions: {
-        rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
-        remarkPlugins: [remarkGfm, [remarkToc, { tight: true, ordered: true }]]
-      }
-    }
-  })
+  const content = await markdownToReact(post.body)
 
   return (
     <>
@@ -90,9 +54,30 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
         {post.title}
       </Heading>
 
-      <article className='prose dark:prose-dark !max-w-full'>{content}</article>
+      {content}
     </>
   )
+}
+
+export const generateMetadata = async ({ params }: DynamicPageProps): Promise<Metadata> => {
+  const { slug } = await params
+
+  const post = await new Post().get(slug)
+  if (!post) {
+    notFound()
+  }
+
+  return MetadataManager.generate(`${post.title} - Blog`, post.description, {
+    openGraph: {
+      type: 'article',
+      publishedTime: post.date.toISOString(),
+      images: [
+        {
+          url: post.imageUrl
+        }
+      ]
+    }
+  })
 }
 
 export const generateStaticParams = async (): Promise<{ [key: string]: any }[]> => {

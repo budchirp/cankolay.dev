@@ -3,11 +3,12 @@ import type React from 'react'
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 import { Box } from '@/components/box'
-import { genMetadata } from '@/lib/gen-metadata'
 import { Post } from '@/lib/post'
 import { cn } from '@/lib/cn'
 import { Calendar, Search } from 'lucide-react'
 import { notFound, redirect } from 'next/navigation'
+import { MetadataManager } from '@/lib/metadata-manager'
+import data from '@/data'
 import Link from 'next/link'
 import Image from 'next/image'
 import MiniSearch from 'minisearch'
@@ -16,18 +17,15 @@ import type { DynamicPageProps } from '@/types/page'
 import type { BlogPost } from '@/types/post'
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = genMetadata({ title: 'Blog' })
+const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPageProps) => {
+  const { search, page: _page }: { search?: string; page?: string } = await searchParams
 
-const Page: React.FC<DynamicPageProps> = async ({
-  searchParams: _searchParams
-}: DynamicPageProps) => {
   const post = new Post()
   const allPosts = await post.getAll()
 
   let posts: BlogPost[] = []
 
-  const searchParams = await _searchParams
-  const searchText = decodeURIComponent(searchParams.search || '')
+  const searchText = decodeURIComponent(search || '')
   if (searchText) {
     const miniSearch = new MiniSearch({
       fields: ['title', 'description', 'tags'],
@@ -44,7 +42,7 @@ const Page: React.FC<DynamicPageProps> = async ({
     posts: paginatedPosts,
     page,
     totalPages
-  } = await new Post().paginate(posts, Number(searchParams?.page || 0) || 0)
+  } = await new Post().paginate(posts, Number(_page || 0) || 0)
   posts = paginatedPosts
 
   if (!posts || posts.length < 1) {
@@ -54,15 +52,15 @@ const Page: React.FC<DynamicPageProps> = async ({
   const prevDisabled = page === 0
   const nextDisabled = page === totalPages
 
-  const search = async (formData: FormData): Promise<void> => {
-    'use server'
-
-    redirect(`/blog?search=${encodeURIComponent((formData.get('search') as string) || '')}`)
-  }
-
   return (
     <div className='grid gap-4'>
-      <form action={search}>
+      <form
+        action={async (formData: FormData): Promise<void> => {
+          'use server'
+
+          redirect(`/blog?search=${encodeURIComponent((formData.get('search') as string) || '')}`)
+        }}
+      >
         <Input
           defaultValue={searchText || ''}
           id='search'
@@ -152,5 +150,7 @@ const Page: React.FC<DynamicPageProps> = async ({
     </div>
   )
 }
+
+export const metadata: Metadata = MetadataManager.generate('Blog', `${data.name}'s blog`)
 
 export default Page

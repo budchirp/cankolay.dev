@@ -8,7 +8,7 @@ import { Container } from '@/components/container'
 import { Button } from '@/components/button'
 import { Logo } from '@/components/logo'
 import { Box } from '@/components/box'
-import { type LinkProps, links } from '@/lib/links'
+import { links } from '@/lib/links'
 import { cn } from '@/lib/cn'
 import { Transition, Menu, MenuItems, MenuItem, MenuButton } from '@headlessui/react'
 import { usePathname } from 'next/navigation'
@@ -16,6 +16,8 @@ import { Link } from 'next-view-transitions'
 import { Menu as MenuIcon, X } from 'lucide-react'
 import { Backdrop } from '@/components/backdrop'
 import { createPortal } from 'react-dom'
+
+import type { LinkProps } from '@/types/link'
 
 type HeaderLinkProps = {
   pathname: string

@@ -30,11 +30,10 @@ export const Box: React.FC<BoxProps> = ({
   padding,
   variant,
   ...props
-}: BoxProps): React.ReactNode => {
-  return (
-    <div {...props} className={cn(boxVariants({ className, padding, variant }))}>
-      {children}
-    </div>
-  )
-}
+}: BoxProps): React.ReactNode => (
+  <div {...props} className={cn(boxVariants({ className, padding, variant }))}>
+    {children}
+  </div>
+)
+
 Box.displayName = 'Box'

@@ -14,24 +14,19 @@ export const VerticalPage: React.FC<VerticalPageProps> = ({
   title,
   items,
   ...props
-}: VerticalPageProps): React.ReactNode => {
-  return (
-    <div
-      {...props}
-      className={cn('size-full flex flex-col flex-1 justify-center gap-4', className)}
-    >
-      <h2 className='text-accent-primary text-5xl font-bold'>{title}</h2>
+}: VerticalPageProps): React.ReactNode => (
+  <div {...props} className={cn('size-full flex flex-col flex-1 justify-center gap-4', className)}>
+    <h2 className='text-accent-primary text-5xl font-bold'>{title}</h2>
 
-      <div className='grid gap-1'>
-        {items.map((item, index) => (
-          <h2 className='text-secondary text-2xl font-medium' key={index}>
-            {item}
-          </h2>
-        ))}
-      </div>
-
-      {children && <div>{children}</div>}
+    <div className='grid gap-1'>
+      {items.map((item, index) => (
+        <h2 className='text-secondary text-2xl font-medium' key={index}>
+          {item}
+        </h2>
+      ))}
     </div>
-  )
-}
+
+    {children && <div>{children}</div>}
+  </div>
+)
 VerticalPage.displayName = 'VerticalPage'

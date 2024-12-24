@@ -1,7 +1,7 @@
-import { parseLRC } from '@/lib/lrc'
+import { NextResponse, type NextRequest } from 'next/server'
+import { parseLRC } from '@/lib/lyrics'
 import { exec } from 'child_process'
 import { promisify } from 'util'
-import { NextResponse, type NextRequest } from 'next/server'
 
 const execAsync = promisify(exec)
 
@@ -12,17 +12,18 @@ export const POST = async (request: NextRequest) => {
       return NextResponse.json({ message: 'Forbidden' }, { status: 403 })
     }
 
-    const body = await request.json()
-    const { song } = body
+    const { song } = await request.json()
     if (!song) {
       throw new Error('`song` is null')
     }
 
     if (!/^[a-zA-Z0-9 _-]+$/.test(song)) {
-      throw new Error('Invalid song name');
+      throw new Error('Invalid song name')
     }
 
-    const { stdout, stderr } = await execAsync(`syncedlyrics "${song.replace(/(["'$`\\])/g, '\\$1')}" -o /dev/null`)
+    const { stdout, stderr } = await execAsync(
+      `syncedlyrics "${song.replace(/(["'$`\\])/g, '\\$1')}" -o /dev/null`
+    )
 
     if (stderr) {
       throw new Error(stderr.toString())
@@ -36,10 +37,6 @@ export const POST = async (request: NextRequest) => {
 
     throw new Error('No output received from syncedlyrics')
   } catch (error) {
-    return NextResponse.json(
-      { message: (error as Error).message },
-      { status: 500 }
-    )
+    return NextResponse.json({ message: (error as Error).message }, { status: 500 })
   }
 }
-

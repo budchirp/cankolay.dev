@@ -14,25 +14,23 @@ export const Input: React.FC<InputProps> = ({
   id,
   icon,
   ...props
-}: InputProps): React.ReactNode => {
-  return (
-    <div className='flex h-min w-full flex-col items-center gap-1'>
-      <label htmlFor={id}>{label}</label>
+}: InputProps): React.ReactNode => (
+  <div className='flex h-min w-full flex-col items-center gap-1'>
+    <label htmlFor={id}>{label}</label>
 
-      <div className='relative flex h-10 w-full items-center rounded-3xl'>
-        <div className='absolute inset-y-0 left-0 flex h-10 w-10 items-center justify-center bg-transparent pl-2 text-3xl'>
-          {icon}
-        </div>
-
-        <input
-          {...props}
-          className={cn(
-            'bg-primary text-primary placeholder-tertiary border-primary focus:border-secondary flex h-full w-full items-center rounded-3xl border py-2 pl-11 pr-4 transition duration-300',
-            className
-          )}
-        />
+    <div className='relative flex h-10 w-full items-center rounded-3xl'>
+      <div className='absolute inset-y-0 left-0 flex h-10 w-10 items-center justify-center bg-transparent pl-2 text-3xl'>
+        {icon}
       </div>
+
+      <input
+        {...props}
+        className={cn(
+          'bg-primary text-primary placeholder-tertiary border-primary focus:border-secondary flex h-full w-full items-center rounded-3xl border py-2 pl-11 pr-4 transition duration-300',
+          className
+        )}
+      />
     </div>
-  )
-}
+  </div>
+)
 Input.displayName = 'Input'

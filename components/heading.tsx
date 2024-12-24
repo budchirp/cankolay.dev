@@ -14,17 +14,16 @@ export const Heading: React.FC<HeadingProps> = ({
   cover,
   description,
   ...props
-}: HeadingProps): React.ReactNode => {
-  return (
-    <div {...props} className={cn('mb-4 mt-12 grid w-full gap-1 pb-2', className)}>
-      {cover}
+}: HeadingProps): React.ReactNode => (
+  <div
+    {...props}
+    className={cn('mb-4 mt-12 grid w-full gap-1 pb-4 border-b-4 border-secondary', className)}
+  >
+    {cover}
 
-      <h2 className='break-all text-3xl font-bold'>{children}</h2>
+    <h2 className='break-all text-3xl font-bold '>{children}</h2>
 
-      {description}
-
-      <span className='bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-gray-700 h-1' />
-    </div>
-  )
-}
+    {description}
+  </div>
+)
 Heading.displayName = 'PageHeader'

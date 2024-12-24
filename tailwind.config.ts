@@ -5,7 +5,11 @@ import type { Config } from 'tailwindcss'
 
 export default {
   darkMode: 'class',
-  content: ['./components/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
+  content: [
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx,mdx}'
+  ],
   theme: {
     extend: {
       screens: {
@@ -54,10 +58,10 @@ export default {
               marginBottom: '0.5rem'
             },
             'h1, h2, h3, h4': {
-              color: theme('colors.gray.900'),
+              color: theme('colors.gray.900')
             },
             'h5, h6': {
-              color: theme('colors.gray.800'),
+              color: theme('colors.gray.800')
             },
             h1: {
               marginTop: '1.25rem',
@@ -91,14 +95,14 @@ export default {
               margin: 0,
               lineHeight: 1.5
             },
-            "ol, ul": {
-              marginTop: "0.5rem"
+            'ol, ul': {
+              marginTop: '0.5rem'
             },
-            "ul > * > ul": {
-              marginTop: "0.25rem"
+            'ul > * > ul': {
+              marginTop: '0.25rem'
             },
-            "ol > * > ol": {
-              marginTop: "0.25rem"
+            'ol > * > ol': {
+              marginTop: '0.25rem'
             },
             ul: {
               listStyleType: 'none',
@@ -112,7 +116,7 @@ export default {
             },
             'ul > li::before': {
               content: '""',
-              marginTop: "0.5rem",
+              marginTop: '0.5rem',
               width: '0.50rem',
               height: '0.50rem',
               position: 'absolute',
@@ -128,13 +132,13 @@ export default {
               fontWeight: 'normal',
               color: theme('colors.gray.700')
             },
-            "ol > li": {
+            'ol > li': {
               margin: 0,
               padding: 0,
-              position: 'relative',
+              position: 'relative'
             },
-            "ol > li::marker": {
-              paddingLeft: "0.5rem",
+            'ol > li::marker': {
+              paddingLeft: '0.5rem',
               color: theme('colors.gray.200')
             },
             a: {
@@ -191,6 +195,9 @@ export default {
               paddingRight: '0.50rem',
               paddingTop: '0.25rem',
               paddingBottom: '0.25rem'
+            },
+            img: {
+              margin: '0'
             }
           }
         },
@@ -210,7 +217,7 @@ export default {
               color: theme('colors.gray.50')
             },
             'h5, h6': {
-              color: theme('colors.gray.100'),
+              color: theme('colors.gray.100')
             },
             'h2 small, h3 small, h4 small': {
               color: theme('colors.gray.200')
@@ -224,7 +231,7 @@ export default {
             'ol > li': {
               color: theme('colors.gray.50')
             },
-            "ol > li::marker": {
+            'ol > li::marker': {
               color: theme('colors.gray.500')
             },
             a: {

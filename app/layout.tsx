@@ -6,7 +6,6 @@ import { Header } from '@/components/ui/header'
 import { Footer } from '@/components/ui/footer'
 import { Lexend } from 'next/font/google'
 import { cn } from '@/lib/cn'
-import localFont from 'next/font/local'
 import data from '@/data'
 
 import type { LayoutProps } from '@/types/layout'
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
   keywords: data.keywords,
   creator: data.name,
   publisher: data.name,
-  referrer: "origin",
+  referrer: 'origin',
   authors: [{ name: data.name, url: data.siteUrl }],
   description: data.description,
   manifest: `${data.siteUrl}/manifest.json`,
@@ -82,11 +81,6 @@ const lexend = Lexend({
   variable: '--font-main'
 })
 
-const korn = localFont({
-  src: "./korn.ttf",
-  variable: "--font-korn"
-})
-
 const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.ReactNode => {
   return (
     <ViewTransitions>
@@ -94,8 +88,7 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
         <body
           className={cn(
             'relative overflow-x-hidden size-full text-primary bg-primary',
-            lexend.variable,
-            korn.variable
+            lexend.variable
           )}
         >
           <ThemeProvider>

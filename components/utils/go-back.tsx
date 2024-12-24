@@ -4,6 +4,7 @@ import type React from 'react'
 
 import { Button } from '@/components/button'
 import { usePathname, useRouter } from 'next/navigation'
+
 import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 
 type GoBackProps = {

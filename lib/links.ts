@@ -1,7 +1,4 @@
-export type LinkProps = {
-  label: string
-  url: string
-}
+import type { LinkProps } from '@/types/link'
 
 export const links: LinkProps[] = [
   {

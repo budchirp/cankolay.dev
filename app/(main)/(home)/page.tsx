@@ -1,12 +1,10 @@
 import type React from 'react'
 
 import { Box } from '@/components/box'
-import { genMetadata } from '@/lib/gen-metadata'
+import { MetadataManager } from '@/lib/metadata-manager'
 import data from '@/data'
 
 import type { Metadata } from 'next'
-
-export const metadata: Metadata = genMetadata({ title: 'About me' })
 
 const Page: React.FC = (): React.ReactNode => {
   const SkillChip = ({
@@ -99,5 +97,7 @@ const Page: React.FC = (): React.ReactNode => {
     </div>
   )
 }
+
+export const metadata: Metadata = MetadataManager.generate('About me', 'Hello, World!')
 
 export default Page

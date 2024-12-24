@@ -5,14 +5,12 @@ import { Heading } from '@/components/heading'
 
 import type { LayoutProps } from '@/types/layout'
 
-const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.ReactNode => {
-  return (
-    <Container>
-      <Heading>Contact me</Heading>
+const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.ReactNode => (
+  <Container>
+    <Heading>Contact me</Heading>
 
-      {children}
-    </Container>
-  )
-}
+    {children}
+  </Container>
+)
 
 export default Layout

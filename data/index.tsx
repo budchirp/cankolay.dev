@@ -12,7 +12,6 @@ import {
   SiNestjs,
   SiC,
   SiKotlin,
-  SiSpotify,
   SiInstagram,
   SiExpress,
   SiLaravel,
@@ -23,7 +22,7 @@ import {
   SiSqlite
 } from 'react-icons/si'
 import { FaAndroid, FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
-import { Hexagon, Instagram, Mail, Send, Syringe, Terminal } from 'lucide-react'
+import { Mail, Send, Syringe, Terminal } from 'lucide-react'
 
 const email = 'contact@cankolay.com'
 

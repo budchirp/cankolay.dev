@@ -19,7 +19,7 @@ import { useTheme } from 'next-themes'
 import { Backdrop } from '@/components/backdrop'
 import { createPortal } from 'react-dom'
 
-export type Theme = 'dark' | 'light' | 'system'
+import type { Theme } from '@/types/theme'
 
 export const themes: { [key in Theme]: [string, LucideIcon] } = {
   dark: ['Dark', Moon],

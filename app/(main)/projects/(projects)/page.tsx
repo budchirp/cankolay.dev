@@ -2,7 +2,9 @@ import type React from 'react'
 
 import { Button } from '@/components/button'
 import { Box } from '@/components/box'
-import { genMetadata } from '@/lib/gen-metadata'
+import { MetadataManager } from '@/lib/metadata-manager'
+import { Github } from '@/lib/github'
+import { Fetch } from '@/lib/fetch'
 import { cn } from '@/lib/cn'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -10,20 +12,16 @@ import data from '@/data'
 
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = genMetadata({ title: 'Projects' })
-
 const Page: React.FC = async () => {
-  const colorsResponse = await fetch(
+  const colorsResponse = await Fetch.get<{ [key: string]: { color: string; url: string } }>(
     'https://raw.githubusercontent.com/ozh/github-colors/master/colors.json'
   )
-  const colors: { [key: string]: { color: string; url: string } } = await colorsResponse.json()
+  const colors = await colorsResponse.json()
 
   const reposWithSources: { [key: string]: any[] } = {}
   await Promise.all(
     data.projectSources.map(async (source: string): Promise<void> => {
-      const response = await fetch(`https://api.github.com/users/${source}/repos`)
-
-      reposWithSources[source] = await response.json()
+      reposWithSources[source] = await Github.getUserRepos(source)
     })
   )
 
@@ -33,26 +31,24 @@ const Page: React.FC = async () => {
 
   return (
     <div className='grid gap-4'>
-      {Object.keys(reposWithSources).map((source, index) => {
+      {data.projectSources.map((source, index) => {
         return (
           <div className='grid gap-2' key={index}>
             <span className='text-tertiary text-lg font-medium'>{source}/</span>
 
             <div className='masonry'>
               {reposWithSources[source].map((repo, index) => {
-                const currentColor = colors[repo.language]?.color ?? null
-
                 return (
                   <Box
                     key={index}
                     className='hover:bg-tertiary group grid h-max w-full gap-1 transition duration-300'
                   >
                     <Link
-                      href={repo.html_url}
+                      href={`projects/${source}/${repo.name}`}
                       rel='noreferrer'
                       target='_blank'
                       className='text-primary group-hover:text-secondary flex w-full items-center break-all text-2xl font-bold transition duration-300'
-                      aria-label={`Go to ${repo.html_url}`}
+                      aria-label='Go to project'
                     >
                       {repo.name}
                     </Link>
@@ -66,13 +62,17 @@ const Page: React.FC = async () => {
                         {repo.language && (
                           <span
                             style={{
-                              ...(currentColor ? { color: currentColor as string } : {})
+                              color: colors[repo.language]?.color || undefined
                             }}
-                            className={cn('text-sm', !currentColor ? 'text-secondary' : '')}
+                            className={cn(
+                              'text-sm',
+                              !colors[repo.language]?.color ? 'text-secondary' : ''
+                            )}
                           >
                             {repo.language}
                           </span>
                         )}
+
                         {repo.homepage && (
                           <Link
                             href={repo.homepage}
@@ -98,5 +98,7 @@ const Page: React.FC = async () => {
 }
 
 export const revalidate = 3600
+
+export const metadata: Metadata = MetadataManager.generate('Projects', `${data.name}'s projects`)
 
 export default Page

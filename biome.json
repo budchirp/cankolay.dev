@@ -20,6 +20,9 @@
       "style": {
         "useNodejsImportProtocol": "off",
         "noInferrableTypes": "off"
+      },
+      "complexity": {
+        "noStaticOnlyClass": "off"
       }
     }
   },

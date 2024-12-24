@@ -10,8 +10,8 @@ import { Backdrop } from '@/components/backdrop'
 import { Transition } from '@headlessui/react'
 import { VerticalPage } from '@/components/vertical-page'
 import { Button } from '@/components/button'
+import { Hourglass } from '@/lib/hourglass'
 import { cn } from '@/lib/cn'
-import { formatTime } from '@/lib/time'
 import { Disc3, VolumeX, X } from 'lucide-react'
 import Link from 'next/link'
 import data from '@/data'
@@ -61,7 +61,6 @@ export const NowPlaying: React.FC = () => {
   useEffect(() => {
     if (song && showLyricsScreen) {
       const currentTitle = song.title
-      const previousTitle = previousTitleRef.current
 
       if (currentTitle === previousTitleRef.current) return
 
@@ -96,12 +95,12 @@ export const NowPlaying: React.FC = () => {
   useEffect(() => {
     const now = Date.now()
 
-    if (now - lastScrollTime > 3000 && activeLyricRef.current) {
+    if (now - lastScrollTime > 5000 && activeLyricRef.current) {
       activeLyricRef.current.scrollIntoView({
         behavior: 'smooth',
         block: 'center'
       })
-      setLastScrollTime(now) // Update the last scroll time
+      setLastScrollTime(now)
     }
   }, [song?.elapsedTime])
 
@@ -149,7 +148,7 @@ export const NowPlaying: React.FC = () => {
 
             <div className='flex items-center justify-between gap-2'>
               <span className='text-sm leading-none select-none text-secondary'>
-                {formatTime(song?.elapsedTime)}
+                {Hourglass.formatTime(song?.elapsedTime)}
               </span>
 
               <div className='w-full h-1 bg-secondary relative rounded-full'>
@@ -162,7 +161,7 @@ export const NowPlaying: React.FC = () => {
               </div>
 
               <span className='text-sm leading-none select-none text-secondary'>
-                {formatTime(song?.totalTime)}
+                {Hourglass.formatTime(song?.totalTime)}
               </span>
             </div>
           </div>
@@ -231,17 +230,6 @@ export const NowPlaying: React.FC = () => {
                     'text-2xl leading-10',
                     song?.elapsedTime >= lyric.time ? 'font-bold' : 'text-tertiary'
                   )}
-                  style={
-                    // :)
-                    song?.artist.toLowerCase() === 'korn'
-                      ? {
-                          fontFamily: 'var(--font-korn)',
-                          fontSize: '64px',
-                          fontWeight: 300,
-                          lineHeight: '4rem'
-                        }
-                      : {}
-                  }
                   key={lyric.time}
                   ref={song?.elapsedTime >= lyric.time ? activeLyricRef : null}
                 >
