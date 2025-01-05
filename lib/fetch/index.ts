@@ -4,8 +4,8 @@ export class Fetch {
     method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
     headers?: Record<string, string>,
     body?: Record<string, unknown> | FormData
-  ) =>
-    fetch(url, {
+  ) => {
+    return fetch(url, {
       method,
       headers: {
         ...(body instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
@@ -17,6 +17,7 @@ export class Fetch {
         json: () => Promise<T>
       } & Response
     >
+  }
 
   public static get = async <T>(url: string, headers?: Record<string, string>) =>
     await Fetch.fetch<T>(url, 'GET', headers, undefined)

@@ -36,7 +36,7 @@ export const GET = async (request: NextRequest) => {
   try {
     const referer = request.headers.get('referer')
     if (!referer || !referer.startsWith(process.env.APP_URL || '')) {
-      return NextResponse.json({ message: 'Forbidden' }, { status: 403 })
+      return NextResponse.json({ message: 'Forbidden', data: null }, { status: 403 })
     }
 
     const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
@@ -47,7 +47,7 @@ export const GET = async (request: NextRequest) => {
     })
 
     if (response.status === 204 || response.status > 400) {
-      return NextResponse.json({ message: 'Playing nothing' })
+      return NextResponse.json({ message: 'Playing nothing', data: null })
     }
 
     const json = await response.json()
@@ -57,7 +57,7 @@ export const GET = async (request: NextRequest) => {
 
     const percentage = Math.min((elapsedTime / totalTime) * 100, 100)
 
-    return NextResponse.json({
+    const data: NowPlayingType = {
       link: json?.item?.external_urls?.spotify,
 
       title: json?.item?.name,
@@ -71,8 +71,16 @@ export const GET = async (request: NextRequest) => {
       percentage,
 
       isPlaying: json?.is_playing
-    } as NowPlayingType)
+    }
+
+    return NextResponse.json({
+      message: '',
+      data
+    })
   } catch (error) {
-    return NextResponse.json({ message: (error as Error).message }, { status: 500 })
+    return NextResponse.json(
+      { message: 'Failed to get song details', details: (error as Error).message, data: null },
+      { status: 500 }
+    )
   }
 }

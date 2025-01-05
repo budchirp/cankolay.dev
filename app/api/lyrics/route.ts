@@ -9,7 +9,7 @@ export const POST = async (request: NextRequest) => {
   try {
     const referer = request.headers.get('referer')
     if (!referer || !referer.startsWith(process.env.APP_URL || '')) {
-      return NextResponse.json({ message: 'Forbidden' }, { status: 403 })
+      return NextResponse.json({ message: 'Forbidden', data: null }, { status: 403 })
     }
 
     const { song } = await request.json()
@@ -26,17 +26,23 @@ export const POST = async (request: NextRequest) => {
     )
 
     if (stderr) {
-      throw new Error(stderr.toString())
+      throw new Error()
     }
 
-    if (stdout) {
+    if (!stderr && stdout) {
       const lyrics = parseLRC(stdout)
 
-      return NextResponse.json(lyrics)
+      return NextResponse.json({
+        message: '',
+        data: lyrics
+      })
     }
 
-    throw new Error('No output received from syncedlyrics')
+    throw new Error()
   } catch (error) {
-    return NextResponse.json({ message: (error as Error).message }, { status: 500 })
+    return NextResponse.json(
+      { message: 'Failed to get lyrics', details: (error as Error).message, data: null },
+      { status: 500 }
+    )
   }
 }

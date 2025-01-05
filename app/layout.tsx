@@ -11,7 +11,7 @@ import data from '@/data'
 import type { LayoutProps } from '@/types/layout'
 import type { Metadata, Viewport } from 'next'
 
-import '@/app/styles.css'
+import '@/styles/globals.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL(data.siteUrl),

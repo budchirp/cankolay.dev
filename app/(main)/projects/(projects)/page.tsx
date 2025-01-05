@@ -4,7 +4,6 @@ import { Button } from '@/components/button'
 import { Box } from '@/components/box'
 import { MetadataManager } from '@/lib/metadata-manager'
 import { Github } from '@/lib/github'
-import { Fetch } from '@/lib/fetch'
 import { cn } from '@/lib/cn'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -13,34 +12,31 @@ import data from '@/data'
 import type { Metadata } from 'next'
 
 const Page: React.FC = async () => {
-  const colorsResponse = await Fetch.get<{ [key: string]: { color: string; url: string } }>(
-    'https://raw.githubusercontent.com/ozh/github-colors/master/colors.json'
-  )
-  const colors = await colorsResponse.json()
+  const colors = await Github.getLanguageColors()
 
-  const reposWithSources: { [key: string]: any[] } = {}
+  const repos: { [key: string]: any[] } = {}
   await Promise.all(
-    data.projectSources.map(async (source: string): Promise<void> => {
-      reposWithSources[source] = await Github.getUserRepos(source)
+    data.projectSources.map(async (source) => {
+      repos[source] = await Github.getUserRepos(source)
     })
   )
 
-  if (!reposWithSources || Object.keys(reposWithSources).length < 1) {
+  if (!repos || Object.keys(repos).length < 1) {
     notFound()
   }
 
   return (
     <div className='grid gap-4'>
-      {data.projectSources.map((source, index) => {
+      {data.projectSources.map((source) => {
         return (
-          <div className='grid gap-2' key={index}>
+          <div className='grid gap-2' key={source}>
             <span className='text-tertiary text-lg font-medium'>{source}/</span>
 
             <div className='masonry'>
-              {reposWithSources[source].map((repo, index) => {
+              {repos[source].map((repo) => {
                 return (
                   <Box
-                    key={index}
+                    key={repo.name}
                     className='hover:bg-tertiary group grid h-max w-full gap-1 transition duration-300'
                   >
                     <Link
@@ -62,11 +58,11 @@ const Page: React.FC = async () => {
                         {repo.language && (
                           <span
                             style={{
-                              color: colors[repo.language]?.color || undefined
+                              color: (colors && colors[repo.language]?.color) || undefined
                             }}
                             className={cn(
                               'text-sm',
-                              !colors[repo.language]?.color ? 'text-secondary' : ''
+                              !colors || !colors[repo.language]?.color ? 'text-secondary' : ''
                             )}
                           >
                             {repo.language}

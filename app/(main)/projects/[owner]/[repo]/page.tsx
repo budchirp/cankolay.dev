@@ -5,11 +5,14 @@ import { Github } from '@/lib/github'
 import { notFound } from 'next/navigation'
 import { Fetch } from '@/lib/fetch'
 import { markdownToReact } from '@/lib/markdown'
-import { Calendar, GitFork, Scale, Star } from 'lucide-react'
+import { Calendar, GitFork, Scale, Star, Link as LucideLink } from 'lucide-react'
 import { Hourglass } from '@/lib/hourglass'
 import data from '@/data'
 
 import type { DynamicPageProps } from '@/types/page'
+import type { Metadata } from 'next'
+import { MetadataManager } from '@/lib/metadata-manager'
+import Link from 'next/link'
 
 const getValue = (obj: any, path: string) => {
   if (!path.includes('.')) {
@@ -18,89 +21,82 @@ const getValue = (obj: any, path: string) => {
   return path.split('.').reduce((acc, key) => acc && acc[key], obj)
 }
 
-type LanguageObject = Record<string, number>
+type Language = Record<string, number>
 
-const calcLanguagePercentage = (languages: LanguageObject): LanguageObject => {
-  if (!languages || Object.keys(languages).length === 0) {
-    return {}
-  }
+const calculateLanguagePercentage = (languages: Language): Language => {
+  if (!languages || Object.keys(languages).length === 0) return {}
 
   const total = Object.values(languages).reduce((sum, value) => sum + value, 0)
-
-  const percentages = Object.entries(languages).map(([key, value]) => ({
+  const entries: [string, number][] = Object.entries(languages).map(([key, value]) => [
     key,
-    percentage: Number.parseFloat(((value / total) * 100).toFixed(1))
-  }))
+    Number(((value / total) * 100).toFixed(2))
+  ])
 
-  percentages.sort((a, b) => b.percentage - a.percentage)
-
-  const totalPercentage = percentages.reduce((sum, item) => sum + item.percentage, 0)
-  let remainingDiff = Number.parseFloat((100 - totalPercentage).toFixed(1))
-
-  if (remainingDiff !== 0) {
-    for (let i = 0; remainingDiff !== 0 && i < percentages.length; i++) {
-      const adjustment = remainingDiff > 0 ? 0.1 : -0.1
-      percentages[i].percentage += adjustment
-      remainingDiff = Number.parseFloat((remainingDiff - adjustment).toFixed(1))
-    }
+  const diff = Number((100 - entries.reduce((sum, [, p]) => sum + p, 0)).toFixed(2))
+  if (Math.abs(diff) > 0.01) {
+    entries.sort(([, a], [, b]) => b - a)
+    entries[0][1] += diff
   }
 
-  return Object.fromEntries(
-    percentages.map(({ key, percentage }) => [key, Number.parseFloat(percentage.toFixed(1))])
-  )
+  return Object.fromEntries(entries) as Language
 }
+
+const badges = [
+  {
+    key: 'homepage',
+    icon: LucideLink
+  },
+  {
+    key: 'stargazers_count',
+    icon: Star
+  },
+  {
+    key: 'license.name',
+    icon: Scale
+  },
+  {
+    key: 'forks',
+    icon: GitFork
+  },
+  {
+    key: 'created_at',
+    icon: Calendar
+  }
+]
 
 const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) => {
   const { owner, repo: reponame } = await params
 
-  if (!data.projectSources.includes(owner)) notFound()
-
-  const repo = await Github.getRepo(owner, reponame)
+  const repo: any = await Github.getRepo(owner, reponame)
   if (!repo) {
     notFound()
   }
 
-  const languagesResponse = await Fetch.get<LanguageObject>(repo.languages_url)
-  const languages = calcLanguagePercentage(await languagesResponse.json())
+  const languages = calculateLanguagePercentage(
+    (await Github.getRepoLanguages(owner, reponame)) as Language
+  )
 
-  const colorsResponse = await Fetch.get<{
-    [key: string]: { color: string; url: string }
-  }>('https://raw.githubusercontent.com/ozh/github-colors/master/colors.json')
-  const colors = await colorsResponse.json()
+  const colors = await Github.getLanguageColors()
 
   const readme = await Fetch.get(
     `https://raw.githubusercontent.com/${owner}/${reponame}/${repo.default_branch}/README.md`
   )
 
-  const content = readme.status !== 200 ? 'No readme' : await markdownToReact(await readme.text())
-
-  const badges = [
-    {
-      key: 'stargazers_count',
-      icon: Star
-    },
-    {
-      key: 'license.name',
-      icon: Scale
-    },
-    {
-      key: 'forks',
-      icon: GitFork
-    },
-    {
-      key: 'created_at',
-      icon: Calendar
-    }
-  ]
+  const content: React.ReactNode =
+    readme.status !== 200 ? 'No readme' : await markdownToReact(await readme.text())
 
   return (
     <div className='size-full'>
       <Heading>
-        {owner}/{reponame}
+        <Link href={repo.html_url}>
+          {owner}/{reponame}
+        </Link>
       </Heading>
 
       <div className='flex md:flex-row flex-col-reverse w-full'>
-        <div className='md:w-3/4 w-full md:border-r-4 md:border-t-0 border-t-4 border-secondary md:pe-4 md:pt-0 pt-4 md:me-4 md:mt-0 mt-4'>{content}</div>
+        <div className='md:w-3/4 w-full md:border-r-4 md:border-t-0 border-t-4 border-secondary md:pe-4 md:pt-0 pt-4 md:me-4 md:mt-0 mt-4'>
+          {content}
+        </div>
 
         <div className='grid gap-4 h-min md:w-1/4 w-full'>
           <p className='text-tertiary'>{repo.description}</p>
@@ -110,11 +106,19 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
               let value = getValue(repo, key)
               if (key === 'created_at') value = Hourglass.formatDate(value)
 
+              if (!value) return
+
               return (
-                <div className='flex gap-1 items-center' key={index}>
+                <div className='flex gap-2 items-center' key={index}>
                   <Icon size={16} />
 
-                  <span>{value}</span>
+                  {key === 'homepage' ? (
+                    <Link className='underline' target='_blank' rel='noreferrer' href={value}>
+                      {value}
+                    </Link>
+                  ) : (
+                    <span>{value}</span>
+                  )}
                 </div>
               )
             })}
@@ -128,7 +132,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
                     key={key}
                     className='h-1'
                     style={{
-                      background: colors[key]?.color || undefined,
+                      background: (colors && colors[key]?.color) || undefined,
                       width: `${languages[key]}%`
                     }}
                   />
@@ -143,7 +147,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
                     <div
                       className='size-2 rounded-full'
                       style={{
-                        background: colors[key]?.color || undefined
+                        background: (colors && colors[key]?.color) || undefined
                       }}
                     />
 
@@ -161,6 +165,39 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
   )
 }
 
+export const generateMetadata = async ({ params }: DynamicPageProps): Promise<Metadata> => {
+  const { owner, repo: reponame } = await params
+
+  const repo: any = await Github.getRepo(owner, reponame)
+  if (!repo) {
+    notFound()
+  }
+
+  return MetadataManager.generate(`${repo.full_name} - Projects`, repo.description, {
+    openGraph: {
+      type: 'article',
+      publishedTime: repo.created_at
+    }
+  })
+}
+
 export const revalidate = 3600
+
+export const generateStaticParams = async () => {
+  let repos: any[] = []
+
+  await Promise.all(
+    data.projectSources.map(async (source) => {
+      repos = [...repos, await Github.getUserRepos(source)]
+    })
+  )
+
+  return repos.map((repo) => {
+    return {
+      owner: repo?.owner?.login,
+      repo: repo.name
+    }
+  })
+}
 
 export default Page

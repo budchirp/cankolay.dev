@@ -10,7 +10,9 @@ export class Hourglass {
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`
   }
 
-  public static formatDate(date: string | Date): string {
+  public static formatDate(date: string | Date): string | null {
+    if (!date) return null
+
     const _date = typeof date === 'string' ? new Date(date) : date
 
     const yyyy = _date.getFullYear()

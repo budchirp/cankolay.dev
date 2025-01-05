@@ -22,7 +22,8 @@
         "noInferrableTypes": "off"
       },
       "complexity": {
-        "noStaticOnlyClass": "off"
+        "noStaticOnlyClass": "off",
+        "useOptionalChain": "off"
       }
     }
   },

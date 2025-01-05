@@ -18,6 +18,7 @@ import data from '@/data'
 
 import type { NowPlayingType } from '@/types/now-playing'
 import type { LyricsType } from '@/types/lyrics'
+import { Fetch } from '@/lib/fetch'
 
 export const NowPlaying: React.FC = () => {
   const [mounted, setMounted] = useState<boolean>(false)
@@ -25,13 +26,14 @@ export const NowPlaying: React.FC = () => {
     setMounted(true)
   }, [])
 
-  const [error, setError] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const [song, updateSong] = useState<NowPlayingType | null>(null)
+  const [song, setSong] = useState<NowPlayingType | null>(null)
 
   const [lastScrollTime, setLastScrollTime] = useState<number>(0)
   const [showLyricsScreen, setShowLyricsScreen] = useState<boolean>(false)
-  const [lyrics, updateLyrics] = useState<LyricsType[] | null>(null)
+
+  const [lyrics, setLyrics] = useState<LyricsType[] | null>(null)
 
   const activeLyricRef = useRef<HTMLParagraphElement | null>(null)
   const previousTitleRef = useRef<string | null>(null)
@@ -39,16 +41,17 @@ export const NowPlaying: React.FC = () => {
   useEffect(() => {
     const fetchNowPlaying = async () => {
       try {
-        const response = await fetch('/api/now-playing')
+        const response = await Fetch.get('/api/now-playing')
+        const json: any = await response.json()
+
         if (!response.ok) {
-          throw new Error('Failed to fetch song')
+          throw new Error(json.message)
         }
 
-        updateSong(await response.json())
-      } catch {
-        setError(true)
-
-        updateSong(null)
+        setSong(json.data)
+      } catch (error) {
+        setError((error as Error).message)
+        setSong(null)
       }
     }
 
@@ -60,31 +63,27 @@ export const NowPlaying: React.FC = () => {
 
   useEffect(() => {
     if (song && showLyricsScreen) {
-      const currentTitle = song.title
+      if (song.title === previousTitleRef.current) return
 
-      if (currentTitle === previousTitleRef.current) return
-
-      updateLyrics(null)
+      setLyrics(null)
 
       const fetchLyrics = async () => {
         try {
-          const response = await fetch('/api/lyrics', {
-            method: 'POST',
-            body: JSON.stringify({
-              song: [song.title, song.artist].join(' ')
-            })
+          const response = await Fetch.post<LyricsType[]>('/api/lyrics', {
+            song: [song.title, song.artist].join(' ')
           })
+          const json: any = await response.json()
+
           if (!response.ok) {
-            throw new Error('Failed to fetch lyrics')
+            throw new Error(json.message)
           }
 
-          updateLyrics(await response.json())
-        } catch {
-          setError(false)
-
-          updateLyrics(null)
+          setLyrics(json.data)
+        } catch (error) {
+          setError((error as Error).message)
+          setLyrics(null)
         } finally {
-          previousTitleRef.current = currentTitle
+          previousTitleRef.current = song.title
         }
       }
 
@@ -100,6 +99,7 @@ export const NowPlaying: React.FC = () => {
         behavior: 'smooth',
         block: 'center'
       })
+
       setLastScrollTime(now)
     }
   }, [song?.elapsedTime])
@@ -117,11 +117,11 @@ export const NowPlaying: React.FC = () => {
 
         <div className='flex flex-col xs:flex-row xs:gap-2 z-10 size-full relative'>
           <div className='xs:size-16 p-2 xs:p-0 size-full'>
-            <div className='border border-primary aspect-square rounded-2xl flex xs:size-16 select-none items-center justify-center'>
+            <div className='border border-primary aspect-square rounded-2xl flex xs:size-16 overflow-hidden select-none items-center justify-center'>
               {song?.albumCover ? (
                 <Link href={song?.link || ''}>
                   <img
-                    className='aspect-square xs:object-cover xs:size-16 rounded-2xl transition duration-500 ease-out hover:scale-90'
+                    className='aspect-square xs:object-cover xs:size-16 rounded-2xl transition duration-500 ease-out hover:scale-110'
                     src={song?.albumCover}
                     alt='album'
                   />
@@ -211,7 +211,7 @@ export const NowPlaying: React.FC = () => {
               <X />
             </Button>
 
-            {error && <VerticalPage title='Oops' items={['No', 'lyrics', 'for', 'this', 'song']} />}
+            {error && <VerticalPage title='Oops' items={error.split(' ')} />}
 
             {!error && !song && (
               <VerticalPage title='No vibe dude' items={['Playing', 'nothing', 'rn']} />

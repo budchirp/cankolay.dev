@@ -103,6 +103,26 @@ html {
   position: absolute;
 }
 
-[data-bright-theme] {
-  @apply !rounded-2xl !bg-gray-800 !px-0 !py-1 !w-full;
+html.dark .shiki,
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+}
+
+code {
+  counter-reset: step;
+  counter-increment: step 0;
+}
+
+code .line::before {
+  content: counter(step);
+  counter-increment: step;
+
+  width: 1rem;
+  margin-right: 1.5rem;
+
+  display: inline-block;
+
+  text-align: right;
+
+  @apply text-gray-500;
 }

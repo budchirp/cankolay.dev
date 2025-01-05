@@ -7,13 +7,13 @@ import type { BlogPost } from '@/types/post'
 import { Hourglass } from '../hourglass'
 
 export class Post {
-  static path = `${process.cwd()}/posts`
+  private static path = `${process.cwd()}/posts`
 
-  async get(slug: string): Promise<BlogPost | undefined | null> {
+  public async get(slug: string): Promise<BlogPost | undefined | null> {
     return (await this.getAll()).find((post) => post.slug === slug)
   }
 
-  async getAll(): Promise<BlogPost[]> {
+  public async getAll(): Promise<BlogPost[]> {
     const postFiles = await fs.readdir(Post.path)
 
     const posts: BlogPost[] = await Promise.all(
@@ -41,7 +41,7 @@ export class Post {
     return posts.sort((a, b) => a.date.getTime() - b.date.getTime()) || []
   }
 
-  async paginate(
+  public async paginate(
     posts: BlogPost[],
     page = 0,
     limit = 10

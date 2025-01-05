@@ -44,6 +44,10 @@ export default {
               marginBottom: '0.75rem',
               fontWeight: 'normal'
             },
+            summary: {
+              fontWeight: theme('fontWeight.bold'),
+              color: theme('colors.gray.900')
+            },
             p: {
               margin: 0,
               padding: 0,
@@ -163,13 +167,6 @@ export default {
               color: theme('colors.gray.900'),
               fontWeight: 'black'
             },
-            pre: {
-              fontFamily: theme('fontFamily.mono').join(', '),
-              borderRadius: theme('borderRadius.2xl'),
-              width: '100%',
-              background: 'transparent !important',
-              padding: '0 !important'
-            },
             kbd: {
               fontFamily: theme('fontFamily.mono').join(', '),
               backgroundColor: theme('colors.gray.50'),
@@ -184,20 +181,25 @@ export default {
               paddingLeft: '0.50rem',
               paddingRight: '0.50rem'
             },
-            code: {
-              fontFamily: theme('fontFamily.mono').join(', '),
+            pre: {
+              backgroundColor: "theme('colors.gray.50') !important",
               borderWidth: '1px',
               borderColor: theme('colors.gray.200'),
-              color: theme('colors.gray.800'),
-              backgroundColor: theme('colors.gray.50'),
-              borderRadius: '0.75rem',
-              paddingLeft: '0.50rem',
-              paddingRight: '0.50rem',
-              paddingTop: '0.25rem',
-              paddingBottom: '0.25rem'
+              borderRadius: theme('borderRadius.2xl'),
+              paddingLeft: '1rem',
+              paddingRight: '1rem',
+              paddingTop: '.5rem',
+              paddingBottom: '.5rem'
+            },
+            code: {
+              fontFamily: theme('fontFamily.mono').join(', '),
+              color: theme('colors.gray.800')
             },
             img: {
               margin: '0'
+            },
+            'thead, tbody, tr, td': {
+              borderColor: theme('colors.gray.200')
             }
           }
         },
@@ -205,6 +207,10 @@ export default {
           css: {
             blockQuote: {
               borderColor: theme('colors.gray.690')
+            },
+            summary: {
+              fontWeight: theme('fontWeight.bold'),
+              color: theme('colors.gray.50')
             },
             p: {
               color: theme('colors.gray.50')
@@ -245,10 +251,12 @@ export default {
               borderColor: theme('colors.gray.690'),
               color: theme('colors.gray.100')
             },
-            code: {
+            pre: {
               borderColor: theme('colors.gray.690'),
-              color: theme('colors.gray.50'),
-              backgroundColor: theme('colors.gray.900')
+              backgroundColor: "theme('colors.gray.900') !important"
+            },
+            'thead, tbody, tr, td': {
+              borderColor: theme('colors.gray.690')
             }
           }
         }
