@@ -78,6 +78,7 @@ export const NowPlaying: React.FC = () => {
             throw new Error(json.message)
           }
 
+          setError(null)
           setLyrics(json.data)
         } catch (error) {
           setError((error as Error).message)
