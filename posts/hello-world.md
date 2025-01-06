@@ -34,7 +34,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget gravida nibh
 
 ```kotlin
 fun main() {
-    println("Hi") njdfsdkayhjkaflhkladıksankjfallamfnavdfkjprintln("Hi") njdfsdkayhjkaflhkladıksankjfallamfnavdfkjprintln("Hi") njdfsdkayhjkaflhkladıksankjfallamfnavdfkjprintln("Hi") njdfsdkayhjkaflhkladıksankjfallamfnavdfkjprintln("Hi") njdfsdkayhjkaflhkladıksankjfallamfnavdfkjprintln("Hi") njdfsdkayhjkaflhkladıksankjfallamfnavdfkj
+    println("Hi")
 }
 ```
 

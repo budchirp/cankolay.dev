@@ -4,7 +4,7 @@ import { ViewTransitions } from 'next-view-transitions'
 import { ThemeProvider } from '@/providers/theme'
 import { Header } from '@/components/ui/header'
 import { Footer } from '@/components/ui/footer'
-import { Lexend } from 'next/font/google'
+import { JetBrains_Mono, Lexend } from 'next/font/google'
 import { cn } from '@/lib/cn'
 import data from '@/data'
 
@@ -81,6 +81,11 @@ const lexend = Lexend({
   variable: '--font-main'
 })
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono"
+})
+
 const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.ReactNode => {
   return (
     <ViewTransitions>
@@ -88,7 +93,8 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
         <body
           className={cn(
             'relative overflow-x-hidden size-full text-primary bg-primary',
-            lexend.variable
+            lexend.variable,
+            jetbrainsMono.variable
           )}
         >
           <ThemeProvider>

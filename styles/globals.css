@@ -64,12 +64,12 @@
   }
 
   .masonry {
-    @apply h-full w-full;
+    @apply h-full w-full overflow-hidden;
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: theme("spacing.4");
 
-    > * {
+    >* {
       break-inside: avoid;
     }
 
@@ -118,7 +118,7 @@ code .line::before {
   counter-increment: step;
 
   width: 1rem;
-  margin-right: 1.5rem;
+  margin-right: 1rem;
 
   display: inline-block;
 

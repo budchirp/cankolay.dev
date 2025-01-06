@@ -17,6 +17,8 @@ import remarkToc from 'remark-toc'
 import rehypeShiki from '@shikijs/rehype'
 
 export const markdownToReact = async (text: string): Promise<React.ReactNode> => {
+  'use server'
+
   const { content } = await compileMDX({
     source: text,
     components,

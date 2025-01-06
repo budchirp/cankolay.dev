@@ -3,6 +3,7 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 
 import type { Config } from 'tailwindcss'
 
+
 export default {
   darkMode: 'class',
   content: [
@@ -42,7 +43,7 @@ export default {
               borderColor: theme('colors.gray.50'),
               marginTop: '0.75rem',
               marginBottom: '0.75rem',
-              fontWeight: 'normal'
+              fontWeight: theme('fontWeight.normal')
             },
             summary: {
               fontWeight: theme('fontWeight.bold'),
@@ -55,7 +56,6 @@ export default {
             },
             hr: {
               backgroundColor: theme('colors.gray.50'),
-
               borderColor: theme('colors.gray.50'),
               height: '0.25rem',
               marginTop: '0.5rem',
@@ -67,34 +67,37 @@ export default {
             'h5, h6': {
               color: theme('colors.gray.800')
             },
+            'h1 a, h2 a, h3 a, h4 a, h5 a, h6 a': {
+              textDecoration: 'none'
+            },
             h1: {
-              marginTop: '1.25rem',
+              marginTop: '1.5rem',
               marginBottom: '0.5rem',
-              fontSize: '1.5rem',
+              fontSize: theme('fontSize.3xl'),
               fontWeight: '900'
             },
             h2: {
               marginTop: '1rem',
               marginBottom: '0.25rem',
-              fontSize: '1.25rem',
-              fontWeight: 'bold'
+              fontSize: theme('fontSize.2xl'),
+              fontWeight: theme('fontWeight.bold')
             },
             h3: {
               marginTop: '0.75rem',
               marginBotton: 0,
-              fontSize: '1rem',
-              fontWeight: 'semibold'
+              fontSize: theme('fontSize.xl'),
+              fontWeight: theme('fontWeight.semibold')
             },
             h4: {
-              marginTop: '0.25rem',
+              marginTop: '0.5rem',
               marginBottom: '0.25rem',
-              fontSize: '1rem',
-              fontWeight: 'medium'
+              fontSize: theme('fontSize.lg'),
+              fontWeight: theme('fontWeight.medium')
             },
             li: {
               color: theme('colors.gray.900'),
               fontSize: '1rem',
-              fontWeight: 'medium',
+              fontWeight: theme('fontWeight.medium'),
               padding: 0,
               margin: 0,
               lineHeight: 1.5
@@ -126,7 +129,7 @@ export default {
               position: 'absolute',
               left: 0,
               borderRadius: '999px',
-              backgroundColor: theme('colors.gray.200')
+              backgroundColor: theme('colors.gray.300')
             },
             ol: {
               paddingTop: 0,
@@ -143,7 +146,7 @@ export default {
             },
             'ol > li::marker': {
               paddingLeft: '0.5rem',
-              color: theme('colors.gray.200')
+              color: theme('colors.gray.500')
             },
             a: {
               color: theme('colors.gray.900'),
@@ -174,14 +177,16 @@ export default {
               borderColor: theme('colors.gray.200'),
               padding: '0.125em 0.25em',
               color: theme('colors.gray.800'),
-              fontWeight: 'semibold',
-              fontSize: '0.875rem',
+              fontWeight: theme("fontWeight.semibold"),
+              fontSize: theme("fontSize.sm"),
               borderRadius: '0.75rem',
               margin: '0 1px',
+              boxShadow: theme("boxShadow.lg"),
               paddingLeft: '0.50rem',
               paddingRight: '0.50rem'
             },
             pre: {
+              fontFamily: theme('fontFamily.mono').join(', '),
               backgroundColor: "theme('colors.gray.50') !important",
               borderWidth: '1px',
               borderColor: theme('colors.gray.200'),
@@ -192,8 +197,10 @@ export default {
               paddingBottom: '.5rem'
             },
             code: {
-              fontFamily: theme('fontFamily.mono').join(', '),
               color: theme('colors.gray.800')
+            },
+            'code *': {
+              fontFamily: "theme('fontFamily.mono') !important"
             },
             img: {
               margin: '0'
@@ -253,7 +260,11 @@ export default {
             },
             pre: {
               borderColor: theme('colors.gray.690'),
-              backgroundColor: "theme('colors.gray.900') !important"
+              backgroundColor: "theme('colors.gray.900') !important",
+              color: theme('colors.gray.100')
+            },
+            code: {
+              color: theme('colors.gray.100')
             },
             'thead, tbody, tr, td': {
               borderColor: theme('colors.gray.690')
@@ -264,7 +275,7 @@ export default {
     },
     fontFamily: {
       main: ['var(--font-main)', ...defaultTheme.fontFamily.sans],
-      mono: defaultTheme.fontFamily.mono
+      mono: ['var(--font-mono)', defaultTheme.fontFamily.mono]
     }
   },
   plugins: [

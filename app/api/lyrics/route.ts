@@ -12,7 +12,7 @@ export const POST = async (request: NextRequest) => {
       return NextResponse.json({ message: 'Forbidden', data: null }, { status: 403 })
     }
 
-    const { song } = await request.json()
+    let { song } = await request.json()
     if (!song) {
       throw new Error('`song` is null')
     }
@@ -20,6 +20,8 @@ export const POST = async (request: NextRequest) => {
     if (!/^[a-zA-Z0-9 _-]+$/.test(song)) {
       throw new Error('Invalid song name')
     }
+
+    song = song.replace(/\s*(-\s*remastered|\(remastered\))$/i, '').trim()
 
     const { stdout, stderr } = await execAsync(
       `syncedlyrics "${song.replace(/(["'$`\\])/g, '\\$1')}" -o /dev/null`
@@ -41,7 +43,11 @@ export const POST = async (request: NextRequest) => {
     throw new Error()
   } catch (error) {
     return NextResponse.json(
-      { message: 'Failed to get lyrics', details: (error as Error).message, data: null },
+      {
+        message: 'Failed to get lyrics',
+        details: (error as Error).message,
+        data: null
+      },
       { status: 500 }
     )
   }
