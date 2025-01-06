@@ -227,7 +227,7 @@ export const NowPlaying: React.FC = () => {
               lyrics?.map((lyric) => (
                 <p
                   className={cn(
-                    'text-2xl leading-10',
+                    'text-2xl transition-all duration-150 leading-10',
                     song?.elapsedTime >= lyric.time ? 'font-bold' : 'text-tertiary'
                   )}
                   key={lyric.time}
