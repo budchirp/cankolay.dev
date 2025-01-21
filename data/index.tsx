@@ -14,12 +14,14 @@ import {
   SiKotlin,
   SiInstagram,
   SiExpress,
-  SiLaravel,
   SiCplusplus,
-  SiRust,
   SiJetpackcompose,
   SiKtor,
-  SiSqlite
+  SiSqlite,
+  SiPostgresql,
+  SiGtk,
+  SiJetbrains,
+  SiGnome
 } from 'react-icons/si'
 import { FaAndroid, FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
 import { Mail, Send, Syringe, Terminal } from 'lucide-react'
@@ -48,7 +50,7 @@ const data = {
   siteUrl: process.env.APP_URL || '',
   about: (
     <>
-      <p>Full-Stack developer</p>
+      <p>Cracked Full-Stack developer</p>
       <p>Amateur guitar player</p>
     </>
   ),
@@ -91,10 +93,6 @@ const data = {
         icon: <SiCplusplus />
       },
       {
-        name: 'Rust',
-        icon: <SiRust />
-      },
-      {
         name: 'Bash',
         icon: <SiGnubash />
       }
@@ -115,6 +113,14 @@ const data = {
       {
         name: 'Termux',
         icon: <Terminal />
+      },
+      {
+        name: 'Jetbrains IDEs',
+        icon: <SiJetbrains />
+      },
+      {
+        name: 'Gnome',
+        icon: <SiGnome />
       }
     ],
     Database: [
@@ -125,6 +131,10 @@ const data = {
       {
         name: 'SQLite',
         icon: <SiSqlite />
+      },
+      {
+        name: 'Postgresql',
+        icon: <SiPostgresql />
       }
     ]
   },
@@ -145,10 +155,6 @@ const data = {
     ],
     Backend: [
       {
-        name: 'Laravel',
-        icon: <SiLaravel />
-      },
-      {
         name: 'Express.js',
         icon: <SiExpress />
       },
@@ -157,7 +163,6 @@ const data = {
         icon: <SiNestjs />
       }
     ],
-
     Mobile: [
       {
         name: 'Android',
@@ -168,12 +173,22 @@ const data = {
         icon: <SiJetpackcompose />
       },
       {
-        name: 'Ktor',
+        name: 'Ktor Client',
         icon: <SiKtor />
       },
       {
         name: 'Hilt',
         icon: <Syringe />
+      }
+    ],
+    Desktop: [
+      {
+        name: 'GTK4',
+        icon: <SiGtk />
+      },
+      {
+        name: 'LibAdwaita',
+        icon: <SiGtk />
       }
     ]
   },
