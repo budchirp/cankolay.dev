@@ -67,6 +67,8 @@ const badges = [
 const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) => {
   const { owner, repo: reponame } = await params
 
+  if (!data.projectSources.includes(owner)) notFound()
+
   const repo: any = await Github.getRepo(owner, reponame)
   if (!repo) {
     notFound()
