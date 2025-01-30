@@ -37,7 +37,7 @@ const Page: React.FC = async () => {
                 return (
                   <Box
                     key={repo.name}
-                    className='hover:bg-tertiary group grid h-max w-full gap-1 transition duration-300'
+                    className='hover:bg-background-tertiary group grid h-max w-full gap-1 transition duration-300'
                   >
                     <Link
                       href={`projects/${source}/${repo.name}`}

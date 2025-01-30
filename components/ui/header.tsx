@@ -18,6 +18,7 @@ import { Backdrop } from '@/components/backdrop'
 import { createPortal } from 'react-dom'
 
 import type { LinkProps } from '@/types/link'
+import { sendGAEvent } from '@next/third-parties/google'
 
 type HeaderLinkProps = {
   pathname: string
@@ -33,8 +34,8 @@ const HeaderLink: React.FC<HeaderLinkProps> = ({
   return (
     <Link
       className={cn(
-        'hover:text-primary text-lg leading-6 transition-all duration-300 hover:font-bold',
-        url === pathname ? 'text-primary font-bold' : 'text-tertiary font-medium'
+        'hover:text-text-primary text-lg leading-6 transition-all duration-300 hover:font-bold',
+        url === pathname ? 'text-text-primary font-bold' : 'text-text-tertiary font-medium'
       )}
       href={url}
     >
@@ -62,8 +63,8 @@ export const Header: React.FC = (): React.ReactNode => {
         }, [pathname])
 
         return (
-          <>
-            <header className='bg-primary fixed top-0 z-[125] flex h-16 w-full !bg-opacity-50 items-center justify-center backdrop-blur'>
+          <div>
+            <header className='bg-background-primary/50 fixed top-0 z-125 flex h-16 w-full items-center justify-center backdrop-blur-sm'>
               <Container className='flex items-center justify-between gap-2'>
                 <Logo />
 
@@ -109,11 +110,11 @@ export const Header: React.FC = (): React.ReactNode => {
               show={open}
               as='div'
               className={cn(
-                'w-screen h-screen_ flex justify-center items-center origin-[90%_0%] z-[125] mx-auto inset-0 fixed',
+                'w-screen h-screen_ flex justify-center items-center origin-[90%_0%] z-125 mx-auto inset-0 fixed',
                 'transition-all scale-100 opacity-100',
-                'data-[closed]:scale-90 data-[closed]:opacity-0',
-                'data-[enter]:ease-out data-[enter]:duration-400',
-                'data-[leave]:ease-in data-[leave]:duration-200'
+                'data-closed:scale-90 data-closed:opacity-0',
+                'data-enter:ease-out data-enter:duration-400',
+                'data-leave:ease-in data-leave:duration-200'
               )}
             >
               <Container className='fixed top-20 flex h-min items-center justify-center'>
@@ -121,7 +122,7 @@ export const Header: React.FC = (): React.ReactNode => {
                   as={Box}
                   static
                   variant='primary'
-                  className='top-0 grid w-full gap-2 overflow-hidden sm:max-w-screen-xs'
+                  className='top-0 grid w-full gap-2 overflow-hidden sm:max-w-(--breakpoint-xs)'
                 >
                   <h2 className='text-2xl font-bold'>Links</h2>
 
@@ -141,7 +142,7 @@ export const Header: React.FC = (): React.ReactNode => {
             </Transition>
 
             <div className='h-16' />
-          </>
+          </div>
         )
       }}
     </Menu>

@@ -8,7 +8,7 @@ import data from '@/data'
 import Link from 'next/link'
 
 export const Footer: React.FC = (): React.ReactNode => (
-  <footer className='bg-primary !bg-opacity-25 backdrop-blur-sm border-t border-primary flex h-16 w-full items-center relative justify-center'>
+  <footer className='bg-background-primary/50 backdrop-blur-xs border-t border-border flex h-16 w-full items-center relative justify-center'>
     <Container className='flex h-full items-center justify-between gap-2'>
       <Logo />
 

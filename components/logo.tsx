@@ -16,7 +16,7 @@ export const Logo: React.FC<LogoProps> = ({ className, ...props }: LogoProps): R
         {...props}
         aria-label={label}
         className={cn(
-          'text-primary flex h-full items-center justify-center text-2xl font-bold',
+          'text-text-primary flex h-full items-center justify-center text-2xl font-bold',
           className
         )}
       >

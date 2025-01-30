@@ -20,16 +20,6 @@ export default {
         16: '4.5rem',
         20: '5.5rem'
       },
-      colors: {
-        gray: {
-          ...colors.gray,
-          900: '#0b0a0e',
-          800: '#100f15',
-          700: '#121118',
-          690: '#1a1b1e'
-        },
-        accent: colors.rose
-      },
       animation: {
         'spin-slow': 'spin 3s linear infinite'
       },
@@ -280,8 +270,5 @@ export default {
   },
   plugins: [
     require('@tailwindcss/typography'),
-    require('tailwind-scrollbar')({
-      nocompatible: true
-    })
   ]
 } as Config

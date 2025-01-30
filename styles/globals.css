@@ -1,97 +1,125 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer components {
-  .bg-primary {
-    @apply bg-white dark:bg-gray-900;
+@config '../tailwind.config.ts';
+
+@theme {
+  --color-accent-50: oklch(0.969 0.015 12.422);
+  --color-accent-100: oklch(0.941 0.03 12.58);
+  --color-accent-200: oklch(0.892 0.058 10.001);
+  --color-accent-300: oklch(0.81 0.117 11.638);
+  --color-accent-400: oklch(0.712 0.194 13.428);
+  --color-accent-500: oklch(0.645 0.246 16.439);
+  --color-accent-600: oklch(0.586 0.253 17.585);
+  --color-accent-700: oklch(0.514 0.222 16.935);
+  --color-accent-800: oklch(0.455 0.188 13.697);
+  --color-accent-900: oklch(0.41 0.159 10.272);
+  --color-accent-950: oklch(0.271 0.105 12.094);
+
+  --color-gray-50: oklch(0.985 0.002 247.839);
+  --color-gray-100: oklch(0.967 0.003 264.542);
+  --color-gray-200: oklch(0.928 0.006 264.531);
+  --color-gray-300: oklch(0.872 0.01 258.338);
+  --color-gray-400: oklch(0.707 0.022 261.325);
+  --color-gray-500: oklch(0.551 0.027 264.364);
+  --color-gray-600: oklch(0.446 0.03 256.802);
+  --color-gray-690: #1a1b1e;
+  --color-gray-700: oklch(0.373 0.034 259.733);
+  --color-gray-700: #121118;
+  --color-gray-800: #100f15;
+  --color-gray-900: #0b0a0e;
+
+  --color-background-primary: var(--background-primary);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+
+  --color-text-accent-primary: var(--text-accent-primary);
+  --color-text-accent-secondary: var(--text-accent-secondary);
+
+  --color-text-primary-reverse: var(--text-primary-reverse);
+  --color-text-secondary-reverse: var(--text-secondary-reverse);
+
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+}
+
+:root {
+  --background-primary: theme("colors.white");
+  --background-secondary: theme("colors.gray.50");
+  --background-tertiary: theme("colors.gray.100");
+
+  --text-primary: theme("colors.gray.900");
+  --text-secondary: theme("colors.gray.800");
+  --text-tertiary: theme("colors.gray.700");
+
+  --text-accent-primary: theme("colors.accent.600");
+  --text-accent-secondary: theme("colors.accent.900");
+
+  --text-primary-reverse: theme("colors.gray.50");
+  --text-secondary-reverse: theme("colors.gray.100");
+
+  --border: theme("colors.gray.200");
+  --border-hover: theme("colors.gray.300");
+}
+
+.dark {
+  --background-primary: theme("colors.gray.900");
+  --background-secondary: theme("colors.gray.800");
+  --background-tertiary: theme("colors.gray.700");
+
+  --text-primary: theme("colors.gray.50");
+  --text-secondary: theme("colors.gray.100");
+  --text-tertiary: theme("colors.gray.300");
+
+  --text-accent-primary: theme("colors.accent.500");
+  --text-accent-secondary: theme("colors.accent.300");
+
+  --text-primary-reverse: theme("colors.gray.900");
+  --text-secondary-reverse: theme("colors.gray.700");
+
+  --border: theme("colors.gray.690");
+  --border-hover: theme("colors.gray.700");
+}
+
+.min-h-screen_ {
+  min-height: calc(100vh - 4rem);
+}
+
+.h-screen_ {
+  height: calc(100vh - 4rem);
+}
+
+.masonry {
+  @apply h-min w-full overflow-hidden;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: --spacing(4);
+
+  >* {
+    break-inside: avoid;
   }
 
-  .bg-secondary {
-    @apply bg-gray-50 dark:bg-gray-800;
+  @media (width >= theme(--breakpoint-md)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 
-  .bg-tertiary {
-    @apply bg-gray-100 dark:bg-gray-700;
+  @media (width >= theme(--breakpoint-lg)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
+}
 
-  .border-primary {
-    @apply border-gray-200 dark:border-gray-690/90;
-  }
-
-  .border-secondary {
-    @apply border-gray-300 dark:border-gray-700/90;
-  }
-
-  .text-primary {
-    @apply text-gray-900 dark:text-gray-50;
-  }
-
-  .text-secondary {
-    @apply text-gray-800 dark:text-gray-100;
-  }
-
-  .text-tertiary {
-    @apply text-gray-700 dark:text-gray-300;
-  }
-
-  .text-primary-reverse {
-    @apply text-gray-50 dark:text-gray-900;
-  }
-
-  .text-secondary-reverse {
-    @apply text-gray-100 dark:text-gray-700;
-  }
-
-  .text-accent-primary {
-    @apply text-accent-600 dark:text-accent-500;
-  }
-
-  .text-accent-secondary {
-    @apply text-accent-900 dark:text-accent-300;
-  }
-
-  .placeholder-tertiary {
-    @apply placeholder:font-medium placeholder:text-gray-600 dark:placeholder:text-gray-200;
-  }
-
-  .min-h-screen_ {
-    min-height: calc(100vh - theme("spacing.16"));
-  }
-
-  .h-screen_ {
-    height: calc(100vh - theme("spacing.16"));
-  }
-
-  .masonry {
-    @apply h-full w-full overflow-hidden;
-    display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: theme("spacing.4");
-
-    >* {
-      break-inside: avoid;
-    }
-
-    @screen md {
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-
-    @screen lg {
-      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    }
-  }
-
-  .masonry-2 {
-    @apply h-full w-full;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.masonry-2 {
+  @apply h-full w-full;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 * {
   -webkit-tap-highlight-color: transparent;
 
-  @apply appearance-none scroll-smooth font-main antialiased outline-none selection:bg-accent-300/90 selection:text-black/90 scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-700;
+  @apply appearance-none scroll-smooth font-main antialiased outline-hidden selection:bg-accent-300/90 selection:text-black/90;
 }
 
 html {

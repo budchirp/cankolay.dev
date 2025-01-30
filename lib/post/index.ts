@@ -1,10 +1,10 @@
-import fs from 'fs/promises'
-import path from 'path'
-import matter from 'gray-matter'
+import { Hourglass } from '@/lib/hourglass'
 import readingTime from 'reading-time'
+import matter from 'gray-matter'
+import path from 'path'
+import fs from 'fs/promises'
 
 import type { BlogPost } from '@/types/post'
-import { Hourglass } from '../hourglass'
 
 export class Post {
   private static path = `${process.cwd()}/posts`

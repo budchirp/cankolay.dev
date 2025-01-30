@@ -28,7 +28,7 @@ const Page: React.FC = (): React.ReactNode => {
     <div className='mt-12 grid gap-8'>
       <div className='grid gap-4'>
         <div className='grid gap-2'>
-          <p className='text-accent-primary text-3xl font-bold'>{data.name}</p>
+          <p className='text-text-accent-primary text-3xl font-bold'>{data.name}</p>
 
           <div className='text-md'>{data.about}</div>
         </div>
@@ -39,7 +39,7 @@ const Page: React.FC = (): React.ReactNode => {
           <div className='grid gap-3'>
             {Object.keys(data.technologies).map((key, index) => (
               <div key={index} className='grid gap-2'>
-                <span className='text-tertiary font-medium'>{key}</span>
+                <span className='text-text-tertiary font-medium'>{key}</span>
 
                 <div className='masonry masonry-2 gap-2'>
                   {/* @ts-ignore */}
@@ -59,7 +59,7 @@ const Page: React.FC = (): React.ReactNode => {
         <div className='grid gap-3'>
           {Object.keys(data.stacks).map((key, index) => (
             <div key={index} className='grid gap-2'>
-              <span className='text-tertiary font-medium'>{key}</span>
+              <span className='text-text-tertiary font-medium'>{key}</span>
 
               <div className='masonry masonry-2 gap-2'>
                 {/* @ts-ignore */}
@@ -80,13 +80,13 @@ const Page: React.FC = (): React.ReactNode => {
             .reverse()
             .map((key, index) => (
               <div key={index} className='grid grid-cols-2 gap-2'>
-                <span className='text-accent-primary text-2xl font-bold'>{key}</span>
+                <span className='text-text-accent-primary text-2xl font-bold'>{key}</span>
                 <div>
                   {/* @ts-ignore */}
                   {data.journey[key].map((text, index) => (
                     <div key={index} className='flex gap-2'>
-                      <span className='text-tertiary'>-</span>
-                      <p className='text-primary'>{text}</p>
+                      <span className='text-text-tertiary'>-</span>
+                      <p>{text}</p>
                     </div>
                   ))}
                 </div>

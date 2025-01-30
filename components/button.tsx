@@ -18,7 +18,7 @@ const buttonVariants = cva(
       color: {
         primary: 'bg-accent-600 text-gray-50 hover:text-gray-100 disabled:text-gray-200',
         secondary:
-          'bg-primary border border-primary hover:border-secondary disabled:text-secondary text-primary hover:text-secondary'
+          'bg-background-primary border border-border hover:bg-background-secondary hover:border-hover disabled:text-text-secondary text-text-primary hover:text-text-secondary'
       }
     },
     defaultVariants: {

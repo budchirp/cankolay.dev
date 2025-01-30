@@ -1,5 +1,6 @@
 import type React from 'react'
 
+import { GoogleTagManager } from '@next/third-parties/google'
 import { ViewTransitions } from 'next-view-transitions'
 import { ThemeProvider } from '@/providers/theme'
 import { Header } from '@/components/ui/header'
@@ -92,7 +93,7 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
       <html suppressHydrationWarning lang='en-US'>
         <body
           className={cn(
-            'relative overflow-x-hidden size-full text-primary bg-primary',
+            'relative overflow-x-hidden size-full text-primary bg-background-primary',
             lexend.variable,
             jetbrainsMono.variable
           )}
@@ -117,6 +118,8 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
               </div>
             </div>
           </ThemeProvider>
+
+          <GoogleTagManager gtmId={process.env.GTAG_ID || ""} />
         </body>
       </html>
     </ViewTransitions>

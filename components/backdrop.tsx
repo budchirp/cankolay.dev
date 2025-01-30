@@ -18,10 +18,10 @@ export const Backdrop: React.FC<BackdropProps> = ({
     onClick={onClose}
     appear
     className={cn(
-      'transition-all bg-primary backdrop-blur !bg-opacity-50 h-screen_ top-16 fixed z-[100] w-screen',
-      'data-[closed]:!bg-opacity-0 data-[closed]:backdrop-blur-none',
-      'data-[enter]:ease-out data-[enter]:duration-400',
-      'data-[leave]:ease-in data-[leave]:duration-200'
+      'transition-all bg-background-primary/50 backdrop-blur-sm h-screen_ top-16 fixed z-100 w-screen',
+      'data-closed:bg-opacity-0! data-closed:backdrop-blur-none',
+      'data-enter:ease-out data-enter:duration-400',
+      'data-leave:ease-in data-leave:duration-200'
     )}
   />
 )

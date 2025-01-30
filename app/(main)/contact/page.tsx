@@ -8,7 +8,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 const Page: React.FC = (): React.ReactNode => (
-  <div className='masonry h-min'>
+  <div className='masonry'>
     {Object.keys(data.contact).map((platform, index) => {
       /* @ts-ignore */
       const contact = data.contact[platform]
@@ -16,7 +16,7 @@ const Page: React.FC = (): React.ReactNode => (
       return (
         <Box
           key={index}
-          className='hover:bg-tertiary group flex h-16 items-center gap-3 duration-300'
+          className='hover:bg-background-tertiary group flex h-16 items-center gap-3 duration-300'
         >
           <span className='flex h-10 w-10 items-center justify-center rounded-full bg-accent-700 p-1 text-xl text-gray-50'>
             {contact.icon}
@@ -24,7 +24,7 @@ const Page: React.FC = (): React.ReactNode => (
 
           <Link
             href={contact.link || '/contact'}
-            className='text-primary group-hover:text-secondary flex-1 text-xl font-bold transition duration-300'
+            className='text-text-primary group-hover:text-text-secondary flex-1 text-xl font-bold transition duration-300'
             rel='noreferrer'
             target='_blank'
           >

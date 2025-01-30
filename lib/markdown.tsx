@@ -50,6 +50,6 @@ export const markdownToReact = async (text: string): Promise<React.ReactNode> =>
   })
 
   return (
-    <article className='prose dark:prose-dark mx-auto !max-w-full !w-[90vw]'>{content}</article>
+    <article className='prose dark:prose-dark mx-auto max-w-full! w-[90vw]!'>{content}</article>
   )
 }

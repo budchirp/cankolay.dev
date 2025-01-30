@@ -11,11 +11,11 @@ const Loading: React.FC = (): React.ReactNode => (
           <div className='bg-tertiary h-48 w-full animate-pulse rounded-t-2xl' />
 
           <div className='grid gap-4 p-4'>
-            <div className='bg-tertiary h-3 w-8/12 animate-pulse rounded' />
+            <div className='bg-tertiary h-3 w-8/12 animate-pulse rounded-sm' />
 
             <div className='grid gap-2'>
-              <div className='bg-tertiary h-3 w-full animate-pulse rounded' />
-              <div className='bg-tertiary h-3 w-full animate-pulse rounded' />
+              <div className='bg-tertiary h-3 w-full animate-pulse rounded-sm' />
+              <div className='bg-tertiary h-3 w-full animate-pulse rounded-sm' />
             </div>
 
             <Button disabled color='secondary'>

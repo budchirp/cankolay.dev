@@ -11,6 +11,7 @@ import { Transition } from '@headlessui/react'
 import { VerticalPage } from '@/components/vertical-page'
 import { Button } from '@/components/button'
 import { Hourglass } from '@/lib/hourglass'
+import { Fetch } from '@/lib/fetch'
 import { cn } from '@/lib/cn'
 import { Disc3, VolumeX, X } from 'lucide-react'
 import Link from 'next/link'
@@ -18,7 +19,6 @@ import data from '@/data'
 
 import type { NowPlayingType } from '@/types/now-playing'
 import type { LyricsType } from '@/types/lyrics'
-import { Fetch } from '@/lib/fetch'
 
 export const NowPlaying: React.FC = () => {
   const [mounted, setMounted] = useState<boolean>(false)
@@ -118,7 +118,7 @@ export const NowPlaying: React.FC = () => {
 
         <div className='flex flex-col xs:flex-row xs:gap-2 z-10 size-full relative'>
           <div className='xs:size-16 p-2 xs:p-0 size-full'>
-            <div className='border border-primary aspect-square rounded-2xl flex xs:size-16 overflow-hidden select-none items-center justify-center'>
+            <div className='border border-border aspect-square rounded-2xl flex xs:size-16 overflow-hidden select-none items-center justify-center'>
               {song?.albumCover ? (
                 <Link href={song?.link || ''}>
                   <img
@@ -142,26 +142,26 @@ export const NowPlaying: React.FC = () => {
                 </h2>
               </Link>
 
-              <h3 className='font-medium leading-none text-tertiary'>
+              <h3 className='font-medium leading-none text-text-tertiary'>
                 {song?.artist || data.username}
               </h3>
             </div>
 
             <div className='flex items-center justify-between gap-2'>
-              <span className='text-sm leading-none select-none text-secondary'>
+              <span className='text-sm leading-none select-none text-text-secondary'>
                 {Hourglass.formatTime(song?.elapsedTime)}
               </span>
 
-              <div className='w-full h-1 bg-secondary relative rounded-full'>
+              <div className='w-full h-1 bg-background-secondary relative rounded-full'>
                 <div
-                  className='bg-gradient-to-r from-accent-700 via-accent-500 to-accent-600 ease-linear transition-width duration-1000 h-1 rounded-full'
+                  className='bg-linear-to-r from-accent-700 via-accent-500 to-accent-600 ease-linear transition-width duration-1000 h-1 rounded-full'
                   style={{
                     width: `${song?.percentage || 0}%`
                   }}
                 />
               </div>
 
-              <span className='text-sm leading-none select-none text-secondary'>
+              <span className='text-sm leading-none select-none text-text-secondary'>
                 {Hourglass.formatTime(song?.totalTime)}
               </span>
             </div>
@@ -191,11 +191,11 @@ export const NowPlaying: React.FC = () => {
         show={showLyricsScreen}
         as='div'
         className={cn(
-          'w-screen h-screen_ flex justify-center items-center origin-[50%_0%] z-[125] mx-auto inset-0 fixed',
+          'w-screen h-screen_ flex justify-center items-center origin-[50%_0%] z-125 mx-auto inset-0 fixed',
           'transition-all scale-100 opacity-100',
-          'data-[closed]:scale-90 data-[closed]:opacity-0',
-          'data-[enter]:ease-out data-[enter]:duration-400',
-          'data-[leave]:ease-in data-[leave]:duration-200'
+          'data-closed:scale-90 data-closed:opacity-0',
+          'data-enter:ease-out data-enter:duration-400',
+          'data-leave:ease-in data-leave:duration-200'
         )}
       >
         <Container className='fixed top-16 h-full bottom-0 overflow-y-scroll'>

@@ -7,17 +7,17 @@ const Loading: React.FC = (): React.ReactNode => (
     {[...Array(24)].map((_, index) => {
       return (
         <Box key={index} className='grid gap-2'>
-          <div className='bg-tertiary h-3 w-8/12 animate-pulse rounded' />
+          <div className='bg-background-tertiary h-3 w-8/12 animate-pulse rounded-sm' />
 
           <div className='grid gap-1'>
-            <div className='bg-tertiary h-2 w-full animate-pulse rounded' />
-            <div className='bg-tertiary h-2 w-full animate-pulse rounded' />
-            <div className='bg-tertiary h-2 w-full animate-pulse rounded' />
+            <div className='bg-background-tertiary h-2 w-full animate-pulse rounded-sm' />
+            <div className='bg-background-tertiary h-2 w-full animate-pulse rounded-sm' />
+            <div className='bg-background-tertiary h-2 w-full animate-pulse rounded-sm' />
           </div>
 
           <div className='flex items-center justify-between gap-2'>
-            <div className='bg-tertiary h-3 w-3/12 animate-pulse rounded' />
-            <div className='bg-tertiary h-3 w-3/12 animate-pulse rounded' />
+            <div className='bg-background-tertiary h-3 w-3/12 animate-pulse rounded-sm' />
+            <div className='bg-background-tertiary h-3 w-3/12 animate-pulse rounded-sm' />
           </div>
         </Box>
       )

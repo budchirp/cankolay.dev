@@ -127,7 +127,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
           </div>
 
           <div className='grid gap-2'>
-            <div className='w-full h-1 flex rounded-full relative overflow-hidden bg-secondary'>
+            <div className='w-full h-1 flex rounded-full relative overflow-hidden bg-background-secondary'>
               {Object.keys(languages).map((key: string) => {
                 return (
                   <div
