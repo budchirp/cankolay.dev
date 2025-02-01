@@ -22,11 +22,12 @@
   --color-gray-400: oklch(0.707 0.022 261.325);
   --color-gray-500: oklch(0.551 0.027 264.364);
   --color-gray-600: oklch(0.446 0.03 256.802);
-  --color-gray-690: #1a1b1e;
+  --color-gray-680: oklch(22.63% 0.0215 297.16);
+  --color-gray-690: oklch(20.68% 0.0179 294.98);
   --color-gray-700: oklch(0.373 0.034 259.733);
-  --color-gray-700: #121118;
-  --color-gray-800: #100f15;
-  --color-gray-900: #0b0a0e;
+  --color-gray-700: oklch(18.22% 0.0143 291.46);
+  --color-gray-800: oklch(17.25% 0.0124 292.69);
+  --color-gray-900: oklch(14.8% 0.0087 296.76);
 
   --color-background-primary: var(--background-primary);
   --color-background-secondary: var(--background-secondary);
@@ -81,7 +82,7 @@
   --text-secondary-reverse: theme("colors.gray.700");
 
   --border: theme("colors.gray.690");
-  --border-hover: theme("colors.gray.700");
+  --border-hover: theme("colors.gray.680");
 }
 
 .min-h-screen_ {
@@ -98,7 +99,7 @@
   grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: --spacing(4);
 
-  >* {
+  > * {
     break-inside: avoid;
   }
 

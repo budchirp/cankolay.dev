@@ -26,7 +26,7 @@ export const Input: React.FC<InputProps> = ({
       <input
         {...props}
         className={cn(
-          'bg-background-primary text-text-primary placeholder-text-tertiary border-border focus:border-hover flex h-full w-full items-center rounded-3xl border py-2 pl-11 pr-4 transition duration-300',
+          'bg-background-primary text-text-primary placeholder-text-tertiary border-border focus:border-border-hover hover:border-border-hover flex h-full w-full items-center rounded-3xl border py-2 pl-11 pr-4 transition duration-300',
           className
         )}
       />

@@ -18,7 +18,6 @@ import { Backdrop } from '@/components/backdrop'
 import { createPortal } from 'react-dom'
 
 import type { LinkProps } from '@/types/link'
-import { sendGAEvent } from '@next/third-parties/google'
 
 type HeaderLinkProps = {
   pathname: string
@@ -48,7 +47,6 @@ export const Header: React.FC = (): React.ReactNode => {
   const pathname = usePathname()
 
   const [mounted, setMounted] = useState<boolean>(false)
-
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -68,7 +66,7 @@ export const Header: React.FC = (): React.ReactNode => {
               <Container className='flex items-center justify-between gap-2'>
                 <Logo />
 
-                <div className='flex h-full items-center gap-2'>
+                <div className='flex h-full items-center gap-3'>
                   <div className='hidden flex-row-reverse items-center gap-2 md:flex'>
                     {links.map(
                       (link: LinkProps, index: number): React.ReactElement => (

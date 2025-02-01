@@ -31,19 +31,15 @@ export const ThemeSwitcher: React.FC = (): React.ReactNode => {
   const { theme, setTheme } = useTheme()
 
   const [mounted, setMounted] = useState<boolean>(false)
-
   useEffect((): void => {
     setMounted(true)
   }, [])
 
-  let Icon: LucideIcon | null = null
-  if (mounted) {
-    Icon = themes[theme as Theme][1]
-  }
-
   return (
     <Listbox value={theme} onChange={(value: Theme): any => setTheme(value)}>
       {({ open }) => {
+        const Icon: LucideIcon | null = mounted ? themes[theme as Theme][1] : null
+
         return (
           <div>
             {mounted &&
@@ -88,7 +84,9 @@ export const ThemeSwitcher: React.FC = (): React.ReactNode => {
                         className={({ selected }) =>
                           cn(
                             'border-border flex h-min w-full cursor-pointer items-center border-b px-4 py-2 transition duration-300 last:border-none',
-                            selected ? 'bg-background-secondary' : 'bg-background-primary hover:bg-background-secondary'
+                            selected
+                              ? 'bg-background-secondary'
+                              : 'bg-background-primary hover:bg-background-secondary'
                           )
                         }
                         value={theme}
@@ -97,7 +95,9 @@ export const ThemeSwitcher: React.FC = (): React.ReactNode => {
                           <p
                             className={cn(
                               'flex h-full w-full items-center gap-2 font-medium transition duration-300',
-                              selected ? 'text-text-accent-primary' : 'text-text-primary hover:text-text-secondary'
+                              selected
+                                ? 'text-text-accent-primary'
+                                : 'text-text-primary hover:text-text-secondary'
                             )}
                           >
                             <Icon />

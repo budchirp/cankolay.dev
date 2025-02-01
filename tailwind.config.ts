@@ -3,7 +3,6 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 
 import type { Config } from 'tailwindcss'
 
-
 export default {
   darkMode: 'class',
   content: [
@@ -167,11 +166,11 @@ export default {
               borderColor: theme('colors.gray.200'),
               padding: '0.125em 0.25em',
               color: theme('colors.gray.800'),
-              fontWeight: theme("fontWeight.semibold"),
-              fontSize: theme("fontSize.sm"),
+              fontWeight: theme('fontWeight.semibold'),
+              fontSize: theme('fontSize.sm'),
               borderRadius: '0.75rem',
               margin: '0 1px',
-              boxShadow: theme("boxShadow.lg"),
+              boxShadow: theme('boxShadow.lg'),
               paddingLeft: '0.50rem',
               paddingRight: '0.50rem'
             },
@@ -268,7 +267,5 @@ export default {
       mono: ['var(--font-mono)', defaultTheme.fontFamily.mono]
     }
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ]
+  plugins: [require('@tailwindcss/typography')]
 } as Config

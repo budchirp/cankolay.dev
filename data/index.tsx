@@ -21,7 +21,8 @@ import {
   SiPostgresql,
   SiGtk,
   SiJetbrains,
-  SiGnome
+  SiGnome,
+  SiTelegram
 } from 'react-icons/si'
 import { FaAndroid, FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
 import { Mail, Send, Syringe, Terminal } from 'lucide-react'
@@ -206,7 +207,7 @@ const data = {
     },
     Telegram: {
       link: 'https://t.me/budchirp',
-      icon: <Send />
+      icon: <SiTelegram />
     },
     Discord: {
       link: 'https://discordapp.com/users/1118636505737478205',

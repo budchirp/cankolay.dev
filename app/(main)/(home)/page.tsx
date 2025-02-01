@@ -16,7 +16,7 @@ const Page: React.FC = (): React.ReactNode => {
   }) => {
     return (
       <Box padding='small' className='flex items-center rounded-full gap-3 md:p-3'>
-        <span className='flex h-10 w-10 items-center justify-center rounded-full bg-accent-700 p-1 text-xl text-gray-50'>
+        <span className='flex size-10 items-center justify-center rounded-full bg-accent-700 p-1 text-xl text-gray-50'>
           {icon}
         </span>
         <p className='break-all font-medium'>{name}</p>

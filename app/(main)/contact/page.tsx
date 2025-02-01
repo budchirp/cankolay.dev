@@ -18,7 +18,7 @@ const Page: React.FC = (): React.ReactNode => (
           key={index}
           className='hover:bg-background-tertiary group flex h-16 items-center gap-3 duration-300'
         >
-          <span className='flex h-10 w-10 items-center justify-center rounded-full bg-accent-700 p-1 text-xl text-gray-50'>
+          <span className='flex size-10 items-center justify-center rounded-full bg-accent-700 p-1 text-xl text-gray-50'>
             {contact.icon}
           </span>
 

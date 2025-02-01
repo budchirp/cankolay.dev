@@ -16,9 +16,10 @@ const buttonVariants = cva(
         round: 'h-10 w-10 rounded-full p-2 text-2xl'
       },
       color: {
-        primary: 'bg-accent-600 text-gray-50 hover:text-gray-100 disabled:text-gray-200',
+        primary:
+          'bg-accent-600 text-gray-50 hover:bg-accent-700 hover:text-gray-100 disabled:text-gray-200',
         secondary:
-          'bg-background-primary border border-border hover:bg-background-secondary hover:border-hover disabled:text-text-secondary text-text-primary hover:text-text-secondary'
+          'bg-background-primary border border-border hover:bg-background-secondary hover:border-border-hover disabled:text-text-secondary text-text-primary hover:text-text-secondary'
       }
     },
     defaultVariants: {
@@ -44,7 +45,11 @@ export const Button: React.FC<ButtonProps> = ({
   if (!children) disabled = true
 
   return (
-    <button {...props} className={cn(buttonVariants({ className, variant, color }))}>
+    <button
+      {...props}
+      disabled={disabled}
+      className={cn(buttonVariants({ className, variant, color }))}
+    >
       {disabled && <Loader2 className={cn('animate-spin text-xs', children ? 'mr-2' : '')} />}
       {children ?? ''}
     </button>

@@ -96,12 +96,12 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
       </Heading>
 
       <div className='flex md:flex-row flex-col-reverse w-full'>
-        <div className='md:w-3/4 w-full md:border-r-4 md:border-t-0 border-t-4 border-secondary md:pe-4 md:pt-0 pt-4 md:me-4 md:mt-0 mt-4'>
+        <div className='md:w-3/4 w-full md:border-r-4 md:border-t-0 border-t-4 border-border-hover md:pe-4 md:pt-0 pt-4 md:me-4 md:mt-0 mt-4'>
           {content}
         </div>
 
         <div className='grid gap-4 h-min md:w-1/4 w-full'>
-          <p className='text-tertiary'>{repo.description}</p>
+          <p className='text-text-tertiary'>{repo.description}</p>
 
           <div className='grid gap-1'>
             {badges.map(({ key, icon: Icon }, index) => {
@@ -112,7 +112,9 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
 
               return (
                 <div className='flex gap-2 items-center' key={index}>
-                  <Icon size={16} />
+                  <div className='size-4 flex items-center justify-center'>
+                    <Icon size={16} />
+                  </div>
 
                   {key === 'homepage' ? (
                     <Link className='underline' target='_blank' rel='noreferrer' href={value}>
@@ -155,7 +157,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
 
                     <span className='text-sm'>{key}</span>
 
-                    <span className='text-sm text-tertiary'>{languages[key]}%</span>
+                    <span className='text-sm text-text-tertiary'>{languages[key]}%</span>
                   </li>
                 )
               })}

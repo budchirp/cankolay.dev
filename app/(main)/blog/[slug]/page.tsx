@@ -38,15 +38,15 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
           </div>
         }
         description={
-          <div>
-            <span className='text-secondary flex items-center gap-1 font-medium'>
-              <User className='h-4 w-4' /> <p>{post.author}</p>
+          <div className='grid gap-1'>
+            <span className='text-text-secondary flex items-center gap-1 font-medium'>
+              <User className='size-5' /> <p>{post.author}</p>
             </span>
-            <span className='text-secondary flex items-center gap-1 font-medium'>
-              <Calendar className='h-4 w-4' /> <p>{post.formattedDate}</p>
+            <span className='text-text-secondary flex items-center gap-1 font-medium'>
+              <Calendar className='size-5' /> <p>{post.formattedDate}</p>
             </span>
-            <span className='text-secondary flex items-center gap-1 font-medium'>
-              <Book className='h-4 w-4' /> <p>{post.readingTime}</p>
+            <span className='text-text-secondary flex items-center gap-1 font-medium'>
+              <Book className='size-5' /> <p>{post.readingTime}</p>
             </span>
           </div>
         }

@@ -21,9 +21,11 @@ export const Heading: React.FC<HeadingProps> = ({
   >
     {cover}
 
-    <h2 className='break-all text-3xl font-bold'>{children}</h2>
+    <div className='grid gap-2'>
+      <h2 className='break-all text-3xl font-bold'>{children}</h2>
 
-    {description}
+      {description}
+    </div>
   </div>
 )
 Heading.displayName = 'PageHeader'

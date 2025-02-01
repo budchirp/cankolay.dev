@@ -44,7 +44,7 @@ export class Post {
   public async paginate(
     posts: BlogPost[],
     page = 0,
-    limit = 10
+    limit = 6
   ): Promise<{ posts: BlogPost[] | []; page: number; totalPages: number }> {
     const totalPages = Math.ceil(posts.length / limit) - 1 || 0
     if (typeof page !== 'number' || page > totalPages || page < 0) {

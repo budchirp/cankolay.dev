@@ -83,8 +83,8 @@ const lexend = Lexend({
 })
 
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono"
+  subsets: ['latin'],
+  variable: '--font-mono'
 })
 
 const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.ReactNode => {
@@ -119,7 +119,7 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
             </div>
           </ThemeProvider>
 
-          <GoogleTagManager gtmId={process.env.GTAG_ID || ""} />
+          <GoogleTagManager gtmId={process.env.GTAG_ID || ''} />
         </body>
       </html>
     </ViewTransitions>

@@ -76,7 +76,7 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
         {posts.map((post) => (
           <article key={post.slug}>
             <Box className='relative mb-4 h-min overflow-hidden last:mb-0' padding='none'>
-              <div className='border-border relative flex h-min max-h-48 w-full items-center justify-center overflow-hidden rounded-t-2xl border-b md:max-h-64'>
+              <div className='border-border relative flex h-min max-h-48 w-full items-center justify-center overflow-hidden rounded-t-2xl border-b-4 md:max-h-64'>
                 <Link aria-label='Go to the blog post' href={`/blog/${post.slug}`}>
                   <Image
                     className='w-full h-auto object-cover aspect-video transition duration-500 ease-out hover:scale-125'
@@ -122,8 +122,9 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
           )}
           aria-disabled={prevDisabled}
           aria-label='Previous page'
-          href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${!prevDisabled ? page - 1 : page
-            }`}
+          href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
+            !prevDisabled ? page - 1 : page
+          }`}
         >
           Prev
         </Link>
@@ -139,8 +140,9 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
           )}
           aria-disabled={nextDisabled}
           aria-label='Next page'
-          href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${!nextDisabled ? page + 1 : page
-            }`}
+          href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
+            !nextDisabled ? page + 1 : page
+          }`}
         >
           Next
         </Link>
