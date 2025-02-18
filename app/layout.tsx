@@ -1,6 +1,5 @@
 import type React from 'react'
 
-import { GoogleTagManager } from '@next/third-parties/google'
 import { ViewTransitions } from 'next-view-transitions'
 import { ThemeProvider } from '@/providers/theme'
 import { Header } from '@/components/ui/header'
@@ -13,15 +12,14 @@ import type { LayoutProps } from '@/types/layout'
 import type { Metadata, Viewport } from 'next'
 
 import '@/styles/globals.css'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   metadataBase: new URL(data.siteUrl),
-  generator: 'Next.js',
   applicationName: `${data.name}'s website`,
   keywords: data.keywords,
   creator: data.name,
   publisher: data.name,
-  referrer: 'origin',
   authors: [{ name: data.name, url: data.siteUrl }],
   description: data.description,
   manifest: `${data.siteUrl}/manifest.json`,
@@ -119,7 +117,11 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
             </div>
           </ThemeProvider>
 
-          <GoogleTagManager gtmId={process.env.GTAG_ID || ''} />
+          <Script
+            defer
+            src='https://static.cloudflareinsights.com/beacon.min.js'
+            data-cf-beacon={`{"token": "${process.env.CLOUDFLARE_TOKEN}"}`}
+          />
         </body>
       </html>
     </ViewTransitions>
