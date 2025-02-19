@@ -17,7 +17,7 @@ const buttonVariants = cva(
       },
       color: {
         primary:
-          'bg-accent-600 text-gray-50 hover:bg-accent-700 hover:text-gray-100 disabled:text-gray-200',
+          'bg-accent-600 border border-transparent text-gray-50 hover:bg-accent-700 hover:text-gray-100 disabled:text-gray-200',
         secondary:
           'bg-background-primary border border-border hover:bg-background-secondary hover:border-border-hover disabled:text-text-secondary text-text-primary hover:text-text-secondary'
       }
@@ -31,26 +31,23 @@ const buttonVariants = cva(
 
 export type ButtonProps = {
   children?: React.ReactNode
+  loading?: boolean
 } & ComponentProps<'button'> &
   VariantProps<typeof buttonVariants>
 
 export const Button: React.FC<ButtonProps> = ({
   children,
-  disabled,
+  loading,
   className,
   variant,
   color,
   ...props
 }: ButtonProps): React.ReactNode => {
-  if (!children) disabled = true
+  if (!children) loading = true
 
   return (
-    <button
-      {...props}
-      disabled={disabled}
-      className={cn(buttonVariants({ className, variant, color }))}
-    >
-      {disabled && <Loader2 className={cn('animate-spin text-xs', children ? 'mr-2' : '')} />}
+    <button {...props} className={cn(buttonVariants({ className, variant, color }))}>
+      {loading && <Loader2 className={cn('animate-spin text-xs', children ? 'mr-2' : '')} />}
       {children ?? ''}
     </button>
   )
