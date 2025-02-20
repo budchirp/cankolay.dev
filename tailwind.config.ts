@@ -15,15 +15,8 @@ export default {
       screens: {
         xs: '475px'
       },
-      spacing: {
-        16: '4.5rem',
-        20: '5.5rem'
-      },
       animation: {
         'spin-slow': 'spin 3s linear infinite'
-      },
-      transitionDuration: {
-        400: '400ms'
       },
       typography: (theme: any) => ({
         DEFAULT: {
