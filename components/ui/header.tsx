@@ -62,7 +62,7 @@ export const Header: React.FC = (): React.ReactNode => {
 
         return (
           <div>
-            <header className='bg-background-primary/50 fixed top-0 z-125 flex h-16 w-full items-center justify-center backdrop-blur-sm'>
+            <header className='bg-background-primary/50 fixed top-0 z-20 flex h-16 w-full items-center justify-center backdrop-blur-sm'>
               <Container className='flex items-center justify-between gap-2'>
                 <Logo />
 
@@ -108,7 +108,7 @@ export const Header: React.FC = (): React.ReactNode => {
               show={open}
               as='div'
               className={cn(
-                'w-screen h-screen_ flex justify-center items-center origin-[90%_0%] z-125 mx-auto inset-0 fixed',
+                'w-screen h-screen_ flex justify-center items-center origin-[90%_0%] z-20 mx-auto inset-0 fixed',
                 'transition-all scale-100 opacity-100',
                 'data-closed:scale-90 data-closed:opacity-0',
                 'data-enter:ease-out data-enter:duration-400',

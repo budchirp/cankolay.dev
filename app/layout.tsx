@@ -104,16 +104,18 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
               <div className='absolute z-0 top-[80%] right-[10%] size-96 opacity-25 bg-accent-700 rounded-full blur-[128px]' />
             </div>
 
-            <div id='main' className='relative size-full z-10'>
-              <Header />
+            <div className='grid gap-4 relative z-10 size-full'>
+              <div className='flex flex-col size-full'>
+                <Header />
 
-              <div className='grid gap-4 size-full'>
                 <div className='w-full min-h-screen_'>
-                  <main className='size-full'>{children}</main>
+                  <main id='main' className='size-full'>
+                    {children}
+                  </main>
                 </div>
-
-                <Footer />
               </div>
+
+              <Footer />
             </div>
           </ThemeProvider>
 

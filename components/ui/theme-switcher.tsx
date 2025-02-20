@@ -47,7 +47,7 @@ export const ThemeSwitcher: React.FC = (): React.ReactNode => {
 
             <ListboxButton as={Fragment}>
               <Button
-                disabled={!mounted}
+                loading={!mounted}
                 aria-label='Open theme switcher menu'
                 variant='round'
                 color='secondary'
@@ -60,7 +60,7 @@ export const ThemeSwitcher: React.FC = (): React.ReactNode => {
               show={open}
               as='div'
               className={cn(
-                'w-screen h-screen_ flex justify-center items-center origin-[75%_0%] md:origin-[95%_0%] z-100 mx-auto inset-0 fixed',
+                'w-screen h-screen_ flex justify-center items-center origin-[75%_0%] md:origin-[95%_0%] z-20 mx-auto inset-0 fixed',
                 'transition-all scale-100 opacity-100',
                 'data-closed:scale-90 data-closed:opacity-0',
                 'data-enter:ease-out data-enter:duration-400',
