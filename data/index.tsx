@@ -25,7 +25,7 @@ import {
   SiTelegram
 } from 'react-icons/si'
 import { FaAndroid, FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
-import { Mail, Send, Syringe, Terminal } from 'lucide-react'
+import { Mail, Syringe, Terminal } from 'lucide-react'
 
 const email = 'contact@cankolay.com'
 

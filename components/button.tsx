@@ -13,7 +13,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'rounded-2xl px-5 py-1',
-        round: 'h-10 w-10 rounded-full p-2 text-2xl'
+        round: 'size-10 rounded-full p-2 text-2xl'
       },
       color: {
         primary:
