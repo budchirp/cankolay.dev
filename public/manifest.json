@@ -1,4 +1,6 @@
 {
+  "manifest_version": 3,
+  "version": "0.1.0",
   "name": "Can Kolay",
   "short_name": "budchirp",
   "start_url": "/",
