@@ -107,61 +107,64 @@ export const NowPlaying: React.FC = () => {
 
   return (
     <Container className='grid gap-4'>
-      <div className='h-1 bg-secondary w-full' />
-
-      <Box padding='small' variant='primary' className='relative overflow-hidden'>
-        <div className='absolute left-0 top-0 select-none xs:h-full xs:w-1/4 w-full h-3/4 blur-3xl opacity-75'>
+      <Box
+        className='relative overflow-hidden flex w-full h-min flex-col'
+        padding='small'
+        variant='primary'
+      >
+        <div className='absolute inset-0 overflow-hidden w-full h-3/4 blur-3xl opacity-75 xs:h-full xs:w-2/4'>
           {song?.albumCover && (
-            <img src={song?.albumCover} alt='album' className='object-fill size-full' />
+            <img src={song?.albumCover} alt='album' className='object-fill size-full select-none' />
           )}
         </div>
 
-        <div className='flex flex-col xs:flex-row xs:gap-2 z-10 size-full relative'>
-          <div className='xs:size-16 p-2 xs:p-0 size-full'>
-            <div className='border border-border aspect-square rounded-2xl flex xs:size-16 overflow-hidden select-none items-center justify-center'>
-              {song?.albumCover ? (
-                <Link href={song?.link || ''}>
-                  <img
-                    className='aspect-square xs:object-cover xs:size-16 rounded-2xl transition duration-500 ease-out hover:scale-110'
-                    src={song?.albumCover}
-                    alt='album'
-                  />
-                </Link>
-              ) : (
-                <VolumeX className='xs:size-8 size-16' />
-              )}
-            </div>
+        <div className='flex flex-col z-10 items-center size-full gap-2 relative xs:flex-row'>
+          <div className='border border-border aspect-square flex items-center justify-center rounded-2xl xs:size-18'>
+            {song?.albumCover ? (
+              <Link href={song?.link || ''} target='_blank'>
+                <img
+                  className='aspect-square rounded-2xl size-full xs:size-18 object-cover'
+                  src={song?.albumCover}
+                  alt='album'
+                />
+              </Link>
+            ) : (
+              <VolumeX className='xs:size-8 size-16' />
+            )}
           </div>
 
-          <div className='flex gap-2 size-full justify-between flex-col xs:pe-2 xs:py-1 xs:ps-0 p-2'>
-            <div className='grid gap-1'>
-              <Link href={song?.link || ''} className='flex items-center gap-1'>
-                <Disc3 className={cn('size-4', song?.isPlaying && 'animate-spin-slow')} />
-                <h2 className='text-lg font-bold leading-none text-ellipsis'>
-                  {song?.title || 'Playing nothing'}
-                </h2>
-              </Link>
+          <div className='flex gap-1.5 flex-col px-2 pb-2 pt-1 xs:pe-2 w-full xs:py-1 xs:ps-0 xs:justify-center'>
+            <Link href={song?.link || ''} target='_blank' className='flex items-center gap-1.5'>
+              <Disc3
+                color='white'
+                className='flex text-text-primary items-center justify-center'
+                size={16}
+              />
 
-              <h3 className='font-medium leading-none text-text-tertiary'>
-                {song?.artist || data.username}
-              </h3>
-            </div>
+              <span className='text-lg flex-1 font-bold leading-none break-words'>
+                {song?.title || 'Playing nothing'}
+              </span>
+            </Link>
+
+            <h2 className='font-medium flex items-center leading-none text-text-tertiary break-words'>
+              {song?.artist || data.username}
+            </h2>
 
             <div className='flex items-center justify-between gap-2'>
-              <span className='text-sm leading-none select-none text-text-secondary'>
+              <span className='text-sm w-8 flex text-center items-center justify-center leading-none select-none text-text-secondary'>
                 {Hourglass.formatTime(song?.elapsedTime)}
               </span>
 
-              <div className='w-full h-1 bg-background-secondary relative rounded-full'>
+              <div className='w-full h-2 flex items-center p-0.5 bg-background-secondary relative rounded-full'>
                 <div
-                  className='bg-linear-to-r from-accent-700 via-accent-500 to-accent-600 ease-linear transition-width duration-1000 h-1 rounded-full'
+                  className='bg-linear-to-r from-accent-700 shadow via-accent-500 to-accent-600 ease-linear transition-width duration-1000 h-full rounded-full'
                   style={{
                     width: `${song?.percentage || 0}%`
                   }}
                 />
               </div>
 
-              <span className='text-sm leading-none select-none text-text-secondary'>
+              <span className='text-sm w-8 flex text-center items-center justify-center leading-none select-none text-text-secondary'>
                 {Hourglass.formatTime(song?.totalTime)}
               </span>
             </div>

@@ -19,7 +19,8 @@
       },
       "style": {
         "useNodejsImportProtocol": "off",
-        "noInferrableTypes": "off"
+        "noInferrableTypes": "off",
+        "noParameterAssign": "off"
       },
       "complexity": {
         "noStaticOnlyClass": "off",

@@ -62,7 +62,7 @@ export const Header: React.FC = (): React.ReactNode => {
 
         return (
           <div>
-            <header className='bg-background-primary/50 border-b border-transparent fixed top-0 z-20 flex h-16 w-full items-center justify-center backdrop-blur-sm'>
+            <header className='bg-background-primary/50 select-none border-b border-transparent fixed top-0 z-20 flex h-16 w-full items-center justify-center backdrop-blur-sm'>
               <Container className='flex items-center justify-between gap-2'>
                 <Logo />
 

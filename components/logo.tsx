@@ -5,7 +5,7 @@ import { cn } from '@/lib/cn'
 import data from '@/data'
 import Link from 'next/link'
 
-export type LogoProps = {} & Omit<ComponentProps<'h1'>, 'children'>
+export type LogoProps = Omit<ComponentProps<'h1'>, 'children'>
 
 export const Logo: React.FC<LogoProps> = ({ className, ...props }: LogoProps): React.ReactNode => {
   const label = `${data.username} logo`

@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react'
 
 import { cn } from '@/lib/cn'
 
-export type ContainerProps = {} & ComponentProps<'div'>
+export type ContainerProps = ComponentProps<'div'>
 
 export const Container: React.FC<ContainerProps> = ({
   children,

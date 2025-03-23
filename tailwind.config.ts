@@ -1,10 +1,8 @@
-import colors from 'tailwindcss/colors'
 import defaultTheme from 'tailwindcss/defaultTheme'
 
 import type { Config } from 'tailwindcss'
 
 export default {
-  darkMode: 'class',
   content: [
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
@@ -22,19 +20,21 @@ export default {
         DEFAULT: {
           css: {
             blockQuote: {
-              borderColor: theme('colors.gray.50'),
-              marginTop: '0.75rem',
-              marginBottom: '0.75rem',
-              fontWeight: theme('fontWeight.normal')
+              borderColor: theme('colors.gray.400'),
+              fontWeight: theme('fontWeight.normal'),
+              marginTop: '1.25rem',
+              marginBottom: '1.25rem',
+              paddingLeft: '1rem',
+              borderLeftWidth: '0.375rem'
             },
             summary: {
               fontWeight: theme('fontWeight.bold'),
               color: theme('colors.gray.900')
             },
             p: {
-              margin: 0,
-              padding: 0,
-              color: theme('colors.gray.900')
+              margin: '0.75rem 0',
+              color: theme('colors.gray.900'),
+              lineHeight: '1.625'
             },
             hr: {
               backgroundColor: theme('colors.gray.50'),
@@ -53,39 +53,43 @@ export default {
               textDecoration: 'none'
             },
             h1: {
-              marginTop: '1.5rem',
-              marginBottom: '0.5rem',
+              marginTop: '2rem',
+              marginBottom: '1rem',
               fontSize: theme('fontSize.3xl'),
-              fontWeight: '900'
+              fontWeight: '900',
+              lineHeight: '1.3'
             },
             h2: {
-              marginTop: '1rem',
-              marginBottom: '0.25rem',
+              marginTop: '1.75rem',
+              marginBottom: '0.75rem',
               fontSize: theme('fontSize.2xl'),
-              fontWeight: theme('fontWeight.bold')
+              fontWeight: theme('fontWeight.bold'),
+              lineHeight: '1.35'
             },
             h3: {
-              marginTop: '0.75rem',
-              marginBotton: 0,
+              marginTop: '1.5rem',
+              marginBottom: '0.5rem',
               fontSize: theme('fontSize.xl'),
-              fontWeight: theme('fontWeight.semibold')
+              fontWeight: theme('fontWeight.semibold'),
+              lineHeight: '1.4'
             },
             h4: {
-              marginTop: '0.5rem',
-              marginBottom: '0.25rem',
+              marginTop: '1.25rem',
+              marginBottom: '0.5rem',
               fontSize: theme('fontSize.lg'),
-              fontWeight: theme('fontWeight.medium')
+              fontWeight: theme('fontWeight.medium'),
+              lineHeight: '1.45'
             },
             li: {
               color: theme('colors.gray.900'),
               fontSize: '1rem',
-              fontWeight: theme('fontWeight.medium'),
+              margin: '0.5rem 0',
               padding: 0,
-              margin: 0,
-              lineHeight: 1.5
+              lineHeight: '1.750'
             },
             'ol, ul': {
-              marginTop: '0.5rem'
+              marginTop: '0.75rem',
+              marginBottom: '0.75rem'
             },
             'ul > * > ul': {
               marginTop: '0.25rem'
@@ -101,11 +105,11 @@ export default {
             },
             'ul > li': {
               position: 'relative',
-              paddingLeft: '1rem'
+              paddingLeft: '1.25rem'
             },
             'ul > li::before': {
               content: '""',
-              marginTop: '0.5rem',
+              marginTop: '0.6875rem',
               width: '0.50rem',
               height: '0.50rem',
               position: 'absolute',
@@ -122,7 +126,6 @@ export default {
               color: theme('colors.gray.700')
             },
             'ol > li': {
-              margin: 0,
               padding: 0,
               position: 'relative'
             },
@@ -161,25 +164,25 @@ export default {
               color: theme('colors.gray.800'),
               fontWeight: theme('fontWeight.semibold'),
               fontSize: theme('fontSize.sm'),
-              borderRadius: '0.75rem',
+              borderRadius: theme('borderRadius.full'),
               margin: '0 1px',
               boxShadow: theme('boxShadow.lg'),
               paddingLeft: '0.50rem',
               paddingRight: '0.50rem'
             },
             pre: {
-              fontFamily: theme('fontFamily.mono').join(', '),
-              backgroundColor: "theme('colors.gray.50') !important",
-              borderWidth: '1px',
-              borderColor: theme('colors.gray.200'),
               borderRadius: theme('borderRadius.2xl'),
-              paddingLeft: '1rem',
-              paddingRight: '1rem',
-              paddingTop: '.5rem',
-              paddingBottom: '.5rem'
+              backgroundColor: 'transparent',
+              margin: 0,
+              padding: 0
+            },
+            'pre > div > div > pre': {
+              padding: '0.5rem 1rem '
             },
             code: {
-              color: theme('colors.gray.800')
+              color: theme('colors.gray.800'),
+              padding: 0,
+              margin: 0
             },
             'code *': {
               fontFamily: "theme('fontFamily.mono') !important"
@@ -187,8 +190,26 @@ export default {
             img: {
               margin: '0'
             },
-            'thead, tbody, tr, td': {
+            'thead, tbody, tr, td, th': {
               borderColor: theme('colors.gray.200')
+            },
+            table: {
+              width: '100%',
+              borderCollapse: 'collapse'
+            },
+            th: {
+              backgroundColor: theme('colors.gray.50'),
+              fontWeight: theme('fontWeight.bold'),
+              textAlign: 'left',
+              padding: '0.75rem 1.5rem',
+              color: theme('colors.gray.900')
+            },
+            td: {
+              padding: '0.75rem',
+              color: theme('colors.gray.900')
+            },
+            'tbody tr:nth-child(even)': {
+              backgroundColor: theme('colors.gray.50')
             }
           }
         },
@@ -250,6 +271,16 @@ export default {
             },
             'thead, tbody, tr, td': {
               borderColor: theme('colors.gray.690')
+            },
+            th: {
+              backgroundColor: theme('colors.gray.900'),
+              color: theme('colors.gray.50')
+            },
+            td: {
+              color: theme('colors.gray.50')
+            },
+            'tbody tr:nth-child(even)': {
+              backgroundColor: theme('colors.gray.900')
             }
           }
         }

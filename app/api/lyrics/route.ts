@@ -27,16 +27,10 @@ export const POST = async (request: NextRequest) => {
       `syncedlyrics "${song.replace(/(["'$`\\])/g, '\\$1')}" -o /dev/null`
     )
 
-    if (stderr) {
-      throw new Error()
-    }
-
-    if (!stderr && stdout) {
-      const lyrics = parseLRC(stdout)
-
+    if (stdout && !stderr) {
       return NextResponse.json({
         message: '',
-        data: lyrics
+        data: parseLRC(stdout)
       })
     }
 

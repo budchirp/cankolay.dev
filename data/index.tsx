@@ -22,7 +22,8 @@ import {
   SiGtk,
   SiJetbrains,
   SiGnome,
-  SiTelegram
+  SiTelegram,
+  SiMaterialdesign
 } from 'react-icons/si'
 import { FaAndroid, FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
 import { Mail, Syringe, Terminal } from 'lucide-react'
@@ -164,18 +165,14 @@ const data = {
         icon: <SiNestjs />
       }
     ],
-    Mobile: [
-      {
-        name: 'Android',
-        icon: <FaAndroid />
-      },
+    'Mobile / Android': [
       {
         name: 'Jetpack Compose',
         icon: <SiJetpackcompose />
       },
       {
-        name: 'Ktor Client',
-        icon: <SiKtor />
+        name: 'Material 3',
+        icon: <SiMaterialdesign />
       },
       {
         name: 'Hilt',
@@ -191,13 +188,20 @@ const data = {
         name: 'LibAdwaita',
         icon: <SiGtk />
       }
+    ],
+    'Cross-Platform': [
+      {
+        name: 'Compose Multiplatform',
+        icon: <SiJetpackcompose />
+      }
     ]
   },
   journey: {
+    2025: ['Started creating my own language called Graphite'],
     2024: ['Started learning Rust and C++'],
     2023: ['Started learning C, Java and Kotlin'],
     2022: ['Learned Typescript', 'Learned basic React', 'Learned TailwindCSS', 'Learned Lua'],
-    2021: ['Learned Javascript, PHP', 'Learned Python'],
+    2021: ['Learned Javascript', 'Learned PHP', 'Learned Python'],
     2020: ['Learned HTML, CSS']
   },
   contact: {

@@ -1,5 +1,5 @@
-import type { NowPlayingType } from '@/types/now-playing'
 import { type NextRequest, NextResponse } from 'next/server'
+import type { NowPlayingType } from '@/types/now-playing'
 
 const getSpotifyAccessToken = async (): Promise<string> => {
   const clientID = process.env.SPOTIFY_CLIENT_ID
@@ -79,7 +79,11 @@ export const GET = async (request: NextRequest) => {
     })
   } catch (error) {
     return NextResponse.json(
-      { message: 'Failed to get song details', details: (error as Error).message, data: null },
+      {
+        message: 'Failed to get song details',
+        details: (error as Error).message,
+        data: null
+      },
       { status: 500 }
     )
   }

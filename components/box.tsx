@@ -22,7 +22,7 @@ const boxVariants = cva(['w-full rounded-3xl'], {
   }
 })
 
-export type BoxProps = {} & ComponentProps<'div'> & VariantProps<typeof boxVariants>
+export type BoxProps = ComponentProps<'div'> & VariantProps<typeof boxVariants>
 
 export const Box: React.FC<BoxProps> = ({
   children,

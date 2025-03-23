@@ -9,8 +9,7 @@ import type { Metadata } from 'next'
 
 const Page: React.FC = (): React.ReactNode => (
   <div className='masonry'>
-    {Object.keys(data.contact).map((platform, index) => {
-      /* @ts-ignore */
+    {(Object.keys(data.contact) as Array<keyof typeof data.contact>).map((platform, index) => {
       const contact = data.contact[platform]
 
       return (

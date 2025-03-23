@@ -4,15 +4,15 @@ import { Heading } from '@/components/heading'
 import { Github } from '@/lib/github'
 import { notFound } from 'next/navigation'
 import { Fetch } from '@/lib/fetch'
+import { MetadataManager } from '@/lib/metadata-manager'
 import { markdownToReact } from '@/lib/markdown'
 import { Calendar, GitFork, Scale, Star, Link as LucideLink } from 'lucide-react'
 import { Hourglass } from '@/lib/hourglass'
+import Link from 'next/link'
 import data from '@/data'
 
 import type { DynamicPageProps } from '@/types/page'
 import type { Metadata } from 'next'
-import { MetadataManager } from '@/lib/metadata-manager'
-import Link from 'next/link'
 
 const getValue = (obj: any, path: string) => {
   if (!path.includes('.')) {
@@ -69,7 +69,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
 
   if (!data.projectSources.includes(owner)) notFound()
 
-  const repo: any = await Github.getRepo(owner, reponame)
+  const repo = await Github.getRepo(owner, reponame)
   if (!repo) {
     notFound()
   }
@@ -89,11 +89,11 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
 
   return (
     <div className='size-full'>
-      <Heading>
-        <Link href={repo.html_url}>
+      <Link href={repo.html_url}>
+        <Heading>
           {owner}/{reponame}
-        </Link>
-      </Heading>
+        </Heading>
+      </Link>
 
       <div className='flex md:flex-row flex-col-reverse w-full'>
         <div className='md:w-3/4 w-full md:border-r-4 md:border-t-0 border-t-4 border-border-hover md:pe-4 md:pt-0 pt-4 md:me-4 md:mt-0 mt-4'>
@@ -172,7 +172,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
 export const generateMetadata = async ({ params }: DynamicPageProps): Promise<Metadata> => {
   const { owner, repo: reponame } = await params
 
-  const repo: any = await Github.getRepo(owner, reponame)
+  const repo = await Github.getRepo(owner, reponame)
   if (!repo) {
     notFound()
   }
@@ -189,10 +189,9 @@ export const revalidate = 3600
 
 export const generateStaticParams = async () => {
   let repos: any[] = []
-
   await Promise.all(
     data.projectSources.map(async (source) => {
-      repos = [...repos, await Github.getUserRepos(source)]
+      repos = [...repos, ...(await Github.getUserRepos(source))]
     })
   )
 
