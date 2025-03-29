@@ -62,8 +62,8 @@
   --text-primary-reverse: theme("colors.gray.50");
   --text-secondary-reverse: theme("colors.gray.100");
 
-  --border: theme("colors.gray.200");
-  --border-hover: theme("colors.gray.300");
+  --border: theme("colors.gray.300");
+  --border-hover: theme("colors.gray.400");
 }
 
 .dark {

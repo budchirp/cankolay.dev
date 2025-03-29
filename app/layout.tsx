@@ -1,6 +1,5 @@
 import type React from 'react'
 
-import { ViewTransitions } from 'next-view-transitions'
 import { ThemeProvider } from '@/providers/theme'
 import { Header } from '@/components/ui/header'
 import { Footer } from '@/components/ui/footer'
@@ -87,46 +86,44 @@ const jetbrainsMono = JetBrains_Mono({
 
 const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.ReactNode => {
   return (
-    <ViewTransitions>
-      <html suppressHydrationWarning lang='en-US'>
-        <body
-          className={cn(
-            'relative overflow-x-hidden size-full text-primary bg-background-primary',
-            lexend.variable,
-            jetbrainsMono.variable
-          )}
-        >
-          <ThemeProvider>
-            <div className='absolute inset-0 overflow-hidden'>
-              <div className='absolute z-0 top-[10%] left-[15%] size-96 opacity-25 bg-accent-500 rounded-full blur-[128px]' />
-              <div className='absolute z-0 top-[35%] right-[20%] size-96 opacity-25 bg-accent-600 rounded-full blur-[128px]' />
-              <div className='absolute z-0 top-[50%] left-[25%] size-96 opacity-25 bg-accent-800 rounded-full blur-[128px]' />
-              <div className='absolute z-0 top-[80%] right-[10%] size-96 opacity-25 bg-accent-700 rounded-full blur-[128px]' />
-            </div>
+    <html suppressHydrationWarning lang='en-US'>
+      <body
+        className={cn(
+          'relative overflow-x-hidden size-full text-primary bg-background-primary',
+          lexend.variable,
+          jetbrainsMono.variable
+        )}
+      >
+        <ThemeProvider>
+          <div className='absolute inset-0 overflow-hidden'>
+            <div className='absolute z-0 top-[10%] left-[15%] size-96 opacity-25 bg-accent-500 rounded-full blur-[128px]' />
+            <div className='absolute z-0 top-[35%] right-[20%] size-96 opacity-25 bg-accent-600 rounded-full blur-[128px]' />
+            <div className='absolute z-0 top-[50%] left-[25%] size-96 opacity-25 bg-accent-800 rounded-full blur-[128px]' />
+            <div className='absolute z-0 top-[80%] right-[10%] size-96 opacity-25 bg-accent-700 rounded-full blur-[128px]' />
+          </div>
 
-            <div className='grid gap-4 relative z-10 size-full'>
-              <div className='flex flex-col size-full'>
-                <Header />
+          <div className='grid gap-4 relative z-10 size-full'>
+            <div className='flex flex-col size-full'>
+              <Header />
 
-                <div className='w-full min-h-screen_'>
-                  <main id='main' className='size-full'>
-                    {children}
-                  </main>
-                </div>
+              <div className='w-full min-h-screen_'>
+                <main id='main' className='size-full'>
+                  {children}
+                </main>
               </div>
-
-              <Footer />
             </div>
-          </ThemeProvider>
 
-          <Script
-            defer
-            src='https://static.cloudflareinsights.com/beacon.min.js'
-            data-cf-beacon={`{"token": "${process.env.CLOUDFLARE_TOKEN}"}`}
-          />
-        </body>
-      </html>
-    </ViewTransitions>
+            <Footer />
+          </div>
+        </ThemeProvider>
+
+        <Script
+          defer
+          src='https://static.cloudflareinsights.com/beacon.min.js'
+          data-cf-beacon={`{"token": "${process.env.CLOUDFLARE_TOKEN}"}`}
+        />
+      </body>
+    </html>
   )
 }
 

@@ -7,7 +7,7 @@ import { Loader2 } from 'lucide-react'
 
 const buttonVariants = cva(
   [
-    'flex ease-out disabled:opacity-75 dark:disabled:opacity-50 disabled:animate-pulse active:scale-95 cursor-pointer items-center justify-center font-medium transition duration-300'
+    'flex ease-out disabled:opacity-75 border dark:disabled:opacity-50 disabled:animate-pulse active:scale-95 cursor-pointer items-center justify-center font-medium transition duration-300'
   ],
   {
     variants: {
@@ -17,9 +17,9 @@ const buttonVariants = cva(
       },
       color: {
         primary:
-          'bg-accent-600 border border-transparent text-gray-50 hover:bg-accent-700 hover:text-gray-100 disabled:text-gray-200',
+          'bg-accent-600 border-border/90 text-gray-50 hover:bg-accent-700 hover:text-gray-100 disabled:text-gray-200',
         secondary:
-          'bg-background-primary border border-border hover:bg-background-secondary hover:border-border-hover disabled:text-text-secondary text-text-primary hover:text-text-secondary'
+          'bg-background-primary border-border hover:bg-background-secondary hover:border-border-hover disabled:text-text-secondary text-text-primary hover:text-text-secondary'
       }
     },
     defaultVariants: {
