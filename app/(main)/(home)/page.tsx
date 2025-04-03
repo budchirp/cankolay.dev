@@ -14,10 +14,10 @@ type SkillChipProps = {
 const SkillChip: React.FC<SkillChipProps> = ({ icon, name }: SkillChipProps): React.ReactNode => {
   return (
     <Box padding='small' className='flex items-center rounded-full gap-3 md:p-3'>
-      <span className='flex size-10 items-center justify-center rounded-full bg-accent-700 p-1 text-xl text-gray-50'>
+      <span className='flex size-10 items-center aspect-square justify-center rounded-full bg-background-accent-primary border border-border-accent p-1 text-xl text-gray-50'>
         {icon}
       </span>
-      <p className='break-all font-medium'>{name}</p>
+      <p className='break-words font-medium w-full grow pe-2'>{name}</p>
     </Box>
   )
 }
@@ -84,7 +84,7 @@ const Page: React.FC = (): React.ReactNode => {
                   {data.journey[key].map((text, index) => (
                     <li key={index} className='flex gap-2'>
                       <span className='text-text-tertiary'>-</span>
-                      <p>{text}</p>
+                      <p className='text-text-primary'>{text}</p>
                     </li>
                   ))}
                 </ul>

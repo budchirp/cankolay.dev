@@ -112,14 +112,14 @@ export const NowPlaying: React.FC = () => {
         padding='small'
         variant='primary'
       >
-        <div className='absolute inset-0 overflow-hidden w-full h-3/4 blur-3xl opacity-75 xs:h-full xs:w-1/4'>
+        <div className='absolute inset-0 overflow-hidden w-full h-3/4 transition-none blur-3xl opacity-75 xs:h-full xs:w-1/4'>
           {song?.albumCover && (
             <img src={song?.albumCover} alt='album' className='object-fill size-full select-none' />
           )}
         </div>
 
         <div className='flex flex-col z-10 items-center size-full gap-2 relative xs:flex-row'>
-          <div className='border border-border aspect-square flex items-center justify-center rounded-2xl size-full xs:size-18'>
+          <div className='border border-border shadow-2xl aspect-square flex items-center justify-center rounded-2xl size-full xs:size-18'>
             {song?.albumCover ? (
               <Link href={song?.link || ''} target='_blank'>
                 <img
@@ -147,11 +147,11 @@ export const NowPlaying: React.FC = () => {
             </h2>
 
             <div className='flex items-center justify-between gap-2'>
-              <span className='text-sm w-8 flex text-center items-center justify-center leading-none select-none text-text-secondary'>
+              <span className='text-sm w-10 flex text-center items-center justify-center leading-none select-none text-text-secondary'>
                 {Hourglass.formatTime(song?.elapsedTime)}
               </span>
 
-              <div className='w-full h-2 flex items-center p-0.5 bg-background-secondary relative rounded-full'>
+              <div className='w-full h-2 flex border border-border box-content items-center p-0.5 bg-background-secondary relative rounded-full'>
                 <div
                   className='bg-linear-to-r from-accent-700 shadow via-accent-500 to-accent-600 ease-linear transition-width duration-1000 h-full rounded-full'
                   style={{
@@ -160,7 +160,7 @@ export const NowPlaying: React.FC = () => {
                 />
               </div>
 
-              <span className='text-sm w-8 flex text-center items-center justify-center leading-none select-none text-text-secondary'>
+              <span className='text-sm w-10 flex text-center items-center justify-center leading-none select-none text-text-secondary'>
                 {Hourglass.formatTime(song?.totalTime)}
               </span>
             </div>

@@ -34,7 +34,9 @@ const HeaderLink: React.FC<HeaderLinkProps> = ({
     <Link
       className={cn(
         'hover:text-text-primary text-lg leading-6 transition-all duration-300 hover:font-bold',
-        url === pathname ? 'text-text-primary font-bold' : 'text-text-tertiary font-medium'
+        (url.length > 1 ? pathname.includes(url) : pathname === url)
+          ? 'text-text-primary font-bold'
+          : 'text-text-tertiary font-medium'
       )}
       href={url}
     >

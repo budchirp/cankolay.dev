@@ -15,15 +15,15 @@ const Page: React.FC = (): React.ReactNode => (
       return (
         <Box
           key={index}
-          className='hover:bg-background-tertiary group flex h-16 items-center gap-3 duration-300'
+          className='hover:bg-background-tertiary group flex h-16 items-center transition-all gap-3 duration-300'
         >
-          <span className='flex size-10 items-center justify-center rounded-full bg-accent-700 p-1 text-xl text-gray-50'>
+          <span className='flex size-10 items-center justify-center rounded-full transition-all duration-300 bg-background-accent-primary border border-border-accent group-hover:bg-background-accent-secondary p-1 text-xl text-gray-50'>
             {contact.icon}
           </span>
 
           <Link
             href={contact.link || '/contact'}
-            className='text-text-primary group-hover:text-text-secondary flex-1 text-xl font-bold transition duration-300'
+            className='text-text-primary group-hover:text-text-secondary flex-1 text-xl font-bold transition-all duration-300'
             rel='noreferrer'
             target='_blank'
           >

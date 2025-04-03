@@ -5,13 +5,13 @@ import { Header } from '@/components/ui/header'
 import { Footer } from '@/components/ui/footer'
 import { JetBrains_Mono, Lexend } from 'next/font/google'
 import { cn } from '@/lib/cn'
+import Script from 'next/script'
 import data from '@/data'
 
 import type { LayoutProps } from '@/types/layout'
 import type { Metadata, Viewport } from 'next'
 
 import '@/styles/globals.css'
-import Script from 'next/script'
 
 export const metadata: Metadata = {
   metadataBase: new URL(data.siteUrl),
@@ -89,7 +89,7 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
     <html suppressHydrationWarning lang='en-US'>
       <body
         className={cn(
-          'relative overflow-x-hidden size-full text-primary bg-background-primary',
+          'relative overflow-x-hidden size-full text-text-primary bg-background-primary',
           lexend.variable,
           jetbrainsMono.variable
         )}

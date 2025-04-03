@@ -4,7 +4,7 @@ import type { ComponentProps } from 'react'
 import { cn } from '@/lib/cn'
 import { cva, type VariantProps } from 'class-variance-authority'
 
-const boxVariants = cva(['w-full border border-border rounded-3xl'], {
+const boxVariants = cva(['w-full border transition-all duration-300 border-border rounded-3xl'], {
   variants: {
     variant: {
       primary: 'bg-background-primary border border-border',

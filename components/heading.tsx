@@ -17,7 +17,7 @@ export const Heading: React.FC<HeadingProps> = ({
 }: HeadingProps): React.ReactNode => (
   <div
     {...props}
-    className={cn('mb-4 mt-12 grid w-full gap-1 pb-4 border-b-4 border-border-hover', className)}
+    className={cn('mb-4 mt-12 grid w-full gap-1 pb-4 border-b-4 border-border', className)}
   >
     {cover}
 

@@ -96,7 +96,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
       </Link>
 
       <div className='flex md:flex-row flex-col-reverse w-full'>
-        <div className='md:w-3/4 w-full md:border-r-4 md:border-t-0 border-t-4 border-border-hover md:pe-4 md:pt-0 pt-4 md:me-4 md:mt-0 mt-4'>
+        <div className='md:w-3/4 w-full md:border-r-4 md:border-t-0 border-t-4 border-border md:pe-4 md:pt-0 pt-4 md:me-4 md:mt-0 mt-4'>
           {content}
         </div>
 
