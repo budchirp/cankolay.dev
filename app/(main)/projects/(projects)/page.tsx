@@ -37,7 +37,8 @@ const Page: React.FC = async () => {
                 return (
                   <Box
                     key={repo.name}
-                    className='hover:bg-background-tertiary group grid h-max w-full gap-1 transition duration-300'
+                    padding='nice'
+                    className='hover:bg-background-tertiary group h-max grid gap-1 transition duration-300'
                   >
                     <Link
                       href={`projects/${source}/${repo.name}`}
@@ -49,39 +50,41 @@ const Page: React.FC = async () => {
                       {repo.name}
                     </Link>
 
-                    {repo.description && (
-                      <p className='text-secondary w-full text-sm'>{repo.description}</p>
-                    )}
+                    <div className='grid gap-2'>
+                      {repo.description && (
+                        <p className='text-secondary w-full text-sm'>{repo.description}</p>
+                      )}
 
-                    {repo.language && (
-                      <div className='flex items-center justify-between'>
-                        {repo.language && (
-                          <span
-                            style={{
-                              color: (colors && colors[repo.language]?.color) || undefined
-                            }}
-                            className={cn(
-                              'text-sm',
-                              !colors || !colors[repo.language]?.color ? 'text-secondary' : ''
-                            )}
-                          >
-                            {repo.language}
-                          </span>
-                        )}
+                      {repo.language && (
+                        <div className='flex items-center justify-between'>
+                          {repo.language && (
+                            <span
+                              style={{
+                                color: (colors && colors[repo.language]?.color) || undefined
+                              }}
+                              className={cn(
+                                'text-sm',
+                                !colors || !colors[repo.language]?.color ? 'text-secondary' : ''
+                              )}
+                            >
+                              {repo.language}
+                            </span>
+                          )}
 
-                        {repo.homepage && (
-                          <Link
-                            href={repo.homepage}
-                            className='w-min'
-                            target='_blank'
-                            rel='noreferrer'
-                            aria-label={`Go to ${repo.html_url}`}
-                          >
-                            <Button>Preview</Button>
-                          </Link>
-                        )}
-                      </div>
-                    )}
+                          {repo.homepage && (
+                            <Link
+                              href={repo.homepage}
+                              className='w-min'
+                              target='_blank'
+                              rel='noreferrer'
+                              aria-label={`Go to ${repo.html_url}`}
+                            >
+                              <Button>Preview</Button>
+                            </Link>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </Box>
                 )
               })}

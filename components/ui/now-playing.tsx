@@ -119,7 +119,7 @@ export const NowPlaying: React.FC = () => {
         </div>
 
         <div className='flex flex-col z-10 items-center size-full gap-2 relative xs:flex-row'>
-          <div className='border border-border shadow-2xl aspect-square flex items-center justify-center rounded-2xl size-full xs:size-18'>
+          <div className='border border-border aspect-square flex items-center justify-center rounded-2xl size-full xs:size-18'>
             {song?.albumCover ? (
               <Link href={song?.link || ''} target='_blank'>
                 <img

@@ -12,7 +12,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'rounded-2xl px-5 py-1',
+        default: 'rounded-2xl px-4 py-1',
         round: 'size-10 rounded-full p-2 text-2xl'
       },
       color: {

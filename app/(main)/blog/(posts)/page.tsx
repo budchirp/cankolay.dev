@@ -89,7 +89,7 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
                 </Link>
               </div>
 
-              <div className='grid w-full gap-2 p-4'>
+              <div className='grid w-full gap-2 p-4 pt-3'>
                 <div>
                   <div className='flex items-center'>
                     <Calendar className='mr-1 h-4 w-4 text-xs' />

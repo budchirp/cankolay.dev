@@ -12,6 +12,7 @@ const boxVariants = cva(['w-full border transition-all duration-300 border-borde
     },
     padding: {
       default: 'px-4 py-3',
+      nice: 'p-4 pt-3',
       small: 'p-2',
       none: ''
     }
