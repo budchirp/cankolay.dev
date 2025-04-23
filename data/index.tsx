@@ -16,7 +16,6 @@ import {
   SiExpress,
   SiCplusplus,
   SiJetpackcompose,
-  SiKtor,
   SiSqlite,
   SiPostgresql,
   SiGtk,
@@ -25,10 +24,10 @@ import {
   SiTelegram,
   SiMaterialdesign
 } from 'react-icons/si'
-import { FaAndroid, FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
+import { FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
 import { Mail, Syringe, Terminal } from 'lucide-react'
 
-const email = 'contact@cankolay.com'
+const email = 'budchirp@gmail.com'
 
 const data = {
   name: 'Can Kolay',
