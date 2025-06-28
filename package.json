@@ -10,35 +10,37 @@
     "format": "biome format --write ."
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.2",
+    "@headlessui/react": "^2.2.4",
     "minisearch": "^7.1.2",
-    "next": "^15.3.1",
+    "next": "^15.3.4",
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
-    "@shikijs/transformers": "^3.3.0",
-    "@tailwindcss/postcss": "^4.1.4",
+    "@biomejs/biome": "^2.0.6",
+    "@shikijs/transformers": "^3.7.0",
+    "@tailwindcss/postcss": "^4.1.11",
     "@tailwindcss/typography": "^0.5.16",
-    "@types/node": "22.14.1",
-    "@types/react": "19.1.2",
-    "@types/react-dom": "19.1.2",
+    "@types/node": "24.0.7",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
     "class-variance-authority": "^0.7.1",
     "gray-matter": "^4.0.3",
-    "lucide-react": "^0.503.0",
-    "postcss": "8.5.3",
+    "lucide-react": "^0.525.0",
+    "postcss": "8.5.6",
     "react-icons": "^5.5.0",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",
     "remark-toc": "^9.0.0",
-    "tailwind-merge": "^3.2.0",
-    "tailwindcss": "^4.1.4",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.11",
     "typescript": "5.8.3"
   },
-  "browserslist": ["> 1%"]
+  "browserslist": [
+    "> 1%"
+  ]
 }
