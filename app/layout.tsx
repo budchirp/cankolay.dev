@@ -1,11 +1,10 @@
 import type React from 'react'
 
-import { ThemeProvider } from '@/providers/theme'
+import { JetBrains_Mono, Lexend } from 'next/font/google'
 import { Header } from '@/components/ui/header'
 import { Footer } from '@/components/ui/footer'
-import { JetBrains_Mono, Lexend } from 'next/font/google'
-import { cn } from '@/lib/cn'
 import Script from 'next/script'
+import { cn } from '@/lib/cn'
 import data from '@/data'
 
 import type { LayoutProps } from '@/types/layout'
@@ -95,30 +94,26 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
           jetbrainsMono.variable
         )}
       >
-        <ThemeProvider>
-          <div className='absolute z-0 inset-0 overflow-hidden'>
-            <Container className='absolute inset-0'>
-              <div className='absolute top-[10%] left-[15%] size-96 opacity-25 bg-accent-500 rounded-full blur-[128px]' />
-              <div className='absolute top-[35%] right-[20%] size-96 opacity-25 bg-accent-600 rounded-full blur-[128px]' />
-              <div className='absolute top-[50%] left-[25%] size-96 opacity-25 bg-accent-800 rounded-full blur-[128px]' />
-              <div className='absolute top-[75%] right-[10%] size-96 opacity-25 bg-accent-700 rounded-full blur-[128px]' />
-            </Container>
+        <div className='absolute z-0 inset-0 overflow-hidden'>
+          <Container className='absolute inset-0'>
+            <div className='absolute top-[10%] left-[15%] size-96 opacity-25 bg-accent-500 rounded-full blur-[128px]' />
+            <div className='absolute top-[35%] right-[20%] size-96 opacity-25 bg-accent-600 rounded-full blur-[128px]' />
+            <div className='absolute top-[50%] left-[25%] size-96 opacity-25 bg-accent-800 rounded-full blur-[128px]' />
+            <div className='absolute top-[75%] right-[10%] size-96 opacity-25 bg-accent-700 rounded-full blur-[128px]' />
+          </Container>
+        </div>
+
+        <div className='grid gap-4 relative z-10 size-full'>
+          <div className='flex flex-col size-full'>
+            <Header />
+
+            <main id='main' className='w-full min-h-screen_'>
+              {children}
+            </main>
           </div>
 
-          <div className='grid gap-4 relative z-10 size-full'>
-            <div className='flex flex-col size-full'>
-              <Header />
-
-              <div className='w-full min-h-screen_'>
-                <main id='main' className='size-full'>
-                  {children}
-                </main>
-              </div>
-            </div>
-
-            <Footer />
-          </div>
-        </ThemeProvider>
+          <Footer />
+        </div>
 
         <Script
           defer

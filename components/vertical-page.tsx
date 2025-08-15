@@ -8,7 +8,7 @@ export type VerticalPageProps = {
   items: React.ReactNode[]
 } & ComponentProps<'div'>
 
-export const VerticalPage: React.FC<VerticalPageProps> = ({
+export const CenteredPage: React.FC<VerticalPageProps> = ({
   className,
   children,
   title,
@@ -29,4 +29,4 @@ export const VerticalPage: React.FC<VerticalPageProps> = ({
     {children && <div>{children}</div>}
   </div>
 )
-VerticalPage.displayName = 'VerticalPage'
+CenteredPage.displayName = 'VerticalPage'

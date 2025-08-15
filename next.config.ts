@@ -9,6 +9,11 @@ export default {
         pathname: '/assets/images/**',
         search: ''
       }
+    ],
+    remotePatterns: [
+      {
+        hostname: 'i.scdn.co'
+      }
     ]
   }
 } as NextConfig

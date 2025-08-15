@@ -2,22 +2,21 @@
 
 import type React from 'react'
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
-import { ThemeSwitcher } from '@/components/ui/theme-switcher'
+import { Transition, Menu, MenuItems, MenuItem, MenuButton } from '@headlessui/react'
+import { Menu as MenuIcon, X } from 'lucide-react'
 import { Container } from '@/components/container'
+import { Backdrop } from '@/components/backdrop'
+import { usePathname } from 'next/navigation'
 import { Button } from '@/components/button'
 import { Logo } from '@/components/logo'
 import { Box } from '@/components/box'
 import { links } from '@/lib/links'
 import { cn } from '@/lib/cn'
-import { Transition, Menu, MenuItems, MenuItem, MenuButton } from '@headlessui/react'
-import { usePathname } from 'next/navigation'
-import { Menu as MenuIcon, X } from 'lucide-react'
-import { Backdrop } from '@/components/backdrop'
-import { createPortal } from 'react-dom'
+import Link from 'next/link'
 
 import type { LinkProps } from '@/types/link'
-import Link from 'next/link'
 
 type HeaderLinkProps = {
   pathname: string
@@ -82,20 +81,16 @@ export const Header: React.FC = (): React.ReactNode => {
                     )}
                   </div>
 
-                  <div className='flex h-full items-center gap-2'>
-                    <ThemeSwitcher />
-
-                    <MenuButton
-                      as={Button}
-                      className='md:hidden'
-                      aria-label='Open menu'
-                      variant='round'
-                      color='secondary'
-                      onClick={close}
-                    >
-                      {open ? <X /> : <MenuIcon />}
-                    </MenuButton>
-                  </div>
+                  <MenuButton
+                    as={Button}
+                    className='md:hidden'
+                    aria-label='Open menu'
+                    variant='round'
+                    color='secondary'
+                    onClick={close}
+                  >
+                    {open ? <X /> : <MenuIcon />}
+                  </MenuButton>
                 </div>
               </Container>
             </header>

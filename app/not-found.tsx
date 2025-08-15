@@ -1,6 +1,6 @@
 import type React from 'react'
 
-import { VerticalPage } from '@/components/vertical-page'
+import { CenteredPage } from '@/components/vertical-page'
 import { MetadataManager } from '@/lib/metadata-manager'
 import { Container } from '@/components/container'
 import { GoBack } from '@/components/utils/go-back'
@@ -11,9 +11,9 @@ import type { Metadata } from 'next'
 const NotFound: React.FC<ErrorProps> = (): React.ReactNode => {
   return (
     <Container>
-      <VerticalPage items={['Page', 'not', 'found']} title={'404'}>
+      <CenteredPage items={['Page', 'not', 'found']} title={'404'}>
         <GoBack />
-      </VerticalPage>
+      </CenteredPage>
     </Container>
   )
 }

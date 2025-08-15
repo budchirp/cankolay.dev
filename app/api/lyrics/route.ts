@@ -2,13 +2,14 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { parseLRC } from '@/lib/lyrics'
 import { exec } from 'child_process'
 import { promisify } from 'util'
+import data from '@/data'
 
 const execAsync = promisify(exec)
 
 export const POST = async (request: NextRequest) => {
   try {
     const referer = request.headers.get('referer')
-    if (!referer || !referer.startsWith(process.env.APP_URL || '')) {
+    if (!referer || !referer.startsWith(data.siteUrl)) {
       return NextResponse.json({ message: 'Forbidden', data: null }, { status: 403 })
     }
 

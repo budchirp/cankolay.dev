@@ -3,12 +3,6 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 import type { Config } from 'tailwindcss'
 
 export default {
-  darkMode: 'class',
-  content: [
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './lib/**/*.{js,ts,jsx,tsx,mdx}'
-  ],
   theme: {
     extend: {
       screens: {
@@ -289,7 +283,7 @@ export default {
     },
     fontFamily: {
       main: ['var(--font-main)', ...defaultTheme.fontFamily.sans],
-      mono: ['var(--font-mono)', defaultTheme.fontFamily.mono]
+      mono: ['var(--font-mono)', ...defaultTheme.fontFamily.mono]
     }
   },
   plugins: [require('@tailwindcss/typography')]

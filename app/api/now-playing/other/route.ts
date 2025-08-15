@@ -12,9 +12,9 @@ export const GET = async (request: NextRequest) => {
 
     if (!accessToken) {
       accessToken = await Spotify.getSpotifyAccessToken(
-        process.env.SPOTIFY_CLIENT_ID,
-        process.env.SPOTIFY_CLIENT_SECRET,
-        process.env.SPOTIFY_REFRESH_TOKEN
+        process.env.SECOND_SPOTIFY_CLIENT_ID,
+        process.env.SECOND_SPOTIFY_CLIENT_SECRET,
+        process.env.SECOND_SPOTIFY_REFRESH_TOKEN
       )
     }
 
@@ -23,9 +23,9 @@ export const GET = async (request: NextRequest) => {
     switch (response) {
       case SpotifyResponse.TOKEN_EXPIRED:
         accessToken = await Spotify.getSpotifyAccessToken(
-          process.env.SPOTIFY_CLIENT_ID,
-          process.env.SPOTIFY_CLIENT_SECRET,
-          process.env.SPOTIFY_REFRESH_TOKEN
+          process.env.SECOND_SPOTIFY_CLIENT_ID,
+          process.env.SECOND_SPOTIFY_CLIENT_SECRET,
+          process.env.SECOND_SPOTIFY_REFRESH_TOKEN
         )
         break
 

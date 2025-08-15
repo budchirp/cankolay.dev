@@ -26,9 +26,7 @@ export const Footer: React.FC = (): React.ReactNode => (
       </div>
 
       <div className='items-center h-16 flex justify-between gap-2'>
-        <p className='text-center w-full font-medium text-text-accent-secondary'>
-          Made by {data.name} with ❤️
-        </p>
+        <p className='font-medium text-text-accent-secondary'>Made by {data.name} with ❤️</p>
       </div>
     </Container>
   </footer>

@@ -4,7 +4,7 @@ import { Post } from '@/lib/post'
 import { MetadataManager } from '@/lib/metadata-manager'
 import { Heading } from '@/components/heading'
 import { Book, Calendar, User } from 'lucide-react'
-import { markdownToReact } from '@/lib/markdown'
+import { markdownToReact } from '@/components/markdown'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 
@@ -26,12 +26,11 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
     <>
       <Heading
         cover={
-          <div className='relative flex h-min max-h-96 w-full items-center justify-center overflow-hidden rounded-2xl mb-2'>
+          <div className='relative flex items-center justify-center aspect-video overflow-hidden rounded-2xl mb-2'>
             <Image
-              className='w-full h-auto object-cover aspect-video'
+              className='size-full object-cover aspect-video'
               width={640}
               height={360}
-              sizes='100vw'
               alt={post.title}
               src={post.imageUrl}
             />

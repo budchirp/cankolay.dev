@@ -1,7 +1,7 @@
 import type React from 'react'
 
 import { Box } from '@/components/box'
-import { CopyButton } from '@/components/markdown/copy-button'
+import { CopyButton } from '@/components/markdown/code/copy-button'
 import { bundledLanguages, createHighlighter } from 'shiki/bundle/full'
 import {
   transformerNotationDiff,

@@ -1,7 +1,7 @@
 import type React from 'react'
 
+import { MarkdownCode } from '@/components/markdown/code'
 import Link from 'next/link'
-import { MarkdownCode } from './code'
 
 export const components = {
   code: MarkdownCode,
