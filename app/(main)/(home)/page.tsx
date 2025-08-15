@@ -32,10 +32,10 @@ const Page: React.FC = (): React.ReactNode => {
           <div className='text-md'>{data.about}</div>
         </div>
 
-        <div className='grid gap-1'>
+        <div className='grid gap-2'>
           <p className='text-xl font-bold'>Technologies</p>
 
-          <div className='grid gap-3'>
+          <div className='grid gap-4'>
             {(Object.keys(data.technologies) as Array<keyof typeof data.technologies>).map(
               (key, index) => (
                 <div key={index} className='grid gap-2'>
@@ -53,10 +53,10 @@ const Page: React.FC = (): React.ReactNode => {
         </div>
       </div>
 
-      <div className='grid gap-1'>
+      <div className='grid gap-2'>
         <p className='text-xl font-bold'>Stacks</p>
 
-        <div className='grid gap-3'>
+        <div className='grid gap-4'>
           {(Object.keys(data.stacks) as Array<keyof typeof data.stacks>).map((key, index) => (
             <div key={index} className='grid gap-2'>
               <span className='text-text-tertiary font-medium'>{key}</span>

@@ -22,10 +22,14 @@ import {
   SiJetbrains,
   SiGnome,
   SiTelegram,
-  SiMaterialdesign
+  SiMaterialdesign,
+  SiNextdotjs,
+  SiInstructure,
+  SiRust,
+  SiFigma
 } from 'react-icons/si'
-import { FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
-import { Mail, Syringe, Terminal } from 'lucide-react'
+import { FaBroom, FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
+import { FunctionSquare, Mail, Syringe, Terminal } from 'lucide-react'
 
 const email = 'budchirp@gmail.com'
 
@@ -58,26 +62,6 @@ const data = {
   technologies: {
     Languages: [
       {
-        name: 'Javascript',
-        icon: <SiJavascript />
-      },
-      {
-        name: 'Typescript',
-        icon: <SiTypescript />
-      },
-      {
-        name: 'Python',
-        icon: <SiPython />
-      },
-      {
-        name: 'PHP',
-        icon: <SiPhp />
-      },
-      {
-        name: 'Lua',
-        icon: <SiLua />
-      },
-      {
         name: 'Kotlin',
         icon: <SiKotlin />
       },
@@ -86,12 +70,36 @@ const data = {
         icon: <FaJava />
       },
       {
+        name: 'Rust',
+        icon: <SiRust />
+      },
+      {
         name: 'C',
         icon: <SiC />
       },
       {
         name: 'C++',
         icon: <SiCplusplus />
+      },
+      {
+        name: 'Javascript',
+        icon: <SiJavascript />
+      },
+      {
+        name: 'Typescript',
+        icon: <SiTypescript />
+      },
+      {
+        name: 'Lua',
+        icon: <SiLua />
+      },
+      {
+        name: 'Python',
+        icon: <SiPython />
+      },
+      {
+        name: 'PHP',
+        icon: <SiPhp />
       },
       {
         name: 'Bash',
@@ -122,13 +130,13 @@ const data = {
       {
         name: 'Gnome',
         icon: <SiGnome />
+      },
+      {
+        name: 'Figma',
+        icon: <SiFigma />
       }
     ],
     Database: [
-      {
-        name: 'MongoDB',
-        icon: <SiMongodb />
-      },
       {
         name: 'SQLite',
         icon: <SiSqlite />
@@ -164,6 +172,12 @@ const data = {
         icon: <SiNestjs />
       }
     ],
+    'Full Stack': [
+      {
+        name: 'Next.js',
+        icon: <SiNextdotjs />
+      }
+    ],
     'Mobile / Android': [
       {
         name: 'Jetpack Compose',
@@ -176,6 +190,10 @@ const data = {
       {
         name: 'Hilt',
         icon: <Syringe />
+      },
+      {
+        name: 'Clean Architecture',
+        icon: <FunctionSquare />
       }
     ],
     Desktop: [

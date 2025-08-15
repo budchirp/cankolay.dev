@@ -1,10 +1,10 @@
-export type NowPlayingType = {
+export type Song = {
   link: string
 
   title: string
   artist: string
 
-  albumCover: string
+  image: string
 
   totalTime: number
   elapsedTime: number

@@ -1,4 +1,4 @@
-import type { NowPlayingType } from '@/types/now-playing'
+import type { Song } from '@/types/song'
 
 export enum SpotifyResponse {
   TOKEN_EXPIRED = 0,
@@ -41,7 +41,7 @@ export class Spotify {
     accessToken: string
   ): Promise<{
     response: SpotifyResponse
-    data: NowPlayingType | null
+    data: Song | null
   }> => {
     const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
       cache: 'no-cache',
@@ -71,13 +71,13 @@ export class Spotify {
 
     const percentage = Math.min((elapsedTime / totalTime) * 100, 100)
 
-    const data: NowPlayingType = {
+    const data: Song = {
       link: json?.item?.external_urls?.spotify,
 
       title: json?.item?.name,
       artist: json?.item?.artists.map((artist: any) => artist.name).join(', '),
 
-      albumCover: json?.item?.album?.images[0]?.url,
+      image: json?.item?.album?.images[0]?.url,
 
       totalTime,
       elapsedTime,
