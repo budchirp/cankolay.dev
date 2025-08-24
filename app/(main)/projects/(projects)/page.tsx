@@ -1,13 +1,24 @@
 import type React from 'react'
 
-import { Button } from '@/components/button'
-import { Box } from '@/components/box'
 import { MetadataManager } from '@/lib/metadata-manager'
-import { Github } from '@/lib/github'
-import { cn } from '@/lib/cn'
 import { notFound } from 'next/navigation'
+import { Github } from '@/lib/github'
+
 import Link from 'next/link'
 import data from '@/data'
+
+import {
+  cn,
+  Box,
+  BoxContent,
+  Column,
+  Container,
+  Divider,
+  Grid,
+  Heading,
+  Section,
+  Text
+} from '@trash-ui/components'
 
 import type { Metadata } from 'next'
 
@@ -26,53 +37,65 @@ const Page: React.FC = async () => {
   }
 
   return (
-    <div className='grid gap-4'>
-      {data.projectSources.map((source) => {
-        return (
-          <div className='grid gap-2' key={source}>
-            <span className='text-tertiary text-lg font-medium'>{source}/</span>
+    <Column>
+      <Container>
+        <Section title='Projects' />
 
-            <div className='masonry'>
-              {repos[source].map((repo) => {
-                return (
-                  <Link
-                    href={`projects/${source}/${repo.name}`}
-                    key={repo.name}
-                    rel='noreferrer'
-                    target='_blank'
-                    aria-label='Go to project'
-                  >
-                    <Box padding='nice' className='hover:bg-background-tertiary grid gap-1'>
-                      <h2 className='text-primary flex w-full items-center break-all text-2xl font-bold'>
-                        {repo.name}
-                      </h2>
+        <Column padding='none'>
+          {data.projectSources.map((source) => {
+            return (
+              <Section subsection key={source} title={source}>
+                <Grid>
+                  {repos[source].map((repo) => {
+                    return (
+                      <Link
+                        href={`projects/${source}/${repo.name}`}
+                        key={repo.name}
+                        rel='noreferrer'
+                        target='_blank'
+                        aria-label='Go to project'
+                      >
+                        <Box className='hover:bg-surface-secondary'>
+                          <BoxContent>
+                            <Heading size='h2'>{repo.name}</Heading>
 
-                      {repo.description && (
-                        <p className='text-text-tertiary w-full text-sm'>{repo.description}</p>
-                      )}
+                            {repo.description && (
+                              <Text className='text-text-tertiary w-full text-sm'>
+                                {repo.description}
+                              </Text>
+                            )}
+                          </BoxContent>
 
-                      {repo.language && (
-                        <span
-                          style={{
-                            color: (colors && colors[repo.language]?.color) || undefined
-                          }}
-                          className={cn(
-                            'text-sm',
-                            !colors || !colors[repo.language]?.color ? 'text-secondary' : ''
+                          {repo.language && (
+                            <>
+                              <Divider />
+
+                              <BoxContent>
+                                <Text
+                                  style={{
+                                    color: (colors && colors[repo.language]?.color) || undefined
+                                  }}
+                                  className={cn(
+                                    'text-sm',
+                                    !colors || !colors[repo.language]?.color ? 'text-secondary' : ''
+                                  )}
+                                >
+                                  {repo.language}
+                                </Text>
+                              </BoxContent>
+                            </>
                           )}
-                        >
-                          {repo.language}
-                        </span>
-                      )}
-                    </Box>
-                  </Link>
-                )
-              })}
-            </div>
-          </div>
-        )
-      })}
-    </div>
+                        </Box>
+                      </Link>
+                    )
+                  })}
+                </Grid>
+              </Section>
+            )
+          })}
+        </Column>
+      </Container>
+    </Column>
   )
 }
 

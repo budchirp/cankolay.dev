@@ -2,8 +2,9 @@
 
 import type React from 'react'
 
-import { Button } from '@/components/button'
 import { usePathname, useRouter } from 'next/navigation'
+
+import { Button } from '@trash-ui/components'
 
 type GoBackProps = {
   removeSearchParams?: boolean

@@ -1,33 +1,39 @@
 import type React from 'react'
 
-import { Container } from '@/components/container'
-import { Button } from '@/components/button'
 import { Logo } from '@/components/logo'
 import { Github } from 'lucide-react'
 import data from '@/data'
 import Link from 'next/link'
 
+import { BoxContent, Button, Container, Divider, Row, Text } from '@trash-ui/components'
+
 export const Footer: React.FC = (): React.ReactNode => (
-  <footer className='bg-background-primary/50 backdrop-blur-xs border-t border-border flex w-full items-center relative justify-center'>
+  <footer className='bg-surface-primary/50 backdrop-blur-xs border-t border-outline w-full'>
     <Container>
-      <div className='flex border-b border-border w-full h-16 items-center justify-between gap-2'>
-        <Logo />
+      <BoxContent padding='none' className='py-4'>
+        <Row className='gap-2 justify-between'>
+          <Logo />
 
-        <Link
-          aria-label='Github'
-          href={`https://github.com/${data.githubUsername}`}
-          rel='noreferrer'
-          target='_blank'
-        >
-          <Button aria-label='Github' variant='round' color='secondary'>
-            <Github />
-          </Button>
-        </Link>
-      </div>
+          <Link
+            aria-label='Github'
+            href={`https://github.com/${data.githubUsername}`}
+            rel='noreferrer'
+            target='_blank'
+          >
+            <Button aria-label='Github' shape='circle' color='surface'>
+              <Github />
+            </Button>
+          </Link>
+        </Row>
+      </BoxContent>
 
-      <div className='items-center h-16 flex justify-between gap-2'>
-        <p className='font-medium text-text-accent-secondary'>Made by {data.name} with ❤️</p>
-      </div>
+      <Divider />
+
+      <BoxContent padding='none' className='py-4'>
+        <Row className='gap-2 justify-between'>
+          <Text className='font-medium text-secondary-accent'>Made by {data.name} with ❤️</Text>
+        </Row>
+      </BoxContent>
     </Container>
   </footer>
 )

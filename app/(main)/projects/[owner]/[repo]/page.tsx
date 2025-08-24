@@ -1,15 +1,26 @@
 import type React from 'react'
 
-import { Heading } from '@/components/heading'
-import { Github } from '@/lib/github'
-import { notFound } from 'next/navigation'
-import { Fetch } from '@/lib/fetch'
+import { Calendar, GitFork, Scale, Star, Link as LucideLink } from 'lucide-react'
 import { MetadataManager } from '@/lib/metadata-manager'
 import { markdownToReact } from '@/components/markdown'
-import { Calendar, GitFork, Scale, Star, Link as LucideLink } from 'lucide-react'
 import { Hourglass } from '@/lib/hourglass'
+import { notFound } from 'next/navigation'
+import { Github } from '@/lib/github'
+import { Fetch } from '@/lib/fetch'
 import Link from 'next/link'
 import data from '@/data'
+
+import {
+  Column,
+  Heading,
+  Container,
+  Section,
+  Text,
+  RawRow,
+  Row,
+  Center,
+  Divider
+} from '@trash-ui/components'
 
 import type { DynamicPageProps } from '@/types/page'
 import type { Metadata } from 'next'
@@ -88,84 +99,91 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
     readme.status !== 200 ? 'No readme' : await markdownToReact(await readme.text())
 
   return (
-    <div className='size-full'>
-      <Link href={repo.html_url}>
-        <Heading>
-          {owner}/{reponame}
-        </Heading>
-      </Link>
+    <Column className='size-full'>
+      <Container className='h-full'>
+        <Section
+          className='size-full'
+          title={
+            <Link href={repo.html_url}>
+              <Heading size='h1'>
+                {owner}/{reponame}
+              </Heading>
+            </Link>
+          }
+        >
+          <Row className='md:flex-row flex-col-reverse items-start size-full'>
+            <div className='md:w-3/4 w-full'>{content}</div>
 
-      <div className='flex md:flex-row flex-col-reverse w-full'>
-        <div className='md:w-3/4 w-full md:border-r-4 md:border-t-0 border-t-4 border-border md:pe-4 md:pt-0 pt-4 md:me-4 md:mt-0 mt-4'>
-          {content}
-        </div>
+            <Divider orientation='vertical' className='w-1 hidden md:block' />
 
-        <div className='grid gap-4 h-min md:w-1/4 w-full'>
-          <p className='text-text-tertiary'>{repo.description}</p>
+            <Column padding='none' className='grid gap-4 h-min md:w-1/4 w-full'>
+              <Text className='text-tertiary'>{repo.description}</Text>
 
-          <div className='grid gap-1'>
-            {badges.map(({ key, icon: Icon }, index) => {
-              let value = getValue(repo, key)
-              if (key === 'created_at') value = Hourglass.formatDate(value)
+              <Column padding='none' className='gap-1'>
+                {badges.map(({ key, icon: Icon }, index) => {
+                  let value = getValue(repo, key)
+                  if (key === 'created_at') value = Hourglass.formatDate(value)
 
-              if (!value) return
+                  if (!value) return
 
-              return (
-                <div className='flex gap-2 items-center' key={index}>
-                  <div className='size-4 flex items-center justify-center'>
-                    <Icon size={16} />
-                  </div>
+                  return (
+                    <Row className='gap-2' key={index}>
+                      <Center className='size-4'>
+                        <Icon size={16} />
+                      </Center>
 
-                  {key === 'homepage' ? (
-                    <Link className='underline' target='_blank' rel='noreferrer' href={value}>
-                      {value}
-                    </Link>
-                  ) : (
-                    <span>{value}</span>
-                  )}
-                </div>
-              )
-            })}
-          </div>
+                      {key === 'homepage' ? (
+                        <Link className='underline' target='_blank' rel='noreferrer' href={value}>
+                          {value}
+                        </Link>
+                      ) : (
+                        <Text>{value}</Text>
+                      )}
+                    </Row>
+                  )
+                })}
+              </Column>
 
-          <div className='grid gap-2'>
-            <div className='w-full h-1 flex rounded-full relative overflow-hidden bg-background-secondary'>
-              {Object.keys(languages).map((key: string) => {
-                return (
-                  <div
-                    key={key}
-                    className='h-1'
-                    style={{
-                      background: (colors && colors[key]?.color) || undefined,
-                      width: `${languages[key]}%`
-                    }}
-                  />
-                )
-              })}
-            </div>
+              <Column padding='none' className='gap-2'>
+                <RawRow className='w-full h-1 rounded-full relative overflow-hidden bg-surface-secondary'>
+                  {Object.keys(languages).map((key: string) => {
+                    return (
+                      <div
+                        key={key}
+                        className='h-1'
+                        style={{
+                          background: (colors && colors[key]?.color) || undefined,
+                          width: `${languages[key]}%`
+                        }}
+                      />
+                    )
+                  })}
+                </RawRow>
 
-            <ul className='gap-2'>
-              {Object.keys(languages).map((key: string) => {
-                return (
-                  <li className='flex items-center gap-2' key={key}>
-                    <div
-                      className='size-2 rounded-full'
-                      style={{
-                        background: (colors && colors[key]?.color) || undefined
-                      }}
-                    />
+                <Column padding='none' className='gap-2'>
+                  {Object.keys(languages).map((key: string) => {
+                    return (
+                      <Row className='gap-2' key={key}>
+                        <div
+                          className='size-2 rounded-full'
+                          style={{
+                            background: (colors && colors[key]?.color) || undefined
+                          }}
+                        />
 
-                    <span className='text-sm'>{key}</span>
+                        <Text className='text-sm'>{key}</Text>
 
-                    <span className='text-sm text-text-tertiary'>{languages[key]}%</span>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+                        <Text className='text-sm text-tertiary'>{languages[key]}%</Text>
+                      </Row>
+                    )
+                  })}
+                </Column>
+              </Column>
+            </Column>
+          </Row>
+        </Section>
+      </Container>
+    </Column>
   )
 }
 

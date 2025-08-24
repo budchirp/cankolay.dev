@@ -7,7 +7,6 @@ import {
   SiLua,
   SiNeovim,
   SiTailwindcss,
-  SiMongodb,
   SiGnubash,
   SiNestjs,
   SiC,
@@ -24,11 +23,10 @@ import {
   SiTelegram,
   SiMaterialdesign,
   SiNextdotjs,
-  SiInstructure,
   SiRust,
   SiFigma
 } from 'react-icons/si'
-import { FaBroom, FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
+import { FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
 import { FunctionSquare, Mail, Syringe, Terminal } from 'lucide-react'
 
 const email = 'budchirp@gmail.com'

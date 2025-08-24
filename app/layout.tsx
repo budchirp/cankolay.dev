@@ -4,14 +4,14 @@ import { JetBrains_Mono, Lexend } from 'next/font/google'
 import { Header } from '@/components/ui/header'
 import { Footer } from '@/components/ui/footer'
 import Script from 'next/script'
-import { cn } from '@/lib/cn'
 import data from '@/data'
+
+import { cn, Container } from '@trash-ui/components'
 
 import type { LayoutProps } from '@/types/layout'
 import type { Metadata, Viewport } from 'next'
 
-import '@/styles/globals.css'
-import { Container } from '@/components/container'
+import '@/app/styles.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL(data.siteUrl),

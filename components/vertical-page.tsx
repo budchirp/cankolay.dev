@@ -1,7 +1,7 @@
 import type React from 'react'
 import type { ComponentProps } from 'react'
 
-import { cn } from '@/lib/cn'
+import { Column, Heading, cn } from '@trash-ui/components'
 
 export type VerticalPageProps = {
   title: React.ReactNode
@@ -15,18 +15,20 @@ export const CenteredPage: React.FC<VerticalPageProps> = ({
   items,
   ...props
 }: VerticalPageProps): React.ReactNode => (
-  <div {...props} className={cn('size-full flex flex-col flex-1 justify-center gap-4', className)}>
-    <h2 className='text-text-accent-primary text-5xl font-bold'>{title}</h2>
+  <Column {...props} className={cn('size-full justify-center gap-4', className)}>
+    <Heading color='accent' size='h1'>
+      {title}
+    </Heading>
 
-    <div className='grid gap-1'>
+    <Column padding='none' className='gap-1'>
       {items.map((item, index) => (
         <h2 className='text-text-secondary text-2xl font-medium' key={index}>
           {item}
         </h2>
       ))}
-    </div>
+    </Column>
 
     {children && <div>{children}</div>}
-  </div>
+  </Column>
 )
 CenteredPage.displayName = 'VerticalPage'

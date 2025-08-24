@@ -1,28 +1,28 @@
 import type React from 'react'
 
-import { Box } from '@/components/box'
+import { Box, BoxContent, Column, Container, Grid, Section } from '@trash-ui/components'
 
 const Loading: React.FC = (): React.ReactNode => (
-  <div className='masonry'>
-    {[...Array(24)].map((_, index) => {
-      return (
-        <Box key={index} className='grid gap-2'>
-          <div className='bg-background-tertiary h-3 w-8/12 animate-pulse rounded-sm' />
+  <Column>
+    <Container>
+      <Section title='Projects' />
 
-          <div className='grid gap-1'>
-            <div className='bg-background-tertiary h-2 w-full animate-pulse rounded-sm' />
-            <div className='bg-background-tertiary h-2 w-full animate-pulse rounded-sm' />
-            <div className='bg-background-tertiary h-2 w-full animate-pulse rounded-sm' />
-          </div>
+      <Grid>
+        {[...Array(24)].map((_, index) => {
+          return (
+            <Box key={index}>
+              <BoxContent>
+                <div className='bg-surface-secondary h-3 w-8/12 animate-pulse rounded-sm' />
+                <div className='bg-surface-secondary h-2 w-full animate-pulse rounded-sm' />
 
-          <div className='flex items-center justify-between gap-2'>
-            <div className='bg-background-tertiary h-3 w-3/12 animate-pulse rounded-sm' />
-            <div className='bg-background-tertiary h-3 w-3/12 animate-pulse rounded-sm' />
-          </div>
-        </Box>
-      )
-    })}
-  </div>
+                <div className='bg-surface-secondary h-3 w-3/12 animate-pulse rounded-sm' />
+              </BoxContent>
+            </Box>
+          )
+        })}
+      </Grid>
+    </Container>
+  </Column>
 )
 
 export default Loading

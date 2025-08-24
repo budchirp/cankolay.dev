@@ -1,12 +1,13 @@
 import type React from 'react'
 
-import { Post } from '@/lib/post'
 import { MetadataManager } from '@/lib/metadata-manager'
-import { Heading } from '@/components/heading'
-import { Book, Calendar, User } from 'lucide-react'
 import { markdownToReact } from '@/components/markdown'
+import { Book, Calendar, User } from 'lucide-react'
 import { notFound } from 'next/navigation'
+import { Post } from '@/lib/post'
 import Image from 'next/image'
+
+import { Center, Column, Container, Heading, Row, Section } from '@trash-ui/components'
 
 import type { DynamicPageProps } from '@/types/page'
 import type { BlogPost } from '@/types/post'
@@ -23,38 +24,42 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
   const content = await markdownToReact(post.body)
 
   return (
-    <>
-      <Heading
-        cover={
-          <div className='relative flex items-center justify-center aspect-video overflow-hidden rounded-2xl mb-2'>
-            <Image
-              className='size-full object-cover aspect-video'
-              width={640}
-              height={360}
-              alt={post.title}
-              src={post.imageUrl}
-            />
-          </div>
-        }
-        description={
-          <div className='grid gap-1'>
-            <span className='text-text-secondary flex items-center gap-1 font-medium'>
-              <User className='size-5' /> <p>{post.author}</p>
-            </span>
-            <span className='text-text-secondary flex items-center gap-1 font-medium'>
-              <Calendar className='size-5' /> <p>{post.formattedDate}</p>
-            </span>
-            <span className='text-text-secondary flex items-center gap-1 font-medium'>
-              <Book className='size-5' /> <p>{post.readingTime}</p>
-            </span>
-          </div>
-        }
-      >
-        {post.title}
-      </Heading>
+    <Column>
+      <Container>
+        <Section
+          title={
+            <Column padding='none' className='gap-4'>
+              <Center className='relative aspect-video overflow-hidden w-full rounded-2xl'>
+                <Image
+                  className='w-full object-cover aspect-video'
+                  width={640}
+                  height={360}
+                  alt={post.title}
+                  src={post.imageUrl}
+                />
+              </Center>
 
-      {content}
-    </>
+              <Heading size='h2'>{post.title}</Heading>
+            </Column>
+          }
+          description={
+            <Column padding='none' className='gap-1'>
+              <Row className='text-text-secondary gap-1 font-medium'>
+                <User className='size-5' /> <p>{post.author}</p>
+              </Row>
+              <Row className='text-text-secondary gap-1 font-medium'>
+                <Calendar className='size-5' /> <p>{post.formattedDate}</p>
+              </Row>
+              <Row className='text-text-secondary gap-1 font-medium'>
+                <Book className='size-5' /> <p>{post.readingTime}</p>
+              </Row>
+            </Column>
+          }
+        >
+          {content}
+        </Section>
+      </Container>
+    </Column>
   )
 }
 

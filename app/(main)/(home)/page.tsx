@@ -1,8 +1,21 @@
 import type React from 'react'
 
-import { Box } from '@/components/box'
+import { NowPlaying } from '@/components/ui/now-playing'
 import { MetadataManager } from '@/lib/metadata-manager'
 import data from '@/data'
+
+import {
+  Box,
+  BoxContent,
+  Center,
+  Column,
+  Container,
+  Grid,
+  Heading,
+  Row,
+  Section,
+  Text
+} from '@trash-ui/components'
 
 import type { Metadata } from 'next'
 
@@ -13,86 +26,94 @@ type SkillChipProps = {
 
 const SkillChip: React.FC<SkillChipProps> = ({ icon, name }: SkillChipProps): React.ReactNode => {
   return (
-    <Box padding='small' className='flex items-center rounded-full gap-3 md:p-3'>
-      <span className='flex size-10 items-center aspect-square justify-center rounded-full bg-background-accent-primary border border-border-accent p-1 text-xl text-gray-50'>
-        {icon}
-      </span>
-      <p className='break-words font-medium w-full grow pe-2'>{name}</p>
+    <Box className='rounded-full'>
+      <BoxContent>
+        <Row className='gap-3'>
+          <Center className='size-10 rounded-full aspect-square bg-surface-primary-accent border border-outline-accent p-1 text-gray-50'>
+            {icon}
+          </Center>
+          <Text className='font-medium w-full grow pe-2'>{name}</Text>
+        </Row>
+      </BoxContent>
     </Box>
   )
 }
 
 const Page: React.FC = (): React.ReactNode => {
   return (
-    <div className='mt-12 grid gap-8'>
-      <div className='grid gap-4'>
-        <div className='grid gap-2'>
-          <p className='text-text-accent-primary text-3xl font-bold'>{data.name}</p>
+    <Container>
+      <Column padding='none'>
+        <Section
+          divider={false}
+          title={
+            <Heading size='h1' color='accent'>
+              {data.name}
+            </Heading>
+          }
+          description={data.about}
+        />
 
-          <div className='text-md'>{data.about}</div>
-        </div>
-
-        <div className='grid gap-2'>
-          <p className='text-xl font-bold'>Technologies</p>
-
-          <div className='grid gap-4'>
+        <Section className='mt-0' divider={false} title={<Heading size='h2'>Technologies</Heading>}>
+          <Column padding='none'>
             {(Object.keys(data.technologies) as Array<keyof typeof data.technologies>).map(
               (key, index) => (
-                <div key={index} className='grid gap-2'>
-                  <span className='text-text-tertiary font-medium'>{key}</span>
-
-                  <div className='masonry masonry-2 gap-2'>
+                <Section subsection key={index} title={key}>
+                  <Grid className='gap-2 grid-cols-2'>
                     {data.technologies[key].map((skill, index) => {
                       return <SkillChip icon={skill.icon} name={skill.name} key={index} />
                     })}
-                  </div>
-                </div>
+                  </Grid>
+                </Section>
               )
             )}
-          </div>
-        </div>
-      </div>
+          </Column>
+        </Section>
 
-      <div className='grid gap-2'>
-        <p className='text-xl font-bold'>Stacks</p>
-
-        <div className='grid gap-4'>
-          {(Object.keys(data.stacks) as Array<keyof typeof data.stacks>).map((key, index) => (
-            <div key={index} className='grid gap-2'>
-              <span className='text-text-tertiary font-medium'>{key}</span>
-
-              <div className='masonry masonry-2 gap-2'>
-                {data.stacks[key].map((skill, index) => {
-                  return <SkillChip icon={skill.icon} name={skill.name} key={index} />
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div data-nosnippet className='grid gap-1'>
-        <p className='text-xl font-bold'>My programming journey</p>
-
-        <div className='grid gap-2'>
-          {(Object.keys(data.journey) as unknown as Array<keyof typeof data.journey>)
-            .reverse()
-            .map((key, index) => (
-              <div key={index} className='grid prose-dark grid-cols-2 gap-2'>
-                <span className='text-text-accent-primary text-2xl font-bold'>{key}</span>
-                <ul>
-                  {data.journey[key].map((text, index) => (
-                    <li key={index} className='flex gap-2'>
-                      <span className='text-text-tertiary'>-</span>
-                      <p className='text-text-primary'>{text}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        <Section className='mt-0' divider={false} title={<Heading size='h2'>Stacks</Heading>}>
+          <Column padding='none'>
+            {(Object.keys(data.stacks) as Array<keyof typeof data.stacks>).map((key, index) => (
+              <Section subsection key={index} title={key}>
+                <Grid className='gap-2 grid-cols-2'>
+                  {data.stacks[key].map((skill, index) => {
+                    return <SkillChip icon={skill.icon} name={skill.name} key={index} />
+                  })}
+                </Grid>
+              </Section>
             ))}
-        </div>
-      </div>
-    </div>
+          </Column>
+        </Section>
+
+        <Section
+          className='mt-0'
+          divider={false}
+          title={<Heading size='h2'>My programming journey</Heading>}
+        >
+          <Column padding='none'>
+            {(Object.keys(data.journey) as unknown as Array<keyof typeof data.journey>)
+              .reverse()
+              .map((key, index) => (
+                <Grid key={index} className='gap-2 !grid-cols-2'>
+                  <Heading size='h2' color='accent'>
+                    {key}
+                  </Heading>
+                  <ul>
+                    {data.journey[key].map((text, index) => (
+                      <Row className='gap-1' key={index}>
+                        <span className='text-text-tertiary'>-</span>
+                        <Text>{text}</Text>
+                      </Row>
+                    ))}
+                  </ul>
+                </Grid>
+              ))}
+          </Column>
+        </Section>
+
+        <NowPlaying />
+
+        <NowPlaying api='my-love' />
+      </Column>
+    </Container>
   )
 }
 

@@ -3,8 +3,9 @@
 import type React from 'react'
 import { useState } from 'react'
 
-import { Button } from '@/components/button'
 import { Check, Clipboard } from 'lucide-react'
+
+import { Button } from '@trash-ui/components'
 
 type CopyButtonProps = {
   content: string
@@ -17,8 +18,8 @@ export const CopyButton: React.FC<CopyButtonProps> = ({
 
   return (
     <Button
-      variant='round'
-      color='secondary'
+      shape='circle'
+      color='surface'
       disabled={copied}
       onClick={() => {
         navigator.clipboard.writeText(content)

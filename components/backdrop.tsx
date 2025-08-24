@@ -1,7 +1,7 @@
 import type React from 'react'
 
-import { cn } from '@/lib/cn'
 import { Transition } from '@headlessui/react'
+import { cn } from '@trash-ui/components'
 
 export type BackdropProps = {
   open: boolean

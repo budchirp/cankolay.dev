@@ -1,7 +1,5 @@
 import type React from 'react'
 
-import { Box } from '@/components/box'
-import { CopyButton } from '@/components/markdown/code/copy-button'
 import { bundledLanguages, createHighlighter } from 'shiki/bundle/full'
 import {
   transformerNotationDiff,
@@ -12,6 +10,10 @@ import {
 
 import githubDarkDefault from '@shikijs/themes/github-dark-default'
 import githubLightDefault from '@shikijs/themes/github-light-default'
+
+import { CopyButton } from '@/components/markdown/code/copy-button'
+
+import { Box, BoxContent, Divider, Row, Text } from '@trash-ui/components'
 
 const shiki = await createHighlighter({
   themes: [githubDarkDefault, githubLightDefault],
@@ -46,12 +48,16 @@ export const MarkdownCode: React.FC<MarkdownCodeProps> = async ({
     })
 
     return (
-      <Box padding='none' variant='primary' className='rounded-2xl'>
-        <div className='py-2 select-none ps-4 pe-2 border-b gap-2 w-full flex items-center justify-between border-border'>
-          <span className='font-medium text-text-primary'>{lang}</span>
+      <Box className='rounded-2xl'>
+        <BoxContent padding='sm'>
+          <Row className='select-none px-2 gap-2 w-full items-center justify-between'>
+            <Text className='font-medium text-text-primary'>{lang}</Text>
 
-          <CopyButton content={code} />
-        </div>
+            <CopyButton content={code} />
+          </Row>
+        </BoxContent>
+
+        <Divider />
 
         <div
           dangerouslySetInnerHTML={{

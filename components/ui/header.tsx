@@ -6,17 +6,23 @@ import { createPortal } from 'react-dom'
 
 import { Transition, Menu, MenuItems, MenuItem, MenuButton } from '@headlessui/react'
 import { Menu as MenuIcon, X } from 'lucide-react'
-import { Container } from '@/components/container'
 import { Backdrop } from '@/components/backdrop'
 import { usePathname } from 'next/navigation'
-import { Button } from '@/components/button'
 import { Logo } from '@/components/logo'
-import { Box } from '@/components/box'
 import { links } from '@/lib/links'
-import { cn } from '@/lib/cn'
 import Link from 'next/link'
 
-import type { LinkProps } from '@/types/link'
+import {
+  cn,
+  Box,
+  BoxContent,
+  Button,
+  Center,
+  Column,
+  Container,
+  Heading,
+  Row
+} from '@trash-ui/components'
 
 type HeaderLinkProps = {
   pathname: string
@@ -32,10 +38,10 @@ const HeaderLink: React.FC<HeaderLinkProps> = ({
   return (
     <Link
       className={cn(
-        'hover:text-text-primary text-lg leading-6 transition-all duration-300 hover:font-bold',
+        'hover:text-primary text-lg leading-6 transition-all duration-300 hover:font-bold',
         (url.length > 1 ? pathname.includes(url) : pathname === url)
-          ? 'text-text-primary font-bold'
-          : 'text-text-tertiary font-medium'
+          ? 'text-primary font-bold'
+          : 'text-tertiary font-medium'
       )}
       href={url}
     >
@@ -63,35 +69,35 @@ export const Header: React.FC = (): React.ReactNode => {
 
         return (
           <div>
-            <header className='bg-background-primary/50 select-none border-b border-transparent fixed top-0 z-20 flex h-16 w-full items-center justify-center backdrop-blur-sm'>
-              <Container className='flex items-center justify-between gap-2'>
-                <Logo />
+            <header className='bg-surface-primary/50 select-none fixed top-0 z-20 h-16 w-full backdrop-blur-sm'>
+              <Container className='h-full'>
+                <Row className='gap-2 h-full justify-between'>
+                  <Logo />
 
-                <div className='flex h-full items-center gap-3'>
-                  <div className='hidden flex-row-reverse items-center gap-2 md:flex'>
-                    {links.map(
-                      (link: LinkProps, index: number): React.ReactElement => (
+                  <Row className='gap-3'>
+                    <Row className='hidden flex-row-reverse gap-2 md:flex'>
+                      {links.map((link, index) => (
                         <HeaderLink
                           pathname={pathname}
                           label={link.label}
                           url={link.url}
                           key={index}
                         />
-                      )
-                    )}
-                  </div>
+                      ))}
+                    </Row>
 
-                  <MenuButton
-                    as={Button}
-                    className='md:hidden'
-                    aria-label='Open menu'
-                    variant='round'
-                    color='secondary'
-                    onClick={close}
-                  >
-                    {open ? <X /> : <MenuIcon />}
-                  </MenuButton>
-                </div>
+                    <MenuButton
+                      as={Button}
+                      className='md:hidden'
+                      aria-label='Open menu'
+                      shape='circle'
+                      color='surface'
+                      onClick={close}
+                    >
+                      {open ? <X /> : <MenuIcon />}
+                    </MenuButton>
+                  </Row>
+                </Row>
               </Container>
             </header>
 
@@ -112,27 +118,26 @@ export const Header: React.FC = (): React.ReactNode => {
                 'data-leave:ease-in data-leave:duration-200'
               )}
             >
-              <Container className='fixed top-20 flex h-min items-center justify-center'>
-                <MenuItems
-                  as={Box}
-                  static
-                  variant='primary'
-                  className='top-0 grid w-full gap-2 overflow-hidden sm:max-w-(--breakpoint-xs)'
-                >
-                  <h2 className='text-2xl font-bold'>Links</h2>
+              <Container className='fixed top-20'>
+                <Center>
+                  <MenuItems as={Box} static className='max-w-(--breakpoint-xs)'>
+                    <BoxContent>
+                      <Heading size='h2'>Links</Heading>
 
-                  <div className='grid gap-1'>
-                    {links.map((link, index) => (
-                      <MenuItem
-                        as={HeaderLink}
-                        pathname={pathname}
-                        label={link.label}
-                        url={link.url}
-                        key={index}
-                      />
-                    ))}
-                  </div>
-                </MenuItems>
+                      <Column padding='none' className='gap-1'>
+                        {links.map((link, index) => (
+                          <MenuItem
+                            as={HeaderLink}
+                            pathname={pathname}
+                            label={link.label}
+                            url={link.url}
+                            key={index}
+                          />
+                        ))}
+                      </Column>
+                    </BoxContent>
+                  </MenuItems>
+                </Center>
               </Container>
             </Transition>
 

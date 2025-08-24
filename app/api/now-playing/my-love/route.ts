@@ -1,9 +1,9 @@
-import { Spotify, SpotifyResponse } from '@/lib/spotify'
 import { type NextRequest, NextResponse } from 'next/server'
+import { Spotify, SpotifyResponse } from '@/lib/spotify'
 
 let accessToken: string | null = null
 
-export const GET = async (request: NextRequest) => {
+export const GET = async (request: NextRequest): Promise<NextResponse> => {
   try {
     const referer = request.headers.get('referer')
     if (!referer || !referer.startsWith(process.env.APP_URL || '')) {
@@ -41,6 +41,14 @@ export const GET = async (request: NextRequest) => {
           data
         })
     }
+
+    return NextResponse.json(
+      {
+        message: 'Unknown error',
+        data: null
+      },
+      { status: 500 }
+    )
   } catch (error) {
     console.error(error)
 

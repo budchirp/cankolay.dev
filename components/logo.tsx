@@ -1,7 +1,7 @@
 import type React from 'react'
 import type { ComponentProps } from 'react'
 
-import { cn } from '@/lib/cn'
+import { cn } from '@trash-ui/components'
 import data from '@/data'
 import Link from 'next/link'
 

@@ -2,15 +2,16 @@ import type React from 'react'
 
 import { CenteredPage } from '@/components/vertical-page'
 import { MetadataManager } from '@/lib/metadata-manager'
-import { Container } from '@/components/container'
 import { GoBack } from '@/components/utils/go-back'
+
+import { Container } from '@trash-ui/components'
 
 import type { ErrorProps } from '@/types/error'
 import type { Metadata } from 'next'
 
 const NotFound: React.FC<ErrorProps> = (): React.ReactNode => {
   return (
-    <Container>
+    <Container className='h-full'>
       <CenteredPage items={['Page', 'not', 'found']} title={'404'}>
         <GoBack />
       </CenteredPage>
