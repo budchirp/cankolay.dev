@@ -6,7 +6,6 @@ import { compileMDX } from 'next-mdx-remote/rsc'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
-import remarkToc from 'remark-toc'
 
 export const markdownToReact = async (text: string): Promise<React.ReactNode> => {
   'use server'
@@ -17,7 +16,7 @@ export const markdownToReact = async (text: string): Promise<React.ReactNode> =>
     options: {
       parseFrontmatter: false,
       mdxOptions: {
-        remarkPlugins: [remarkGfm, [remarkToc, { heading: 'Table of Contents' }]],
+        remarkPlugins: [remarkGfm],
         rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]]
       }
     }

@@ -1,8 +1,7 @@
 import { Hourglass } from '@/lib/hourglass'
-import readingTime from 'reading-time'
 import matter from 'gray-matter'
-import path from 'path'
 import fs from 'fs/promises'
+import path from 'path'
 
 import type { BlogPost } from '@/types/post'
 
@@ -29,7 +28,6 @@ export class Post {
             ...metaData,
             id: metaData.slug,
             tags: metaData.tags.split(', '),
-            readingTime: readingTime(content).text,
             date: new Date(metaData.date),
             formattedDate: Hourglass.formatDate(metaData.date)
           }

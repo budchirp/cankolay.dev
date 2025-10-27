@@ -1,7 +1,7 @@
 @import "tailwindcss";
-@source "../node_modules/@trash-ui/components";
-
 @config '../tailwind.config.ts';
+
+@source "../node_modules/@trash-kit/ui";
 
 @theme {
   --color-accent-50: oklch(0.969 0.015 12.422);
@@ -24,7 +24,6 @@
   --color-gray-500: oklch(0.551 0.027 264.364);
   --color-gray-600: oklch(0.446 0.03 256.802);
   --color-gray-700: oklch(0.373 0.034 259.733);
-
   --color-gray-680: oklch(22.63% 0.0215 297.16);
   --color-gray-690: oklch(20.68% 0.0179 294.98);
   --color-gray-700: oklch(18.22% 0.0143 291.46);
@@ -112,14 +111,6 @@ body {
   @apply appearance-none scroll-smooth antialiased outline-hidden selection:bg-accent-300/90 selection:text-black/90;
 }
 
-.min-h-screen_ {
-  min-height: calc(100vh - 4rem);
-}
-
-.h-screen_ {
-  height: calc(100vh - 4rem);
-}
-
 html {
   padding: 0 !important;
   overflow-y: scroll !important;
@@ -150,4 +141,12 @@ pre .line::before {
   text-align: right;
 
   @apply text-gray-500;
+}
+
+.min-h-screen_ {
+  min-height: calc(100vh - 4rem);
+}
+
+.h-screen_ {
+  height: calc(100vh - 4rem);
 }

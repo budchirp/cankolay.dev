@@ -1,22 +1,22 @@
 import type React from 'react'
 
 import { Logo } from '@/components/logo'
+import CONSTANTS from '@/lib/constants'
 import { Github } from 'lucide-react'
-import data from '@/data'
 import Link from 'next/link'
 
-import { BoxContent, Button, Container, Divider, Row, Text } from '@trash-ui/components'
+import { BoxContent, Button, Container, Divider, Row, Text } from '@trash-kit/ui'
 
 export const Footer: React.FC = (): React.ReactNode => (
-  <footer className='bg-surface-primary/50 backdrop-blur-xs border-t border-outline w-full'>
+  <footer className='bg-surface-primary/50 backdrop-blur border-t border-outline w-full'>
     <Container>
-      <BoxContent padding='none' className='py-4'>
-        <Row className='gap-2 justify-between'>
+      <BoxContent className='px-0'>
+        <Row className='gap-2 h-full justify-between items-center'>
           <Logo />
 
           <Link
             aria-label='Github'
-            href={`https://github.com/${data.githubUsername}`}
+            href={`https://github.com/${CONSTANTS.USERNAME}`}
             rel='noreferrer'
             target='_blank'
           >
@@ -26,12 +26,14 @@ export const Footer: React.FC = (): React.ReactNode => (
           </Link>
         </Row>
       </BoxContent>
+    </Container>
 
-      <Divider />
+    <Divider />
 
-      <BoxContent padding='none' className='py-4'>
-        <Row className='gap-2 justify-between'>
-          <Text className='font-medium text-secondary-accent'>Made by {data.name} with ❤️</Text>
+    <Container>
+      <BoxContent className='px-0'>
+        <Row className='gap-2 h-full justify-between items-center'>
+          <Text className='font-medium text-secondary-accent'>Made by {CONSTANTS.NAME} with ❤️</Text>
         </Row>
       </BoxContent>
     </Container>

@@ -3,11 +3,11 @@ import type React from 'react'
 import { MetadataManager } from '@/lib/metadata-manager'
 import { notFound, redirect } from 'next/navigation'
 import { Calendar, Search } from 'lucide-react'
+import CONSTANTS from '@/lib/constants'
 import MiniSearch from 'minisearch'
 import { Post } from '@/lib/post'
 import Image from 'next/image'
 import Link from 'next/link'
-import data from '@/data'
 
 import {
   cn,
@@ -22,10 +22,9 @@ import {
   Row,
   Section,
   Text,
-  RawColumn,
   Grid,
   Center
-} from '@trash-ui/components'
+} from '@trash-kit/ui'
 
 import type { DynamicPageProps } from '@/types/page'
 import type { BlogPost } from '@/types/post'
@@ -67,17 +66,15 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
   const nextDisabled = page === totalPages
 
   return (
-    <Column>
+    <Column padding='page'>
       <Container>
-        <Column padding='none'>
+        <Column>
           <Section title='Posts'>
             <form
-              action={async (formData: FormData): Promise<void> => {
+              action={async (form: FormData): Promise<void> => {
                 'use server'
 
-                redirect(
-                  `/blog?search=${encodeURIComponent((formData.get('search') as string) || '')}`
-                )
+                redirect(`/blog?search=${encodeURIComponent((form.get('search') as string) || '')}`)
               }}
             >
               <Input
@@ -90,6 +87,7 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
                 }}
                 placeholder='Search posts...'
               />
+
               <input type='submit' hidden />
             </form>
           </Section>
@@ -101,7 +99,7 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
                   <Box>
                     <Center className='relative aspect-video w-full overflow-hidden'>
                       <Image
-                        className='aspect-video w-full object-cover transition duration-500 ease-out hover:scale-125'
+                        className='aspect-video object-cover transition duration-500 ease-out hover:scale-125'
                         width={640}
                         height={360}
                         alt={post.title}
@@ -112,17 +110,17 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
                     <Divider />
 
                     <BoxContent>
-                      <RawColumn className='gap-1'>
+                      <Column className='gap-1'>
                         <Row className='gap-1 text-secondary'>
                           <Calendar className='mr-1 size-4 text-xs' />
                           <p className='text-sm font-medium'>{post.formattedDate}</p>
                         </Row>
 
-                        <RawColumn>
+                        <Column className='gap-0'>
                           <Heading size='h2'>{post.title}</Heading>
                           <Text className='text-secondary'>{post.description}</Text>
-                        </RawColumn>
-                      </RawColumn>
+                        </Column>
+                      </Column>
                     </BoxContent>
 
                     <Divider />
@@ -177,6 +175,6 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
   )
 }
 
-export const metadata: Metadata = MetadataManager.generate('Blog', `${data.name}'s blog`)
+export const metadata: Metadata = MetadataManager.generate('Blog', `${CONSTANTS.NAME}'s blog`)
 
 export default Page

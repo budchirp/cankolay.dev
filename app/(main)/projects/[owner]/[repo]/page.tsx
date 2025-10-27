@@ -8,19 +8,9 @@ import { notFound } from 'next/navigation'
 import { Github } from '@/lib/github'
 import { Fetch } from '@/lib/fetch'
 import Link from 'next/link'
-import data from '@/data'
+import data from '@/lib/data'
 
-import {
-  Column,
-  Heading,
-  Container,
-  Section,
-  Text,
-  RawRow,
-  Row,
-  Center,
-  Divider
-} from '@trash-ui/components'
+import { Column, Heading, Container, Section, Text, Row, Center, Divider } from '@trash-kit/ui'
 
 import type { DynamicPageProps } from '@/types/page'
 import type { Metadata } from 'next'
@@ -78,7 +68,7 @@ const badges = [
 const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) => {
   const { owner, repo: reponame } = await params
 
-  if (!data.projectSources.includes(owner)) notFound()
+  if (!data.projectSources.includes(owner as any)) notFound()
 
   const repo = await Github.getRepo(owner, reponame)
   if (!repo) {
@@ -99,10 +89,9 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
     readme.status !== 200 ? 'No readme' : await markdownToReact(await readme.text())
 
   return (
-    <Column className='size-full'>
-      <Container className='h-full'>
+    <Column padding='page'>
+      <Container>
         <Section
-          className='size-full'
           title={
             <Link href={repo.html_url}>
               <Heading size='h1'>
@@ -111,20 +100,18 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
             </Link>
           }
         >
-          <Row className='md:flex-row flex-col-reverse items-start size-full'>
+          <Row className='md:flex-row flex-col-reverse items-start justify-between gap-2 w-full'>
             <div className='md:w-3/4 w-full'>{content}</div>
 
-            <Divider orientation='vertical' className='w-1 hidden md:block' />
-
-            <Column padding='none' className='grid gap-4 h-min md:w-1/4 w-full'>
+            <Column className='gap-4 md:w-1/4'>
               <Text className='text-tertiary'>{repo.description}</Text>
 
-              <Column padding='none' className='gap-1'>
+              <Column className='gap-1'>
                 {badges.map(({ key, icon: Icon }, index) => {
                   let value = getValue(repo, key)
                   if (key === 'created_at') value = Hourglass.formatDate(value)
 
-                  if (!value) return
+                  if (!value) return null
 
                   return (
                     <Row className='gap-2' key={index}>
@@ -144,36 +131,38 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
                 })}
               </Column>
 
-              <Column padding='none' className='gap-2'>
-                <RawRow className='w-full h-1 rounded-full relative overflow-hidden bg-surface-secondary'>
+              <Column className='gap-2'>
+                <Row className='w-full h-1 gap-0 rounded-full overflow-hidden bg-surface-secondary'>
                   {Object.keys(languages).map((key: string) => {
                     return (
                       <div
                         key={key}
-                        className='h-1'
+                        className='h-full'
                         style={{
                           background: (colors && colors[key]?.color) || undefined,
-                          width: `${languages[key]}%`
+                          width: `${languages[key as keyof typeof languages]}%`
                         }}
                       />
                     )
                   })}
-                </RawRow>
+                </Row>
 
-                <Column padding='none' className='gap-2'>
+                <Column className='gap-2'>
                   {Object.keys(languages).map((key: string) => {
                     return (
                       <Row className='gap-2' key={key}>
-                        <div
+                        <Center
                           className='size-2 rounded-full'
                           style={{
                             background: (colors && colors[key]?.color) || undefined
                           }}
                         />
 
-                        <Text className='text-sm'>{key}</Text>
+                        <Row className='gap-1'>
+                          <Text className='text-sm font-medium'>{key}</Text>
 
-                        <Text className='text-sm text-tertiary'>{languages[key]}%</Text>
+                          <Text className='text-sm text-tertiary'>{languages[key]}%</Text>
+                        </Row>
                       </Row>
                     )
                   })}

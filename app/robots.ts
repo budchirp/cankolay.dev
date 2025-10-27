@@ -1,4 +1,4 @@
-import data from '@/data'
+import CONSTANTS from '@/lib/constants'
 
 import type { MetadataRoute } from 'next'
 
@@ -8,7 +8,7 @@ const robots = (): MetadataRoute.Robots => {
       userAgent: '*',
       allow: '/'
     },
-    sitemap: `${data.siteUrl}/sitemap.xml`
+    sitemap: `${CONSTANTS.APP_URL}/sitemap.xml`
   }
 }
 

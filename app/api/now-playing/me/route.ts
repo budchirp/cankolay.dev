@@ -1,32 +1,33 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { Spotify, SpotifyResponse } from '@/lib/spotify'
+import CONSTANTS from '@/lib/constants'
 
 let accessToken: string | null = null
+
+const getAccessToken = async () => {
+  return await Spotify.getSpotifyAccessToken(
+    process.env.SPOTIFY_CLIENT_ID,
+    process.env.SPOTIFY_CLIENT_SECRET,
+    process.env.SPOTIFY_REFRESH_TOKEN
+  )
+}
 
 export const GET = async (request: NextRequest): Promise<NextResponse> => {
   try {
     const referer = request.headers.get('referer')
-    if (!referer || !referer.startsWith(process.env.APP_URL || '')) {
+    if (!referer || !referer.startsWith(CONSTANTS.APP_URL)) {
       return NextResponse.json({ message: 'Forbidden', data: null }, { status: 403 })
     }
 
     if (!accessToken) {
-      accessToken = await Spotify.getSpotifyAccessToken(
-        process.env.SPOTIFY_CLIENT_ID,
-        process.env.SPOTIFY_CLIENT_SECRET,
-        process.env.SPOTIFY_REFRESH_TOKEN
-      )
+      accessToken = await getAccessToken()
     }
 
     const { response, data } = await Spotify.getNowPlaying(accessToken)
 
     switch (response) {
       case SpotifyResponse.TOKEN_EXPIRED:
-        accessToken = await Spotify.getSpotifyAccessToken(
-          process.env.SPOTIFY_CLIENT_ID,
-          process.env.SPOTIFY_CLIENT_SECRET,
-          process.env.SPOTIFY_REFRESH_TOKEN
-        )
+        accessToken = await getAccessToken()
         break
 
       case SpotifyResponse.PLAYING_NOTHING:

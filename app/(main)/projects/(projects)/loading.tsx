@@ -1,26 +1,32 @@
 import type React from 'react'
 
-import { Box, BoxContent, Column, Container, Grid, Section } from '@trash-ui/components'
+import { Box, BoxContent, Column, Container, Divider, Grid, Section } from '@trash-kit/ui'
 
 const Loading: React.FC = (): React.ReactNode => (
-  <Column>
+  <Column padding='page'>
     <Container>
-      <Section title='Projects' />
+      <Section title='Projects'>
+        <Grid>
+          {[...Array(24)].map((_, index) => {
+            return (
+              <Box key={index}>
+                <BoxContent>
+                  <div className='bg-surface-secondary h-3 w-8/12 animate-pulse rounded-sm' />
 
-      <Grid>
-        {[...Array(24)].map((_, index) => {
-          return (
-            <Box key={index}>
-              <BoxContent>
-                <div className='bg-surface-secondary h-3 w-8/12 animate-pulse rounded-sm' />
-                <div className='bg-surface-secondary h-2 w-full animate-pulse rounded-sm' />
+                  <div className='bg-surface-secondary h-2 w-full animate-pulse rounded-sm' />
+                  <div className='bg-surface-secondary h-2 w-full animate-pulse rounded-sm' />
+                </BoxContent>
 
-                <div className='bg-surface-secondary h-3 w-3/12 animate-pulse rounded-sm' />
-              </BoxContent>
-            </Box>
-          )
-        })}
-      </Grid>
+                <Divider />
+
+                <BoxContent>
+                  <div className='bg-surface-secondary h-3 w-3/12 animate-pulse rounded-sm' />
+                </BoxContent>
+              </Box>
+            )
+          })}
+        </Grid>
+      </Section>
     </Container>
   </Column>
 )

@@ -4,9 +4,10 @@ import { JetBrains_Mono, Lexend } from 'next/font/google'
 import { Header } from '@/components/ui/header'
 import { Footer } from '@/components/ui/footer'
 import Script from 'next/script'
-import data from '@/data'
+import data from '@/lib/data'
+import CONSTANTS from '@/lib/constants'
 
-import { cn, Container } from '@trash-ui/components'
+import { cn, Container } from '@trash-kit/ui'
 
 import type { LayoutProps } from '@/types/layout'
 import type { Metadata, Viewport } from 'next'
@@ -14,17 +15,14 @@ import type { Metadata, Viewport } from 'next'
 import '@/app/styles.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(data.siteUrl),
-  applicationName: `${data.name}'s website`,
-  keywords: data.keywords,
-  creator: data.name,
-  publisher: data.name,
-  authors: [{ name: data.name, url: data.siteUrl }],
-  description: data.description,
-  manifest: `${data.siteUrl}/manifest.json`,
+  metadataBase: new URL(CONSTANTS.APP_URL),
+  applicationName: `${CONSTANTS.NAME}'s website`,
+  keywords: data.seo.keywords.join(', '),
+  description: data.seo.description,
+  manifest: `${CONSTANTS.APP_URL}/manifest.json`,
   title: {
     default: 'About me',
-    template: `%s - ${data.name}`
+    template: `%s - ${CONSTANTS.NAME}`
   },
   formatDetection: {
     email: false,
@@ -41,24 +39,22 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    creator: data.name,
-    description: data.description,
+    description: data.seo.description,
     title: {
       default: 'About me',
-      template: `%s - ${data.name}`
+      template: `%s - ${CONSTANTS.NAME}`
     }
   },
   openGraph: {
-    siteName: `${data.name}'s website`,
+    siteName: `${CONSTANTS.NAME}'s website`,
     locale: 'en_US',
     type: 'website',
-    description: data.description,
-    url: data.siteUrl,
+    description: data.seo.description,
+    url: CONSTANTS.APP_URL,
     countryName: 'Türkiye',
-    emails: [data.email],
     title: {
       default: 'About me',
-      template: `%s - ${data.name}`
+      template: `%s - ${CONSTANTS.NAME}`
     }
   }
 }
@@ -89,7 +85,7 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
     <html suppressHydrationWarning lang='en-US'>
       <body
         className={cn(
-          'relative overflow-x-hidden size-full text-text-primary bg-background-primary',
+          'relative overflow-x-hidden size-full text-primary bg-surface-primary',
           lexend.variable,
           jetbrainsMono.variable
         )}
@@ -103,14 +99,12 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
           </Container>
         </div>
 
-        <div className='grid gap-4 relative z-10 size-full'>
-          <div className='flex flex-col size-full'>
-            <Header />
+        <div className='relative z-10 size-full'>
+          <Header />
 
-            <main id='main' className='w-full min-h-screen_'>
-              {children}
-            </main>
-          </div>
+          <main id='main' className='w-full min-h-screen_'>
+            {children}
+          </main>
 
           <Footer />
         </div>

@@ -1,9 +1,7 @@
 import {
-  SiDiscord,
   SiTypescript,
   SiPython,
   SiJavascript,
-  SiPhp,
   SiLua,
   SiNeovim,
   SiTailwindcss,
@@ -11,52 +9,49 @@ import {
   SiNestjs,
   SiC,
   SiKotlin,
-  SiInstagram,
   SiExpress,
   SiCplusplus,
   SiJetpackcompose,
   SiSqlite,
   SiPostgresql,
-  SiGtk,
   SiJetbrains,
-  SiGnome,
   SiTelegram,
   SiMaterialdesign,
   SiNextdotjs,
   SiRust,
-  SiFigma
+  SiSpringboot
 } from 'react-icons/si'
 import { FaCss3, FaGit, FaJava, FaLinux, FaReact } from 'react-icons/fa'
-import { FunctionSquare, Mail, Syringe, Terminal } from 'lucide-react'
+import { FunctionSquare, Mail, Syringe } from 'lucide-react'
 
-const email = 'budchirp@gmail.com'
+import CONSTANTS from '@/lib/constants'
 
-const data = {
-  name: 'Can Kolay',
-  username: 'budchirp',
-  description: 'Hello, World!',
-  email,
-  githubUsername: 'budchirp',
-  projectSources: ['budchirp', 'OxygeNvim'],
-  keywords: [
-    'budchirp',
-    'who is budchirp',
-    'about budchirp',
-    'budchirp projects',
-    'contact budchirp',
-    'can kolay',
-    'who is can kolay',
-    'about can kolay',
-    'contact can kolay',
-    'can kolay projects'
-  ],
-  siteUrl: process.env.APP_URL || 'http://localhost:3000',
+export default {
+  seo: {
+    description: 'Hello, World!',
+    keywords: [
+      'budchirp',
+      'who is budchirp',
+      'about budchirp',
+      'budchirp projects',
+      'contact budchirp',
+      'can kolay',
+      'who is can kolay',
+      'about can kolay',
+      'contact can kolay',
+      'can kolay projects'
+    ]
+  },
+
+  projectSources: ['budchirp', 'oxygenvim'],
+
   about: (
     <>
-      <p>Cracked Full-Stack developer</p>
-      <p>Amateur guitar player</p>
+      <p>Full-Stack developer</p>
+      <p>Guitar player</p>
     </>
   ),
+
   technologies: {
     Languages: [
       {
@@ -96,14 +91,11 @@ const data = {
         icon: <SiPython />
       },
       {
-        name: 'PHP',
-        icon: <SiPhp />
-      },
-      {
         name: 'Bash',
         icon: <SiGnubash />
       }
     ],
+
     Tools: [
       {
         name: 'Linux',
@@ -118,22 +110,11 @@ const data = {
         icon: <SiNeovim />
       },
       {
-        name: 'Termux',
-        icon: <Terminal />
-      },
-      {
         name: 'Jetbrains IDEs',
         icon: <SiJetbrains />
-      },
-      {
-        name: 'Gnome',
-        icon: <SiGnome />
-      },
-      {
-        name: 'Figma',
-        icon: <SiFigma />
       }
     ],
+
     Database: [
       {
         name: 'SQLite',
@@ -145,6 +126,7 @@ const data = {
       }
     ]
   },
+
   stacks: {
     Frontend: [
       {
@@ -160,6 +142,7 @@ const data = {
         icon: <SiTailwindcss />
       }
     ],
+
     Backend: [
       {
         name: 'Express.js',
@@ -168,14 +151,20 @@ const data = {
       {
         name: 'NestJS',
         icon: <SiNestjs />
+      },
+      {
+        name: 'Spring Boot',
+        icon: <SiSpringboot />
       }
     ],
+
     'Full Stack': [
       {
         name: 'Next.js',
         icon: <SiNextdotjs />
       }
     ],
+
     'Mobile / Android': [
       {
         name: 'Jetpack Compose',
@@ -194,16 +183,7 @@ const data = {
         icon: <FunctionSquare />
       }
     ],
-    Desktop: [
-      {
-        name: 'GTK4',
-        icon: <SiGtk />
-      },
-      {
-        name: 'LibAdwaita',
-        icon: <SiGtk />
-      }
-    ],
+
     'Cross-Platform': [
       {
         name: 'Compose Multiplatform',
@@ -211,6 +191,7 @@ const data = {
       }
     ]
   },
+
   journey: {
     2025: ['Started creating my own language called Graphite'],
     2024: ['Started learning Rust and C++'],
@@ -219,16 +200,16 @@ const data = {
     2021: ['Learned Javascript', 'Learned PHP', 'Learned Python'],
     2020: ['Learned HTML, CSS']
   },
+
   contact: {
     Email: {
-      link: `mailto:${email}`,
+      link: `mailto:${CONSTANTS.EMAIL}`,
       icon: <Mail />
     },
+
     Telegram: {
-      link: 'https://t.me/budchirp',
+      link: `https://t.me/${CONSTANTS.USERNAME}`,
       icon: <SiTelegram />
     }
   }
-}
-
-export default data
+} as const

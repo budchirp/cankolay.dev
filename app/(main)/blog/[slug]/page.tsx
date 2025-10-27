@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation'
 import { Post } from '@/lib/post'
 import Image from 'next/image'
 
-import { Center, Column, Container, Heading, Row, Section } from '@trash-ui/components'
+import { Center, Column, Container, Heading, Row, Section } from '@trash-kit/ui'
 
 import type { DynamicPageProps } from '@/types/page'
 import type { BlogPost } from '@/types/post'
@@ -24,7 +24,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
   const content = await markdownToReact(post.body)
 
   return (
-    <Column>
+    <Column padding='page'>
       <Container>
         <Section
           title={
@@ -44,14 +44,11 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
           }
           description={
             <Column padding='none' className='gap-1'>
-              <Row className='text-text-secondary gap-1 font-medium'>
+              <Row className='text-secondary gap-1 font-medium'>
                 <User className='size-5' /> <p>{post.author}</p>
               </Row>
-              <Row className='text-text-secondary gap-1 font-medium'>
+              <Row className='text-secondary gap-1 font-medium'>
                 <Calendar className='size-5' /> <p>{post.formattedDate}</p>
-              </Row>
-              <Row className='text-text-secondary gap-1 font-medium'>
-                <Book className='size-5' /> <p>{post.readingTime}</p>
               </Row>
             </Column>
           }
