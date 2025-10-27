@@ -12,7 +12,6 @@ export type PostBody = string
 
 export type BlogPost = Omit<RawPost, 'tags' | 'date'> & {
   id: string
-  readingTime: string
   body: PostBody
   tags: string[]
   date: Date

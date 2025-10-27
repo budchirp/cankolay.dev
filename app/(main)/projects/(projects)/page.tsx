@@ -2,10 +2,10 @@ import type React from 'react'
 
 import { MetadataManager } from '@/lib/metadata-manager'
 import { notFound } from 'next/navigation'
+import CONSTANTS from '@/lib/constants'
 import { Github } from '@/lib/github'
-
+import data from '@/lib/data'
 import Link from 'next/link'
-import data from '@/data'
 
 import {
   cn,
@@ -18,7 +18,7 @@ import {
   Heading,
   Section,
   Text
-} from '@trash-ui/components'
+} from '@trash-kit/ui'
 
 import type { Metadata } from 'next'
 
@@ -37,11 +37,9 @@ const Page: React.FC = async () => {
   }
 
   return (
-    <Column>
+    <Column padding='page'>
       <Container>
-        <Section title='Projects' />
-
-        <Column padding='none'>
+        <Section title='Projects'>
           {data.projectSources.map((source) => {
             return (
               <Section subsection key={source} title={source}>
@@ -60,7 +58,7 @@ const Page: React.FC = async () => {
                             <Heading size='h2'>{repo.name}</Heading>
 
                             {repo.description && (
-                              <Text className='text-text-tertiary w-full text-sm'>
+                              <Text className='text-tertiary w-full text-sm'>
                                 {repo.description}
                               </Text>
                             )}
@@ -93,7 +91,7 @@ const Page: React.FC = async () => {
               </Section>
             )
           })}
-        </Column>
+        </Section>
       </Container>
     </Column>
   )
@@ -101,6 +99,9 @@ const Page: React.FC = async () => {
 
 export const revalidate = 3600
 
-export const metadata: Metadata = MetadataManager.generate('Projects', `${data.name}'s projects`)
+export const metadata: Metadata = MetadataManager.generate(
+  'Projects',
+  `${CONSTANTS.NAME}'s projects`
+)
 
 export default Page

@@ -1,9 +1,9 @@
 import type React from 'react'
 
-import { Column, Container, Section, Text } from '@trash-ui/components'
+import { Column, Container, Section, Text } from '@trash-kit/ui'
 
 const Loading: React.FC = (): React.ReactNode => (
-  <Column>
+  <Column padding='lg'>
     <Container>
       <Section title='Loading...' />
     </Container>

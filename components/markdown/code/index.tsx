@@ -13,7 +13,7 @@ import githubLightDefault from '@shikijs/themes/github-light-default'
 
 import { CopyButton } from '@/components/markdown/code/copy-button'
 
-import { Box, BoxContent, Divider, Row, Text } from '@trash-ui/components'
+import { Box, BoxContent, Divider, Row, Text } from '@trash-kit/ui'
 
 const shiki = await createHighlighter({
   themes: [githubDarkDefault, githubLightDefault],
@@ -51,7 +51,7 @@ export const MarkdownCode: React.FC<MarkdownCodeProps> = async ({
       <Box className='rounded-2xl'>
         <BoxContent padding='sm'>
           <Row className='select-none px-2 gap-2 w-full items-center justify-between'>
-            <Text className='font-medium text-text-primary'>{lang}</Text>
+            <Text className='font-medium text-primary'>{lang}</Text>
 
             <CopyButton content={code} />
           </Row>

@@ -9,16 +9,7 @@ import { Fetch } from '@/lib/fetch'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import {
-  Section,
-  Box,
-  BoxContent,
-  Center,
-  Column,
-  Text,
-  Row,
-  RawColumn
-} from '@trash-ui/components'
+import { Section, Box, BoxContent, Center, Column, Text, Row } from '@trash-kit/ui'
 
 import type { Song } from '@/types/song'
 
@@ -52,27 +43,27 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({ api = 'me' }) => {
 
   return (
     <Section subsection title={api === 'me' ? 'Me' : 'My 💗'}>
-      <Box className='relative overflow-hidden'>
+      <Box className='relative'>
         <BoxContent padding='sm'>
-          <div className='absolute inset-0 blur-3xl opacity-75 w-full h-3/4  xs:h-full xs:w-1/4'>
+          <div className='absolute inset-0 blur-3xl opacity-75 w-full h-3/4 xs:h-full xs:w-1/4'>
             {song?.image && (
               <Image
                 height={50}
                 width={50}
                 src={song?.image}
                 alt='album'
-                className='object-fill size-full select-none rounded-2xl'
+                className='object-fill size-full'
               />
             )}
           </div>
 
-          <Column padding='none' className='xs:flex-row z-10 w-full items-center gap-2'>
+          <Column className='xs:flex-row z-10 w-full items-center gap-2'>
             <Center className='border border-outline aspect-square overflow-hidden shrink-0 rounded-2xl size-full xs:size-20'>
               {song?.image ? (
                 <Image
                   height={400}
                   width={400}
-                  className='aspect-square size-full object-cover'
+                  className='size-full object-cover'
                   src={song?.image}
                   alt='album'
                 />
@@ -81,8 +72,8 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({ api = 'me' }) => {
               )}
             </Center>
 
-            <Column padding='none' className='gap-4 w-full p-2 xs:pe-2 xs:ps-0 xs:justify-center'>
-              <Column padding='none' className='gap-1'>
+            <Column className='gap-4 w-full p-2 xs:pe-2 xs:ps-0 xs:justify-center'>
+              <Column className='gap-1'>
                 <Link href={song?.link || ''} target='_blank' className='flex items-center gap-1.5'>
                   <Disc3 className={song?.isPlaying ? 'animate-spin-slow' : ''} size={16} />
 
@@ -103,7 +94,7 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({ api = 'me' }) => {
 
                 <Row className='w-full h-2 border border-outline box-content p-0.5 bg-surface-secondary rounded-full'>
                   <div
-                    className='bg-linear-to-r from-accent-700 shadow via-accent-500 to-accent-600 ease-linear transition-width duration-1000 h-full rounded-full'
+                    className='bg-linear-to-r from-emerald-700 shadow via-emerald-500 to-emerald-600 ease-linear transition-width duration-1000 h-full rounded-full'
                     style={{
                       width: `${song?.percentage || 0}%`
                     }}

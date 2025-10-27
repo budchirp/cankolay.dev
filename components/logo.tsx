@@ -1,14 +1,14 @@
 import type React from 'react'
 import type { ComponentProps } from 'react'
 
-import { cn } from '@trash-ui/components'
-import data from '@/data'
+import CONSTANTS from '@/lib/constants'
+import { cn } from '@trash-kit/ui'
 import Link from 'next/link'
 
 export type LogoProps = Omit<ComponentProps<'h1'>, 'children'>
 
 export const Logo: React.FC<LogoProps> = ({ className, ...props }: LogoProps): React.ReactNode => {
-  const label = `${data.username} logo`
+  const label = `${CONSTANTS.USERNAME} logo`
 
   return (
     <Link href='/' aria-label={label}>
@@ -16,11 +16,11 @@ export const Logo: React.FC<LogoProps> = ({ className, ...props }: LogoProps): R
         {...props}
         aria-label={label}
         className={cn(
-          'text-text-primary flex h-full items-center justify-center text-2xl font-bold',
+          'text-primary flex h-full items-center justify-center text-2xl font-bold',
           className
         )}
       >
-        {data.username}
+        {CONSTANTS.USERNAME}
       </h1>
     </Link>
   )

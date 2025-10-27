@@ -1,24 +1,16 @@
 import type React from 'react'
 
 import { MetadataManager } from '@/lib/metadata-manager'
-import data from '@/data'
+import CONSTANTS from '@/lib/constants'
+import data from '@/lib/data'
 import Link from 'next/link'
 
-import {
-  Box,
-  BoxContent,
-  Column,
-  Container,
-  Grid,
-  Row,
-  Section,
-  Center
-} from '@trash-ui/components'
+import { Box, BoxContent, Column, Container, Grid, Row, Section, Center } from '@trash-kit/ui'
 
 import type { Metadata } from 'next'
 
 const Page: React.FC = (): React.ReactNode => (
-  <Column>
+  <Column padding='page'>
     <Container>
       <Section title='Contact me'>
         <Grid>
@@ -59,7 +51,7 @@ const Page: React.FC = (): React.ReactNode => (
 
 export const metadata: Metadata = MetadataManager.generate(
   'Contact me',
-  `${data.name}'s contact details`
+  `${CONSTANTS.NAME}'s contact details`
 )
 
 export default Page

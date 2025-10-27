@@ -6,7 +6,6 @@ import { createPortal } from 'react-dom'
 
 import { Transition, Menu, MenuItems, MenuItem, MenuButton } from '@headlessui/react'
 import { Menu as MenuIcon, X } from 'lucide-react'
-import { Backdrop } from '@/components/backdrop'
 import { usePathname } from 'next/navigation'
 import { Logo } from '@/components/logo'
 import { links } from '@/lib/links'
@@ -21,8 +20,10 @@ import {
   Column,
   Container,
   Heading,
-  Row
-} from '@trash-ui/components'
+  Row,
+  Backdrop,
+  Divider
+} from '@trash-kit/ui'
 
 type HeaderLinkProps = {
   pathname: string
@@ -69,7 +70,7 @@ export const Header: React.FC = (): React.ReactNode => {
 
         return (
           <div>
-            <header className='bg-surface-primary/50 select-none fixed top-0 z-20 h-16 w-full backdrop-blur-sm'>
+            <header className='bg-transparent select-none fixed top-0 z-20 h-16 w-full backdrop-blur-sm'>
               <Container className='h-full'>
                 <Row className='gap-2 h-full justify-between'>
                   <Logo />
@@ -123,8 +124,12 @@ export const Header: React.FC = (): React.ReactNode => {
                   <MenuItems as={Box} static className='max-w-(--breakpoint-xs)'>
                     <BoxContent>
                       <Heading size='h2'>Links</Heading>
+                    </BoxContent>
 
-                      <Column padding='none' className='gap-1'>
+                    <Divider />
+
+                    <BoxContent>
+                      <Column className='gap-1'>
                         {links.map((link, index) => (
                           <MenuItem
                             as={HeaderLink}

@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 import { Check, Clipboard } from 'lucide-react'
 
-import { Button } from '@trash-ui/components'
+import { Button } from '@trash-kit/ui'
 
 type CopyButtonProps = {
   content: string
