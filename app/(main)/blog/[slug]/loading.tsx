@@ -3,7 +3,7 @@ import type React from 'react'
 import { Column, Container, Section, Text } from '@trash-kit/ui'
 
 const Loading: React.FC = (): React.ReactNode => (
-  <Column padding='lg'>
+  <Column padding='page'>
     <Container>
       <Section title='Loading...' />
     </Container>
