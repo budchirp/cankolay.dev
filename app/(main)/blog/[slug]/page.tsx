@@ -24,38 +24,40 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
   const content = await markdownToReact(post.body)
 
   return (
-    <Column padding='page'>
-      <Container>
-        <Section
-          title={
-            <Column padding='none' className='gap-4'>
-              <Center className='relative aspect-video overflow-hidden w-full rounded-2xl'>
-                <Image
-                  className='w-full object-cover aspect-video'
-                  width={640}
-                  height={360}
-                  alt={post.title}
-                  src={post.imageUrl}
-                />
-              </Center>
+    <Column>
+      <Section>
+        <Container>
+          <Section
+            title={
+              <Column padding='none' className='gap-4'>
+                <Center className='relative aspect-video overflow-hidden w-full rounded-2xl'>
+                  <Image
+                    className='w-full object-cover aspect-video'
+                    width={640}
+                    height={360}
+                    alt={post.title}
+                    src={post.imageUrl}
+                  />
+                </Center>
 
-              <Heading size='h2'>{post.title}</Heading>
-            </Column>
-          }
-          description={
-            <Column padding='none' className='gap-1'>
-              <Row className='text-secondary gap-1 font-medium'>
-                <User className='size-5' /> <p>{post.author}</p>
-              </Row>
-              <Row className='text-secondary gap-1 font-medium'>
-                <Calendar className='size-5' /> <p>{post.formattedDate}</p>
-              </Row>
-            </Column>
-          }
-        >
-          {content}
-        </Section>
-      </Container>
+                <Heading size='h2'>{post.title}</Heading>
+              </Column>
+            }
+            description={
+              <Column padding='none' className='gap-1'>
+                <Row className='text-secondary gap-1 font-medium'>
+                  <User className='size-5' /> <p>{post.author}</p>
+                </Row>
+                <Row className='text-secondary gap-1 font-medium'>
+                  <Calendar className='size-5' /> <p>{post.formattedDate}</p>
+                </Row>
+              </Column>
+            }
+          >
+            {content}
+          </Section>
+        </Container>
+      </Section>
     </Column>
   )
 }

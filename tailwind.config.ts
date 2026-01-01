@@ -166,7 +166,7 @@ export default {
               paddingRight: '0.50rem'
             },
             pre: {
-              borderRadius: theme('borderRadius.2xl'),
+              borderRadius: theme('borderRadius.3xl'),
               backgroundColor: 'transparent',
               margin: 0,
               padding: 0

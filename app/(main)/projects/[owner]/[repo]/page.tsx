@@ -68,7 +68,8 @@ const badges = [
 const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) => {
   const { owner, repo: reponame } = await params
 
-  if (!data.projectSources.includes(owner as any)) notFound()
+  if (!data.projectSources.map((source) => source.toLowerCase()).includes(owner.toLowerCase()))
+    notFound()
 
   const repo = await Github.getRepo(owner, reponame)
   if (!repo) {
@@ -114,7 +115,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
                   if (!value) return null
 
                   return (
-                    <Row className='gap-2' key={index}>
+                    <Row key={index}>
                       <Center className='size-4'>
                         <Icon size={16} />
                       </Center>
@@ -150,7 +151,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
                 <Column className='gap-2'>
                   {Object.keys(languages).map((key: string) => {
                     return (
-                      <Row className='gap-2' key={key}>
+                      <Row key={key}>
                         <Center
                           className='size-2 rounded-full'
                           style={{

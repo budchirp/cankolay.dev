@@ -14,7 +14,7 @@ export const CenteredPage: React.FC<CenteredPageProps> = ({
   items,
   ...props
 }: CenteredPageProps): React.ReactNode => (
-  <Container className='h-screen_'>
+  <Container className='h-screen'>
     <Column {...props} className={'justify-center h-full'}>
       <Heading color='accent' size='h1'>
         {title}

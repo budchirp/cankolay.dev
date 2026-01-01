@@ -66,9 +66,9 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
   const nextDisabled = page === totalPages
 
   return (
-    <Column padding='page'>
-      <Container>
-        <Column>
+    <Column className='gap-0'>
+      <Section>
+        <Container>
           <Section title='Posts'>
             <form
               action={async (form: FormData): Promise<void> => {
@@ -90,87 +90,87 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
 
               <input type='submit' hidden />
             </form>
-          </Section>
 
-          <Grid>
-            {posts.map((post) => (
-              <article key={post.slug}>
-                <Link aria-label='Go to the blog post' href={`/blog/${post.slug}`}>
-                  <Box>
-                    <Center className='relative aspect-video w-full overflow-hidden'>
-                      <Image
-                        className='aspect-video object-cover transition duration-500 ease-out hover:scale-125'
-                        width={640}
-                        height={360}
-                        alt={post.title}
-                        src={post.imageUrl}
-                      />
-                    </Center>
+            <Grid>
+              {posts.map((post) => (
+                <article key={post.slug}>
+                  <Link aria-label='Go to the blog post' href={`/blog/${post.slug}`}>
+                    <Box>
+                      <Center className='relative aspect-video w-full overflow-hidden'>
+                        <Image
+                          className='aspect-video object-cover transition duration-500 ease-out hover:scale-125'
+                          width={640}
+                          height={360}
+                          alt={post.title}
+                          src={post.imageUrl}
+                        />
+                      </Center>
 
-                    <Divider />
+                      <Divider />
 
-                    <BoxContent>
-                      <Column className='gap-1'>
-                        <Row className='gap-1 text-secondary'>
-                          <Calendar className='mr-1 size-4 text-xs' />
-                          <p className='text-sm font-medium'>{post.formattedDate}</p>
-                        </Row>
+                      <BoxContent>
+                        <Column className='gap-1'>
+                          <Row className='gap-1 text-secondary'>
+                            <Calendar className='mr-1 size-4 text-xs' />
+                            <p className='text-sm font-medium'>{post.formattedDate}</p>
+                          </Row>
 
-                        <Column className='gap-0'>
-                          <Heading size='h2'>{post.title}</Heading>
-                          <Text className='text-secondary'>{post.description}</Text>
+                          <Column className='gap-0'>
+                            <Heading size='h2'>{post.title}</Heading>
+                            <Text className='text-secondary'>{post.description}</Text>
+                          </Column>
                         </Column>
-                      </Column>
-                    </BoxContent>
+                      </BoxContent>
 
-                    <Divider />
+                      <Divider />
 
-                    <BoxContent>
-                      <Button className='w-full'>Read more</Button>
-                    </BoxContent>
-                  </Box>
-                </Link>
-              </article>
-            ))}
-          </Grid>
-        </Column>
-      </Container>
+                      <BoxContent>
+                        <Button className='w-full'>Read more</Button>
+                      </BoxContent>
+                    </Box>
+                  </Link>
+                </article>
+              ))}
+            </Grid>
+          </Section>
+        </Container>
 
-      <Container>
-        <Row className='justify-between'>
-          <Link
-            className={cn(
-              'text-lg font-bold transition duration-300',
-              nextDisabled ? 'text-tertiary' : 'text-primary hover:text-secondary'
-            )}
-            aria-disabled={prevDisabled}
-            aria-label='Previous page'
-            href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
-              !prevDisabled ? page - 1 : page
-            }`}
-          >
-            Prev
-          </Link>
+        <Container>
+          <Row className='justify-between'>
+            <Link
+              className={cn(
+                'text-lg font-bold transition duration-300',
+                nextDisabled ? 'text-tertiary' : 'text-primary hover:text-secondary'
+              )}
+              aria-disabled={prevDisabled}
+              aria-label='Previous page'
+              href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
+                !prevDisabled ? page - 1 : page
+              }`}
+            >
+              Prev
+            </Link>
 
-          <Text className='font-medium'>
-            page {page + 1} out of {totalPages + 1}
-          </Text>
+            <Text className='font-medium'>
+              page {page + 1} out of {totalPages + 1}
+            </Text>
 
-          <Link
-            className={cn(
-              'text-lg font-bold transition duration-300',
-              nextDisabled ? 'text-tertiary' : 'text-primary hover:text-secondary'
-            )}
-            aria-disabled={nextDisabled}
-            aria-label='Next page'
-            href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
-              !nextDisabled ? page + 1 : page
-            }`}
-          >
-            Next
-          </Link>
-        </Row>
-      </Container>
+            <Link
+              className={cn(
+                'text-lg font-bold transition duration-300',
+                nextDisabled ? 'text-tertiary' : 'text-primary hover:text-secondary'
+              )}
+              aria-disabled={nextDisabled}
+              aria-label='Next page'
+              href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
+                !nextDisabled ? page + 1 : page
+              }`}
+            >
+              Next
+            </Link>
+          </Row>
+        </Container>
+      </Section>
     </Column>
   )
 }

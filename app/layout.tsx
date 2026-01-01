@@ -1,7 +1,7 @@
 import type React from 'react'
 
-import { JetBrains_Mono, Lexend } from 'next/font/google'
-import { Header } from '@/components/ui/header'
+import { Google_Sans, JetBrains_Mono, Lexend } from 'next/font/google'
+import { NavigationIsland } from '@/components/ui/navigation-island'
 import { Footer } from '@/components/ui/footer'
 import Script from 'next/script'
 import data from '@/lib/data'
@@ -70,7 +70,7 @@ export const viewport: Viewport = {
   ]
 }
 
-const lexend = Lexend({
+const googleSans = Google_Sans({
   subsets: ['latin'],
   variable: '--font-main'
 })
@@ -86,7 +86,7 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
       <body
         className={cn(
           'relative overflow-x-hidden size-full text-primary bg-surface-primary',
-          lexend.variable,
+          googleSans.variable,
           jetbrainsMono.variable
         )}
       >
@@ -100,9 +100,9 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
         </div>
 
         <div className='relative z-10 size-full'>
-          <Header />
+          <NavigationIsland />
 
-          <main id='main' className='w-full min-h-screen_'>
+          <main id='main' className='w-full min-h-screen'>
             {children}
           </main>
 
