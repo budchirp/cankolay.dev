@@ -67,8 +67,11 @@
   --primary-accent: var(--color-accent-600);
   --secondary-accent: var(--color-accent-900);
 
-  --outline: var(--color-gray-300);
-  --outline-hover: var(--color-gray-400);
+  --outline: oklch(from var(--color-gray-300) l c h / 0.75);
+  --outline-hover: oklch(from var(--color-gray-400) l c h / 0.75);
+
+  --outline-accent: var(--color-accent-500);
+  --outline-accent-hover: var(--color-accent-400);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -86,8 +89,8 @@
     --primary-accent: var(--color-accent-500);
     --secondary-accent: var(--color-accent-300);
 
-    --outline: var(--color-gray-690);
-    --outline-hover: var(--color-gray-680);
+    --outline: oklch(from var(--color-gray-690) l c h / 0.75);
+    --outline-hover: oklch(from var(--color-gray-680) l c h / 0.75);
 
     --outline-accent: var(--color-accent-500);
     --outline-accent-hover: var(--color-accent-400);
@@ -116,12 +119,12 @@ html {
   overflow-y: scroll !important;
 }
 
-*::-webkit-scrollbar {
-  @apply w-2 bg-surface-secondary rounded-full;
+* {
+  scrollbar-width: none;
 }
 
-*::-webkit-scrollbar-thumb {
-  @apply bg-outline rounded-full m-1;
+*::-webkit-scrollbar {
+  display: none;
 }
 
 pre {
@@ -141,12 +144,4 @@ pre .line::before {
   text-align: right;
 
   @apply text-gray-500;
-}
-
-.min-h-screen_ {
-  min-height: calc(100vh - 4rem);
-}
-
-.h-screen_ {
-  height: calc(100vh - 4rem);
 }

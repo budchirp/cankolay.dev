@@ -12,6 +12,7 @@ import Link from 'next/link'
 import { Section, Box, BoxContent, Center, Column, Text, Row } from '@trash-kit/ui'
 
 import type { Song } from '@/types/song'
+import { SiSpotify } from 'react-icons/si'
 
 type NowPlayingProps = {
   api?: 'me' | 'my-love'
@@ -57,8 +58,8 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({ api = 'me' }) => {
             )}
           </div>
 
-          <Column className='xs:flex-row z-10 w-full items-center gap-2'>
-            <Center className='border border-outline aspect-square overflow-hidden shrink-0 rounded-2xl size-full xs:size-20'>
+          <Column className='xs:flex-row z-10 w-full items-center gap-3'>
+            <Center className='border border-outline aspect-square overflow-hidden shrink-0 rounded-2xl size-full xs:size-22'>
               {song?.image ? (
                 <Image
                   height={400}
@@ -72,27 +73,31 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({ api = 'me' }) => {
               )}
             </Center>
 
-            <Column className='gap-4 w-full p-2 xs:pe-2 xs:ps-0 xs:justify-center'>
+            <Column className='gap-2 w-full p-2 xs:pe-2 xs:ps-0 xs:justify-center'>
               <Column className='gap-1'>
-                <Link href={song?.link || ''} target='_blank' className='flex items-center gap-1.5'>
-                  <Disc3 className={song?.isPlaying ? 'animate-spin-slow' : ''} size={16} />
+                <Row className='justify-between'>
+                  <Link
+                    href={song?.link || ''}
+                    target='_blank'
+                    className='flex items-center gap-1.5'
+                  >
+                    <Disc3 className={song?.isPlaying ? 'animate-spin-slow' : ''} size={16} />
 
-                  <Text className='text-lg flex-1 font-bold leading-none'>
-                    {song?.title || 'Playing nothing'}
-                  </Text>
-                </Link>
+                    <Text className='text-xl text-primary flex-1 font-bold leading-none'>
+                      {song?.title || 'Playing nothing'}
+                    </Text>
+                  </Link>
 
-                <Text className='font-medium leading-none text-tertiary'>
+                  <SiSpotify size={16} />
+                </Row>
+
+                <Text className='text-md font-medium leading-none text-secondary/75'>
                   {song?.artist || '*****'}
                 </Text>
               </Column>
 
-              <Row className='gap-2'>
-                <Text className='text-sm w-10 text-start leading-none text-secondary'>
-                  {Hourglass.formatTime(song?.elapsedTime)}
-                </Text>
-
-                <Row className='w-full h-2 border border-outline box-content p-0.5 bg-surface-secondary rounded-full'>
+              <Column className='gap-2'>
+                <Row className='w-full h-2 box-content bg-surface-secondary rounded-full'>
                   <div
                     className='bg-linear-to-r from-emerald-700 shadow via-emerald-500 to-emerald-600 ease-linear transition-width duration-1000 h-full rounded-full'
                     style={{
@@ -101,10 +106,12 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({ api = 'me' }) => {
                   />
                 </Row>
 
-                <Text className='text-sm w-10 text-end leading-none text-secondary'>
-                  {Hourglass.formatTime(song?.totalTime)}
-                </Text>
-              </Row>
+                <Row className='text-sm text-primary/50 justify-between leading-none'>
+                  <Text className='text-start'>{Hourglass.formatTime(song?.elapsedTime)}</Text>
+
+                  <Text className='text-end'>{Hourglass.formatTime(song?.totalTime)}</Text>
+                </Row>
+              </Column>
             </Column>
           </Column>
         </BoxContent>

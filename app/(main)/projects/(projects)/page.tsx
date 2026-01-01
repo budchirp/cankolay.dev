@@ -37,62 +37,66 @@ const Page: React.FC = async () => {
   }
 
   return (
-    <Column padding='page'>
-      <Container>
-        <Section title='Projects'>
-          {data.projectSources.map((source) => {
-            return (
-              <Section subsection key={source} title={source}>
-                <Grid>
-                  {repos[source].map((repo) => {
-                    return (
-                      <Link
-                        href={`projects/${source}/${repo.name}`}
-                        key={repo.name}
-                        rel='noreferrer'
-                        target='_blank'
-                        aria-label='Go to project'
-                      >
-                        <Box className='hover:bg-surface-secondary'>
-                          <BoxContent>
-                            <Heading size='h2'>{repo.name}</Heading>
+    <Column className='gap-0'>
+      <Section>
+        <Container>
+          <Section title='Projects'>
+            {data.projectSources.map((source) => {
+              return (
+                <Section subsection key={source} title={source}>
+                  <Grid>
+                    {repos[source].map((repo) => {
+                      return (
+                        <Link
+                          href={`projects/${source}/${repo.name}`}
+                          key={repo.name}
+                          rel='noreferrer'
+                          target='_blank'
+                          aria-label='Go to project'
+                        >
+                          <Box className='hover:bg-surface-secondary'>
+                            <BoxContent>
+                              <Heading size='h2'>{repo.name}</Heading>
 
-                            {repo.description && (
-                              <Text className='text-tertiary w-full text-sm'>
-                                {repo.description}
-                              </Text>
-                            )}
-                          </BoxContent>
-
-                          {repo.language && (
-                            <>
-                              <Divider />
-
-                              <BoxContent>
-                                <Text
-                                  style={{
-                                    color: (colors && colors[repo.language]?.color) || undefined
-                                  }}
-                                  className={cn(
-                                    'text-sm',
-                                    !colors || !colors[repo.language]?.color ? 'text-secondary' : ''
-                                  )}
-                                >
-                                  {repo.language}
+                              {repo.description && (
+                                <Text className='text-tertiary w-full text-sm'>
+                                  {repo.description}
                                 </Text>
-                              </BoxContent>
-                            </>
-                          )}
-                        </Box>
-                      </Link>
-                    )
-                  })}
-                </Grid>
-              </Section>
-            )
-          })}
-        </Section>
-      </Container>
+                              )}
+                            </BoxContent>
+
+                            {repo.language && (
+                              <>
+                                <Divider />
+
+                                <BoxContent>
+                                  <Text
+                                    style={{
+                                      color: (colors && colors[repo.language]?.color) || undefined
+                                    }}
+                                    className={cn(
+                                      'text-sm',
+                                      !colors || !colors[repo.language]?.color
+                                        ? 'text-secondary'
+                                        : ''
+                                    )}
+                                  >
+                                    {repo.language}
+                                  </Text>
+                                </BoxContent>
+                              </>
+                            )}
+                          </Box>
+                        </Link>
+                      )
+                    })}
+                  </Grid>
+                </Section>
+              )
+            })}
+          </Section>
+        </Container>
+      </Section>
     </Column>
   )
 }

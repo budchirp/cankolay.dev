@@ -48,22 +48,24 @@ export const MarkdownCode: React.FC<MarkdownCodeProps> = async ({
     })
 
     return (
-      <Box className='rounded-2xl'>
-        <BoxContent padding='sm'>
-          <Row className='select-none px-2 gap-2 w-full items-center justify-between'>
-            <Text className='font-medium text-primary'>{lang}</Text>
+      <Box className='group relative'>
+        <div className='absolute top-0 right-0 p-2.5 opacity-0 group-hover:opacity-100 transition-all duration-300'>
+          <CopyButton content={code} />
+        </div>
 
-            <CopyButton content={code} />
-          </Row>
+        <BoxContent className='py-1 px-3'>
+          <Text className='font-medium text-primary'>{lang}</Text>
         </BoxContent>
 
         <Divider />
 
-        <div
-          dangerouslySetInnerHTML={{
-            __html: html
-          }}
-        />
+        <BoxContent className='p-0.5'>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: html
+            }}
+          />
+        </BoxContent>
       </Box>
     )
   }
