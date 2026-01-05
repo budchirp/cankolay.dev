@@ -45,22 +45,19 @@ const colors = Object.entries(tailwindColors).filter(
 
 const Page: React.FC = async (): Promise<React.ReactNode> => {
   const projects = await Promise.all(
-    data.projects
-      .map(async (project: any) => {
-        const split = project.repo.split('/')
+    data.projects.map(async (project: any) => {
+      const split = project.repo.split('/')
 
-        const repo = await Github.getRepo(split[0], split[1])
-        if (!repo) return null
+      const repo = await Github.getRepo(split[0], split[1])
 
-        return {
-          ...project,
-          name: project.name || split[1],
-          description: project.description || repo.description,
-          url: project.url || repo.homepage,
-          keywords: project.keywords || repo.topics || []
-        }
-      })
-      .filter((project) => project !== null)
+      return {
+        ...project,
+        name: project.name || split[1],
+        description: project.description || repo?.description,
+        url: project.url || repo?.homepage,
+        keywords: project.keywords || repo?.topics || []
+      }
+    })
   )
 
   return (
@@ -101,7 +98,7 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
                   <article key={project.repo}>
                     <Box>
                       <Center className='relative aspect-video w-full overflow-hidden'>
-                        {project.image ? (
+                        {project?.image ? (
                           <Image
                             className='object-cover size-full transition duration-500 ease-out hover:scale-125'
                             width={640}
@@ -110,29 +107,26 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
                             src={project.image}
                           />
                         ) : (
-                          (() => {
-                            return (
-                              <div
-                                className='size-full'
+                          <div
+                            className='size-full'
+                            style={{
+                              backgroundColor: background || 'var(--color-surface-secondary)'
+                            }}
+                          >
+                            <Center className='h-full'>
+                              <Heading
                                 style={{
-                                  backgroundColor: background || 'var(--color-surface-secondary)'
+                                  color: background
+                                    ? 'color-mix(in srgb, white 70%, transparent)'
+                                    : 'var(--color-primary)'
                                 }}
+                                size='h2'
+                                className='text-center'
                               >
-                                <Center className='h-full'>
-                                  <Heading
-                                    style={{
-                                      color: background
-                                        ? 'color-mix(in srgb, white 65%, transparent)'
-                                        : 'var(--color-primary)'
-                                    }}
-                                    size='h2'
-                                  >
-                                    {project.name}
-                                  </Heading>
-                                </Center>
-                              </div>
-                            )
-                          })()
+                                {project.name}
+                              </Heading>
+                            </Center>
+                          </div>
                         )}
                       </Center>
 

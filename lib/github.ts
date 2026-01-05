@@ -15,7 +15,11 @@ export class Github {
   public static getUserRepos = async (username: string): Promise<any> => {
     'use server'
 
-    const repos = await Fetch.get(`https://api.github.com/users/${username}/repos`, Github.headers)
+    const repos = await Fetch.get(
+      `https://api.github.com/users/${username}/repos`,
+      true,
+      Github.headers
+    )
     if (repos.status !== 200) return null
 
     return await repos.json()
@@ -24,7 +28,7 @@ export class Github {
   public static getUser = async (username: string): Promise<any> => {
     'use server'
 
-    const user = await Fetch.get(`https://api.github.com/users/${username}`, Github.headers)
+    const user = await Fetch.get(`https://api.github.com/users/${username}`, true, Github.headers)
     if (user.status !== 200) return null
 
     return await user.json()
@@ -35,6 +39,7 @@ export class Github {
 
     const repo = await Fetch.get(
       `https://api.github.com/repos/${username}/${reponame}`,
+      true,
       Github.headers
     )
     if (repo.status !== 200) return null
@@ -47,6 +52,7 @@ export class Github {
 
     const languages = await Fetch.get(
       `https://api.github.com/repos/${username}/${reponame}/languages`,
+      true,
       Github.headers
     )
     if (languages.status !== 200) return null
@@ -56,7 +62,8 @@ export class Github {
 
   public static getLanguageColors = async (): Promise<LanguageColors | null> => {
     const colors = await Fetch.get<LanguageColors>(
-      'https://raw.githubusercontent.com/ozh/github-colors/master/colors.json'
+      'https://raw.githubusercontent.com/ozh/github-colors/master/colors.json',
+      true
     )
     if (colors.status !== 200) return null
 

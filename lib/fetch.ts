@@ -2,6 +2,7 @@ export class Fetch {
   private static fetch = <T>(
     url: string,
     method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
+    cache: RequestCache = 'no-cache',
     headers?: Record<string, string>,
     body?: Record<string, unknown> | FormData
   ) => {
@@ -11,7 +12,7 @@ export class Fetch {
         ...(body instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
         ...headers
       },
-      cache: 'force-cache',
+      cache,
       body: body instanceof FormData ? body : JSON.stringify(body)
     }) as Promise<
       {
@@ -20,27 +21,36 @@ export class Fetch {
     >
   }
 
-  public static get = async <T>(url: string, headers?: Record<string, string>) =>
-    await Fetch.fetch<T>(url, 'GET', headers, undefined)
+  public static get = async <T>(
+    url: string,
+    cache: boolean = false,
+    headers?: Record<string, string>
+  ) => await Fetch.fetch<T>(url, 'GET', cache ? 'force-cache' : 'no-cache', headers, undefined)
 
   public static post = async <T>(
     url: string,
+    cache: boolean = false,
     body?: Record<string, unknown> | FormData,
     headers?: Record<string, string>
-  ) => await Fetch.fetch<T>(url, 'POST', headers, body)
+  ) => await Fetch.fetch<T>(url, 'POST', cache ? 'force-cache' : 'no-cache', headers, body)
 
   public static put = async <T>(
     url: string,
+    cache: boolean = false,
     body?: Record<string, unknown> | FormData,
     headers?: Record<string, string>
-  ) => await Fetch.fetch<T>(url, 'PUT', headers, body)
+  ) => await Fetch.fetch<T>(url, 'PUT', cache ? 'force-cache' : 'no-cache', headers, body)
 
-  public static delete = async <T>(url: string, headers?: Record<string, string>) =>
-    await Fetch.fetch<T>(url, 'DELETE', headers, undefined)
+  public static delete = async <T>(
+    url: string,
+    cache: boolean = false,
+    headers?: Record<string, string>
+  ) => await Fetch.fetch<T>(url, 'DELETE', cache ? 'force-cache' : 'no-cache', headers, undefined)
 
   public static patch = async <T>(
     url: string,
+    cache: boolean = false,
     body?: Record<string, unknown> | FormData,
     headers?: Record<string, string>
-  ) => await Fetch.fetch<T>(url, 'PATCH', headers, body)
+  ) => await Fetch.fetch<T>(url, 'PATCH', cache ? 'force-cache' : 'no-cache', headers, body)
 }
