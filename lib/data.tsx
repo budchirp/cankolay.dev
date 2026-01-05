@@ -25,14 +25,19 @@ export default {
 
   projects: [
     {
-      name: 'WakeUp Android',
-      repo: 'budchirp/wakeup-android'
+      name: 'WakeUp',
+      repo: 'budchirp/wakeup'
     },
     {
       name: 'Plak',
       repo: 'budchirp/plak'
     },
     {
+      name: 'Kernel Language',
+      repo: 'budchirp/kernel'
+    },
+    {
+      name: 'Graphite Language',
       repo: 'budchirp/graphite'
     },
     {

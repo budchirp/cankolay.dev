@@ -42,15 +42,17 @@ const NavigationIslandItem: React.FC<NavigationIslandItemProps> = ({
   pathname,
   link
 }: NavigationIslandItemProps): React.ReactNode => {
+  const isActive = link.url.length > 1 ? pathname.includes(link.url) : pathname === link.url
   return (
     <Link href={link.url}>
-      <Box className='rounded-2xl group hover:bg-surface-secondary transition-all duration-300'>
+      <Box
+        className={cn(
+          'rounded-2xl group transition-all duration-300',
+          isActive ? 'bg-surface-primary' : 'bg-surface-primary/50 hover:bg-surface-primary'
+        )}
+      >
         <BoxContent
-          className={cn(
-            (link.url.length > 1 ? pathname.includes(link.url) : pathname === link.url)
-              ? 'opacity-100'
-              : 'opacity-50 group-hover:opacity-100'
-          )}
+          className={cn(isActive ? 'opacity-100' : 'opacity-50 group-hover:opacity-100')}
           padding='sm'
         >
           <Center className='size-8 aspect-square'>{link.icon}</Center>
@@ -83,11 +85,11 @@ export const NavigationIsland: React.FC = (): React.ReactNode => {
   return (
     <header
       className={cn(
-        'bg-transparent select-none fixed bottom-4 z-20 flex items-center justify-center w-full transition-all duration-300',
+        'select-none fixed bottom-4 z-20 flex items-center justify-center w-full transition-all duration-300',
         isVisible ? 'translate-y-0 ease-out' : 'translate-y-32 pointer-events-none ease-in'
       )}
     >
-      <Box className='w-fit bg-surface-secondary/50 shadow-2xl' blur>
+      <Box className='w-fit bg-surface-primary/50 shadow-2xl' blur>
         <BoxContent padding='sm'>
           <Row className='h-full justify-between'>
             {links.map((link, index) => (

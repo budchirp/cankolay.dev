@@ -96,8 +96,8 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({ api = 'me' }) => {
                 </Text>
               </Column>
 
-              <Column className='gap-2'>
-                <Row className='w-full h-2 box-content bg-surface-secondary rounded-full'>
+              <Column className='gap-1'>
+                <Row className='w-full h-1.5 box-content bg-surface-secondary rounded-full'>
                   <div
                     className='bg-linear-to-r from-emerald-700 shadow via-emerald-500 to-emerald-600 ease-linear transition-width duration-1000 h-full rounded-full'
                     style={{
@@ -106,7 +106,7 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({ api = 'me' }) => {
                   />
                 </Row>
 
-                <Row className='text-sm text-primary/50 justify-between leading-none'>
+                <Row className='text-sm text-primary/50 justify-between'>
                   <Text className='text-start'>{Hourglass.formatTime(song?.elapsedTime)}</Text>
 
                   <Text className='text-end'>{Hourglass.formatTime(song?.totalTime)}</Text>
