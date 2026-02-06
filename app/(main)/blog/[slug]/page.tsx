@@ -2,8 +2,9 @@ import type React from 'react'
 
 import { MetadataManager } from '@/lib/metadata-manager'
 import { markdownToReact } from '@/components/markdown'
-import { Book, Calendar, User } from 'lucide-react'
+import {Hourglass} from "@/lib/hourglass"
 import { notFound } from 'next/navigation'
+import {Calendar, Pencil} from 'lucide-react'
 import { Post } from '@/lib/post'
 import Image from 'next/image'
 
@@ -36,22 +37,17 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
                     width={640}
                     height={360}
                     alt={post.title}
-                    src={post.imageUrl}
+                    src={post.image}
                   />
                 </Center>
 
-                <Heading size='h2'>{post.title}</Heading>
+                <Heading className="wrap-break-word" size='h2'>{post.title}</Heading>
               </Column>
             }
             description={
-              <Column padding='none' className='gap-1'>
-                <Row className='text-secondary gap-1 font-medium'>
-                  <User className='size-5' /> <p>{post.author}</p>
-                </Row>
-                <Row className='text-secondary gap-1 font-medium'>
-                  <Calendar className='size-5' /> <p>{post.formattedDate}</p>
-                </Row>
-              </Column>
+              <Row className='text-secondary gap-1 font-medium'>
+                <Calendar className='size-5' /> <p>{Hourglass.formatDate(post.date)}</p>
+              </Row>
             }
           >
             {content}
@@ -76,7 +72,7 @@ export const generateMetadata = async ({ params }: DynamicPageProps): Promise<Me
       publishedTime: post.date.toISOString(),
       images: [
         {
-          url: post.imageUrl
+          url: post.image
         }
       ]
     }

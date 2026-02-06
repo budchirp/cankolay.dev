@@ -3,6 +3,7 @@ import type React from 'react'
 import { MetadataManager } from '@/lib/metadata-manager'
 import { notFound, redirect } from 'next/navigation'
 import { Calendar, Search } from 'lucide-react'
+import {Hourglass} from "@/lib/hourglass"
 import CONSTANTS from '@/lib/constants'
 import MiniSearch from 'minisearch'
 import { Post } from '@/lib/post'
@@ -36,12 +37,12 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
   const post = new Post()
   const allPosts = await post.getAll()
 
-  let posts: BlogPost[] = []
+  let posts: BlogPost[]
 
   const searchText = decodeURIComponent(search || '')
   if (searchText) {
     const miniSearch = new MiniSearch({
-      fields: ['title', 'description', 'tags'],
+      fields: ['title', 'description'],
       storeFields: Object.keys(allPosts[0])
     })
     miniSearch.addAll(allPosts)
@@ -54,7 +55,7 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
   const {
     posts: paginatedPosts,
     page,
-    totalPages
+    total
   } = await new Post().paginate(posts, Number(_page || 0) || 0)
   posts = paginatedPosts
 
@@ -63,7 +64,7 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
   }
 
   const prevDisabled = page === 0
-  const nextDisabled = page === totalPages
+  const nextDisabled = page === total
 
   return (
     <Column className='gap-0'>
@@ -102,7 +103,7 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
                           width={640}
                           height={360}
                           alt={post.title}
-                          src={post.imageUrl}
+                          src={post.image}
                         />
                       </Center>
 
@@ -112,7 +113,7 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
                         <Column className='gap-1'>
                           <Row className='gap-1 text-secondary'>
                             <Calendar className='mr-1 size-4 text-xs' />
-                            <p className='text-sm font-medium'>{post.formattedDate}</p>
+                            <p className='text-sm font-medium'>{Hourglass.formatDate(post.date)}</p>
                           </Row>
 
                           <Column className='gap-0'>
@@ -152,7 +153,7 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
             </Link>
 
             <Text className='font-medium'>
-              page {page + 1} out of {totalPages + 1}
+              page {page + 1} out of {total + 1}
             </Text>
 
             <Link

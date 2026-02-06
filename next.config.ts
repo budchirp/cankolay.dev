@@ -5,7 +5,7 @@ export default {
   images: {
     localPatterns: [
       {
-        pathname: '/assets/images/**',
+        pathname: '/assets/**',
         search: ''
       }
     ],

@@ -1,19 +1,15 @@
-export type RawPost = {
+export type PostFrontMatter = {
   slug: string
-  author: string
   title: string
   description: string
-  tags: string
   date: string
-  imageUrl: string
+  image: string
 }
 
 export type PostBody = string
 
-export type BlogPost = Omit<RawPost, 'tags' | 'date'> & {
+export type BlogPost = Omit<PostFrontMatter, 'date'> & {
   id: string
   body: PostBody
-  tags: string[]
   date: Date
-  formattedDate: string
 }

@@ -15,7 +15,7 @@ export class Post {
   public async getAll(): Promise<BlogPost[]> {
     const postFiles = await fs.readdir(Post.path)
 
-    const posts: BlogPost[] = await Promise.all(
+    const posts = await Promise.all(
       postFiles
         .filter((file) => path.extname(file) === '.md' || path.extname(file) === '.mdx')
         .sort((a, b) => a.localeCompare(b, 'en', { numeric: true }))
@@ -24,35 +24,31 @@ export class Post {
             await fs.readFile(`${Post.path}/${file}`, 'utf-8')
           ) as any
 
-          const newMetaData: Omit<BlogPost, 'body'> = {
-            ...metaData,
-            id: metaData.slug,
-            tags: metaData.tags.split(', '),
-            date: new Date(metaData.date),
-            formattedDate: Hourglass.formatDate(metaData.date)
-          }
-
-          return { ...newMetaData, body: content } as BlogPost
+          return { ...{
+              ...metaData,
+              id: metaData.slug,
+              date: new Date(metaData.date)
+            }, body: content } as BlogPost
         })
     )
 
-    return posts.sort((a, b) => a.date.getTime() - b.date.getTime()) || []
+    return posts.sort((a, b) => a.date.getTime() + b.date.getTime()) || []
   }
 
   public async paginate(
     posts: BlogPost[],
     page = 0,
     limit = 6
-  ): Promise<{ posts: BlogPost[] | []; page: number; totalPages: number }> {
-    const totalPages = Math.ceil(posts.length / limit) - 1 || 0
-    if (typeof page !== 'number' || page > totalPages || page < 0) {
-      return { posts: [], page: 0, totalPages: 0 }
+  ): Promise<{ posts: BlogPost[] | []; page: number; total: number }> {
+    const total = Math.ceil(posts.length / limit) - 1 || 0
+    if (page > total || page < 0) {
+      return { posts: [], page: 0, total: 0 }
     }
 
     return {
       posts: posts.slice(limit * page, limit * page + limit),
       page,
-      totalPages
+      total
     }
   }
 }

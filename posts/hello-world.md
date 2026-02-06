@@ -2,10 +2,8 @@
 slug: hello-world
 title: Hello, World!
 description: First post of this blog!
-author: budchirp
-tags: hi
 date: 2023-09-05T11:13:33.674Z
-imageUrl: /assets/images/bebek.jpg
+image: /assets/bebek.jpg
 ---
 
 First post of this blog!

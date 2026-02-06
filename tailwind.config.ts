@@ -183,7 +183,9 @@ export default {
               fontFamily: "theme('fontFamily.mono') !important"
             },
             img: {
-              margin: '0'
+              objectFit: 'cover',
+              margin: '0 auto',
+              borderRadius: theme('borderRadius.2xl'),
             },
             'thead, tbody, tr, td, th': {
               borderColor: theme('colors.gray.200')
