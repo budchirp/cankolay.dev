@@ -54,7 +54,7 @@ export const MarkdownCode: React.FC<MarkdownCodeProps> = async ({
         </div>
 
         <BoxContent className='py-1 px-3'>
-          <Text className='font-medium text-primary'>{lang}</Text>
+          <Text className='font-medium text-content-primary'>{lang}</Text>
         </BoxContent>
 
         <Divider />

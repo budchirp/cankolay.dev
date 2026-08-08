@@ -30,7 +30,7 @@ const Loading: React.FC = (): React.ReactNode => (
                   <Divider />
 
                   <BoxContent>
-                    <Button className='w-full' disabled color='surface'>
+                    <Button className='w-full' disabled color='primary'>
                       loading...
                     </Button>
                   </BoxContent>

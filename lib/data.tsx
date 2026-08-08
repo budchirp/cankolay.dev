@@ -26,19 +26,15 @@ export default {
   projects: [
     {
       name: 'WakeUp',
-      repo: 'budchirp/wakeup'
+      repo: 'budchirp/twodo'
     },
     {
-      name: 'Plak',
-      repo: 'budchirp/plak'
+      name: 'Trash Services',
+      repo: 'budchirp/trash-web'
     },
     {
-      name: 'Kernel Language',
-      repo: 'budchirp/kernel'
-    },
-    {
-      name: 'Graphite Language',
-      repo: 'budchirp/graphite'
+      name: 'Zep Language',
+      repo: 'budchirp/zep-lang'
     },
     {
       name: 'OxygeNvim',
@@ -48,7 +44,7 @@ export default {
 
   about: (
     <Column className='gap-2'>
-      <Column className='gap-0'>
+      <Column>
         <Heading className='wrap-break-word' size='h4'>
           Full-Stack & Android developer
         </Heading>
@@ -57,7 +53,7 @@ export default {
         </Heading>
       </Column>
 
-      <p className='text-tertiary'>
+      <p className='text-content-tertiary'>
         Full-Stack and Android developer with over five years of experience, working across
         corporate and open-source projects. Focused on clean code and low-level programming, with an
         emphasis on compiler development. Guitar player with 1.5 years of experience.

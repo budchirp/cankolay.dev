@@ -3,11 +3,11 @@
 import type React from 'react'
 import { useEffect, useState } from 'react'
 
+import { Code, Home, Pencil } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
 import { Box, BoxContent, Center, Row, cn } from '@trash-kit/ui'
-import { Code, Home, Pencil } from 'lucide-react'
 
 type LinkProps = {
   label: string
@@ -20,11 +20,6 @@ const links: LinkProps[] = [
     label: 'Home',
     icon: <Home />,
     url: '/'
-  },
-  {
-    label: 'Projects',
-    icon: <Code />,
-    url: '/projects'
   },
   {
     label: 'Blog',
@@ -48,7 +43,9 @@ const NavigationIslandItem: React.FC<NavigationIslandItemProps> = ({
       <Box
         className={cn(
           'rounded-2xl group transition-all duration-300',
-          isActive ? 'bg-surface-primary' : 'bg-surface-primary/50 hover:bg-surface-primary'
+          isActive
+            ? 'bg-surface-accent/25 text-surface-content-accent border-outline-accent/25'
+            : 'bg-surface-primary/50'
         )}
       >
         <BoxContent
@@ -89,9 +86,9 @@ export const NavigationIsland: React.FC = (): React.ReactNode => {
         isVisible ? 'translate-y-0 ease-out' : 'translate-y-32 pointer-events-none ease-in'
       )}
     >
-      <Box className='w-fit bg-surface-primary/50 shadow-2xl' blur>
+      <Box className='w-fit backdrop-blur bg-surface-secondary/75 shadow-2xl'>
         <BoxContent padding='sm'>
-          <Row className='h-full justify-between'>
+          <Row className='h-full gap-2 justify-between'>
             {links.map((link, index) => (
               <NavigationIslandItem pathname={pathname} link={link} key={index} />
             ))}

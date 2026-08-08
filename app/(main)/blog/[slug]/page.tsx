@@ -2,9 +2,9 @@ import type React from 'react'
 
 import { MetadataManager } from '@/lib/metadata-manager'
 import { markdownToReact } from '@/components/markdown'
-import {Hourglass} from "@/lib/hourglass"
+import { Hourglass } from '@/lib/hourglass'
 import { notFound } from 'next/navigation'
-import {Calendar, Pencil} from 'lucide-react'
+import { Calendar, Pencil } from 'lucide-react'
 import { Post } from '@/lib/post'
 import Image from 'next/image'
 
@@ -30,7 +30,7 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
         <Container>
           <Section
             title={
-              <Column padding='none' className='gap-4'>
+              <Column className='gap-4'>
                 <Center className='relative aspect-video overflow-hidden w-full rounded-2xl'>
                   <Image
                     className='w-full object-cover aspect-video'
@@ -41,11 +41,13 @@ const Page: React.FC<DynamicPageProps> = async ({ params }: DynamicPageProps) =>
                   />
                 </Center>
 
-                <Heading className="wrap-break-word" size='h2'>{post.title}</Heading>
+                <Heading className='wrap-break-word' size='h2'>
+                  {post.title}
+                </Heading>
               </Column>
             }
             description={
-              <Row className='text-secondary gap-1 font-medium'>
+              <Row className='text-content-secondary gap-1 font-medium'>
                 <Calendar className='size-5' /> <p>{Hourglass.formatDate(post.date)}</p>
               </Row>
             }

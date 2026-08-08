@@ -1,6 +1,6 @@
 import type React from 'react'
 
-import { Google_Sans, JetBrains_Mono, Lexend } from 'next/font/google'
+import { Google_Sans, JetBrains_Mono } from 'next/font/google'
 import { NavigationIsland } from '@/components/ui/navigation-island'
 import { Footer } from '@/components/ui/footer'
 import Script from 'next/script'
@@ -12,7 +12,7 @@ import { cn, Container } from '@trash-kit/ui'
 import type { LayoutProps } from '@/types/layout'
 import type { Metadata, Viewport } from 'next'
 
-import '@/app/styles.css'
+import '@/app/style.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL(CONSTANTS.APP_URL),
@@ -85,7 +85,7 @@ const RootLayout: React.FC<LayoutProps> = ({ children }: LayoutProps): React.Rea
     <html suppressHydrationWarning lang='en-US'>
       <body
         className={cn(
-          'relative overflow-x-hidden size-full text-primary bg-surface-primary',
+          'relative overflow-x-hidden size-full text-content-primary bg-surface-primary',
           googleSans.variable,
           jetbrainsMono.variable
         )}

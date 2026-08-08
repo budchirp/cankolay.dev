@@ -15,14 +15,14 @@ export const CenteredPage: React.FC<CenteredPageProps> = ({
   ...props
 }: CenteredPageProps): React.ReactNode => (
   <Container className='h-screen'>
-    <Column {...props} className={'justify-center h-full'}>
-      <Heading color='accent' size='h1'>
+    <Column {...props} className='justify-center h-full gap-4'>
+      <Heading className='text-accent' size='h1'>
         {title}
       </Heading>
 
       <Column className='gap-1'>
         {items.map((item, index) => (
-          <h2 className='text-secondary text-2xl font-medium' key={index}>
+          <h2 className='text-content-secondary text-2xl font-medium' key={index}>
             {item}
           </h2>
         ))}

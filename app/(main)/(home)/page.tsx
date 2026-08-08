@@ -1,8 +1,9 @@
 import type React from 'react'
 
-import { NowPlaying } from '@/components/ui/now-playing'
 import { MetadataManager } from '@/lib/metadata-manager'
+import tailwindColors from 'tailwindcss/colors'
 import CONSTANTS from '@/lib/constants'
+import { Github } from '@/lib/github'
 import Image from 'next/image'
 import data from '@/lib/data'
 import Link from 'next/link'
@@ -24,9 +25,6 @@ import {
 } from '@trash-kit/ui'
 
 import type { Metadata } from 'next'
-
-import tailwindColors from 'tailwindcss/colors'
-import { Github } from '@/lib/github'
 
 const colors = Object.entries(tailwindColors).filter(
   ([key]) =>
@@ -61,16 +59,16 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
   )
 
   return (
-    <Column className='gap-0'>
+    <Column>
       <Section>
         <Container>
           <Section
             divider={false}
             title={
-              <Column className='md:w-2/3'>
-                <Column className='gap-0'>
+              <Column className='md:w-2/3 gap-4'>
+                <Column>
                   <Heading size='h2'>Hi, It's me</Heading>
-                  <Heading className='-ml-0.5' size='h1' color='accent'>
+                  <Heading className='-ml-0.5 text-accent' size='h1'>
                     {CONSTANTS.NAME}
                   </Heading>
                 </Column>
@@ -113,12 +111,12 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
                               backgroundColor: background || 'var(--color-surface-secondary)'
                             }}
                           >
-                            <Center className='h-full'>
+                            <Center className='size-full'>
                               <Heading
                                 style={{
                                   color: background
                                     ? 'color-mix(in srgb, white 70%, transparent)'
-                                    : 'var(--color-primary)'
+                                    : 'var(--color-content-primary)'
                                 }}
                                 size='h2'
                                 className='text-center'
@@ -134,13 +132,13 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
 
                       <BoxContent>
                         <Column className='gap-2'>
-                          <Column className='gap-0'>
+                          <Column>
                             <Heading size='h2'>{project.name}</Heading>
-                            <Text className='text-secondary'>{project.description}</Text>
+                            <Text className='text-content-secondary'>{project.description}</Text>
                           </Column>
 
                           {project.keywords.length > 0 && (
-                            <Row className='overflow-x-auto'>
+                            <Row className='overflow-x-auto gap-2 rounded-2xl'>
                               {project.keywords.map((keyword: string, index: number) => (
                                 <Tag
                                   className='break-none flex shrink-0'
@@ -165,7 +163,7 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
 
                           {project.url && (
                             <Link href={project.url}>
-                              <Button color='surface'>View website</Button>
+                              <Button color='primary'>View website</Button>
                             </Link>
                           )}
                         </Row>
@@ -191,13 +189,10 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
 
                   return (
                     <Link key={index} href={contact.link} rel='noreferrer' target='_blank'>
-                      <Box
-                        key={index}
-                        className='hover:bg-surface-secondary group transition-all duration-300'
-                      >
+                      <Box key={index} clickable className='group'>
                         <BoxContent>
-                          <Row>
-                            <Center className='transition-all duration-300 shadow-2xl size-10 aspect-square rounded-full bg-surface-primary-accent text-white group-hover:bg-surface-secondary-accent border border-outline-accent group-hover:border-outline-accent-hover'>
+                          <Row className='gap-2'>
+                            <Center className='transition-all duration-300 shadow-2xl size-10 aspect-square rounded-full bg-surface-accent text-surface-content-accent groun-hover:text-surface-content-accent-hover group-hover:bg-surface-accent-hover border border-outline-accent group-hover:border-outline-accent-hover'>
                               {contact.icon}
                             </Center>
 
@@ -210,29 +205,6 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
                 }
               )}
             </Grid>
-          </Section>
-        </Container>
-      </Section>
-
-      <Divider />
-
-      <Section className='bg-surface-secondary relative'>
-        <div className='absolute z-0 inset-0 overflow-hidden'>
-          <Container className='absolute inset-0'>
-            <div className='absolute top-0 left-0 size-64 opacity-50 bg-emerald-800 rounded-full blur-[128px]' />
-            <div className='absolute top-[85%] right-[20%] size-64 opacity-50 bg-emerald-700 rounded-full blur-[128px]' />
-          </Container>
-        </div>
-
-        <Container className='relative z-10'>
-          <Section
-            className='mt-0'
-            title={<Heading size='h2'>Now playing</Heading>}
-            columnClassName='gap-8'
-          >
-            <NowPlaying />
-
-            <NowPlaying api='my-love' />
           </Section>
         </Container>
       </Section>

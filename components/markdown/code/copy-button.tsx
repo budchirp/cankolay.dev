@@ -19,7 +19,7 @@ export const CopyButton: React.FC<CopyButtonProps> = ({
   return (
     <Button
       shape='circle'
-      color='surface'
+      color='primary'
       disabled={copied}
       onClick={() => {
         navigator.clipboard.writeText(content)
