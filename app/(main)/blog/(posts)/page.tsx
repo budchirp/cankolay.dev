@@ -41,27 +41,29 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
 
   const searchText = decodeURIComponent(search || '')
   if (searchText) {
-    const miniSearch = new MiniSearch({
-      fields: ['title', 'description'],
-      storeFields: Object.keys(allPosts[0])
-    })
-    miniSearch.addAll(allPosts)
+    if (allPosts.length > 0) {
+      const miniSearch = new MiniSearch({
+        fields: ['title', 'description'],
+        storeFields: Object.keys(allPosts[0])
+      })
+      miniSearch.addAll(allPosts)
 
-    posts = miniSearch.search(searchText) as any[] as BlogPost[]
+      posts = miniSearch.search(searchText) as any[] as BlogPost[]
+    } else {
+      posts = []
+    }
   } else {
     posts = allPosts
   }
 
-  const {
-    posts: paginatedPosts,
-    page,
-    total
-  } = await new Post().paginate(posts, Number(_page || 0) || 0)
-  posts = paginatedPosts
+  const requestedPage = Number(_page || 0) || 0
+  const { posts: paginatedPosts, page, total } = await new Post().paginate(posts, requestedPage)
 
-  if (!posts || posts.length < 1) {
+  if (requestedPage < 0 || (requestedPage > total && posts.length > 0)) {
     notFound()
   }
+
+  posts = paginatedPosts
 
   const prevDisabled = page === 0
   const nextDisabled = page === total
@@ -72,31 +74,31 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
         <Container>
           <Section title='Posts'>
             <Column className='gap-4'>
+              <form
+                action={async (form: FormData): Promise<void> => {
+                  'use server'
+
+                  redirect(
+                    `/blog?search=${encodeURIComponent((form.get('search') as string) || '')}`
+                  )
+                }}
+              >
+                <Input
+                  defaultValue={searchText || ''}
+                  id='search'
+                  type='text'
+                  name='search'
+                  icons={{
+                    leading: <Search />
+                  }}
+                  placeholder='Search posts...'
+                />
+
+                <input type='submit' hidden />
+              </form>
+
               {posts.length > 0 ? (
                 <>
-                  <form
-                    action={async (form: FormData): Promise<void> => {
-                      'use server'
-
-                      redirect(
-                        `/blog?search=${encodeURIComponent((form.get('search') as string) || '')}`
-                      )
-                    }}
-                  >
-                    <Input
-                      defaultValue={searchText || ''}
-                      id='search'
-                      type='text'
-                      name='search'
-                      icons={{
-                        leading: <Search />
-                      }}
-                      placeholder='Search posts...'
-                    />
-
-                    <input type='submit' hidden />
-                  </form>
-
                   <Grid>
                     {posts.map((post) => (
                       <article key={post.slug}>
@@ -145,13 +147,13 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
                     <Link
                       className={cn(
                         'text-lg font-bold transition duration-300',
-                        nextDisabled
-                          ? 'text-content-tertiary'
+                        prevDisabled
+                          ? 'text-content-tertiary pointer-events-none'
                           : 'text-content-primary hover:text-content-secondary'
                       )}
                       aria-disabled={prevDisabled}
                       aria-label='Previous page'
-                      href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
+                      href={`/blog?${searchText ? `search=${encodeURIComponent(searchText)}&` : ''}page=${
                         !prevDisabled ? page - 1 : page
                       }`}
                     >
@@ -166,12 +168,12 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
                       className={cn(
                         'text-lg font-bold transition duration-300',
                         nextDisabled
-                          ? 'text-content-tertiary'
+                          ? 'text-content-tertiary pointer-events-none'
                           : 'text-content-primary hover:text-content-secondary'
                       )}
                       aria-disabled={nextDisabled}
                       aria-label='Next page'
-                      href={`/blog?${searchText ? `search=${searchText}&` : ''}page=${
+                      href={`/blog?${searchText ? `search=${encodeURIComponent(searchText)}&` : ''}page=${
                         !nextDisabled ? page + 1 : page
                       }`}
                     >

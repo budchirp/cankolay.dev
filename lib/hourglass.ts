@@ -15,8 +15,8 @@ export class Hourglass {
     date = typeof date === 'string' ? new Date(date) : date
 
     const yyyy = date.getFullYear()
-    const mm = date.getMonth()
-    const dd = date.getDay()
+    const mm = date.getMonth() + 1
+    const dd = date.getDate()
 
     return `${dd < 10 ? `0${dd}` : dd}/${mm < 10 ? `0${mm}` : mm}/${yyyy}`
   }

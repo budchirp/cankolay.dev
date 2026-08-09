@@ -1,4 +1,3 @@
-import { Hourglass } from '@/lib/hourglass'
 import matter from 'gray-matter'
 import fs from 'fs/promises'
 import path from 'path'
@@ -32,7 +31,7 @@ export class Post {
         })
     )
 
-    return posts.sort((a, b) => a.date.getTime() + b.date.getTime()) || []
+    return posts.sort((a, b) => b.date.getTime() - a.date.getTime()) || []
   }
 
   public async paginate(
@@ -40,7 +39,7 @@ export class Post {
     page = 0,
     limit = 6
   ): Promise<{ posts: BlogPost[] | []; page: number; total: number }> {
-    const total = Math.ceil(posts.length / limit) - 1 || 0
+    const total = Math.max(0, Math.ceil(posts.length / limit) - 1)
     if (page > total || page < 0) {
       return { posts: [], page: 0, total: 0 }
     }

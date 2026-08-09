@@ -8,8 +8,6 @@ import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 
 export const markdownToReact = async (text: string): Promise<React.ReactNode> => {
-  'use server'
-
   const { content } = await compileMDX({
     source: text,
     components,

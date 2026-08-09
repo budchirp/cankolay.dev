@@ -66,6 +66,8 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
             divider={false}
             title={
               <Column className='md:w-2/3 gap-4'>
+                <Tag color='secondary'>Open to New Opportunities</Tag>
+
                 <Column>
                   <Heading size='h2'>Hi, It's me</Heading>
                   <Heading className='-ml-0.5 text-accent' size='h1'>
@@ -74,6 +76,12 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
                 </Column>
 
                 {data.about}
+
+                <Row className='gap-3 pt-1'>
+                  <Link href={`mailto:${CONSTANTS.EMAIL}`}>
+                    <Button color='accent'>Get in Touch</Button>
+                  </Link>
+                </Row>
               </Column>
             }
           />
@@ -84,7 +92,45 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
 
       <Section>
         <Container>
-          <Section className='mt-0' title={<Heading size='h2'>Featured Projects</Heading>}>
+          <Section
+            className='mt-0'
+            title={<Heading size='h2'>Services</Heading>}
+            description={
+              <Text className='text-content-secondary max-w-2xl'>{data.servicesDescription}</Text>
+            }
+          >
+            <Grid>
+              {data.services.map((service, index) => (
+                <article key={index}>
+                  <Box className='h-full'>
+                    <BoxContent>
+                      <Row className='gap-3 items-center'>
+                        <Center className='size-10 aspect-square rounded-full bg-surface-accent text-surface-content-accent border border-outline-accent shrink-0'>
+                          {service.icon}
+                        </Center>
+
+                        <Heading size='h3'>{service.title}</Heading>
+                      </Row>
+                    </BoxContent>
+
+                    <Divider />
+
+                    <BoxContent>
+                      <Text className='text-content-secondary'>{service.description}</Text>
+                    </BoxContent>
+                  </Box>
+                </article>
+              ))}
+            </Grid>
+          </Section>
+        </Container>
+      </Section>
+
+      <Divider />
+
+      <Section>
+        <Container>
+          <Section className='mt-0' title={<Heading size='h2'>Personal Projects</Heading>}>
             <Grid>
               {projects.map((project) => {
                 const random = colors.keys().toArray()
@@ -94,79 +140,55 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
 
                 return (
                   <article key={project.repo}>
-                    <Box>
-                      <Center className='relative aspect-video w-full overflow-hidden'>
-                        {project?.image ? (
-                          <Image
-                            className='object-cover size-full transition duration-500 ease-out hover:scale-125'
-                            width={640}
-                            height={360}
-                            alt={project.name}
-                            src={project.image}
-                          />
-                        ) : (
-                          <div
-                            className='size-full'
-                            style={{
-                              backgroundColor: background || 'var(--color-surface-secondary)'
-                            }}
-                          >
-                            <Center className='size-full'>
-                              <Heading
-                                style={{
-                                  color: background
-                                    ? 'color-mix(in srgb, white 70%, transparent)'
-                                    : 'var(--color-content-primary)'
-                                }}
-                                size='h2'
-                                className='text-center'
-                              >
-                                {project.name}
-                              </Heading>
-                            </Center>
-                          </div>
-                        )}
-                      </Center>
+                    <Box clickable>
+                      <Link
+                        href={`https://github.com/${project.repo}`}
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        <Center className='relative aspect-video w-full overflow-hidden cursor-pointer'>
+                          {project?.image ? (
+                            <Image
+                              className='object-cover size-full transition duration-500 ease-out hover:scale-125'
+                              width={640}
+                              height={360}
+                              alt={project.name}
+                              src={project.image}
+                            />
+                          ) : (
+                            <div
+                              className='size-full'
+                              style={{
+                                backgroundColor: background || 'var(--color-surface-secondary)'
+                              }}
+                            >
+                              <Center className='size-full'>
+                                <Heading
+                                  style={{
+                                    color: background
+                                      ? 'color-mix(in srgb, white 70%, transparent)'
+                                      : 'var(--color-content-primary)'
+                                  }}
+                                  size='h2'
+                                  className='text-center'
+                                >
+                                  {project.name}
+                                </Heading>
+                              </Center>
+                            </div>
+                          )}
+                        </Center>
+                      </Link>
 
                       <Divider />
 
                       <BoxContent>
                         <Column className='gap-2'>
-                          <Column>
-                            <Heading size='h2'>{project.name}</Heading>
+                          <Heading size='h2'>{project.name}</Heading>
+                          {project.description && (
                             <Text className='text-content-secondary'>{project.description}</Text>
-                          </Column>
-
-                          {project.keywords.length > 0 && (
-                            <Row className='overflow-x-auto gap-2 rounded-2xl'>
-                              {project.keywords.map((keyword: string, index: number) => (
-                                <Tag
-                                  className='break-none flex shrink-0'
-                                  color='secondary'
-                                  key={index}
-                                >
-                                  {keyword}
-                                </Tag>
-                              ))}
-                            </Row>
                           )}
                         </Column>
-                      </BoxContent>
-
-                      <Divider />
-
-                      <BoxContent>
-                        <Row>
-                          <Link href={`/projects/${project.repo}`}>
-                            <Button>Details</Button>
-                          </Link>
-
-                          {project.url && (
-                            <Link href={project.url}>
-                              <Button color='primary'>View website</Button>
-                            </Link>
-                          )}
-                        </Row>
                       </BoxContent>
                     </Box>
                   </article>
@@ -191,12 +213,12 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
                     <Link key={index} href={contact.link} rel='noreferrer' target='_blank'>
                       <Box key={index} clickable className='group'>
                         <BoxContent>
-                          <Row className='gap-2'>
+                          <Row className='gap-3'>
                             <Center className='transition-all duration-300 shadow-2xl size-10 aspect-square rounded-full bg-surface-accent text-surface-content-accent groun-hover:text-surface-content-accent-hover group-hover:bg-surface-accent-hover border border-outline-accent group-hover:border-outline-accent-hover'>
                               {contact.icon}
                             </Center>
 
-                            <Text className='text-xl font-bold'>{platform}</Text>
+                            <Heading size='h3'>{platform}</Heading>
                           </Row>
                         </BoxContent>
                       </Box>
