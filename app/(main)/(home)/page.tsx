@@ -1,5 +1,6 @@
 import type React from 'react'
 
+import { NowPlaying } from '@/components/ui/now-playing'
 import { MetadataManager } from '@/lib/metadata-manager'
 import tailwindColors from 'tailwindcss/colors'
 import CONSTANTS from '@/lib/constants'
@@ -227,6 +228,27 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
                 }
               )}
             </Grid>
+          </Section>
+        </Container>
+      </Section>
+
+      <Divider />
+
+      <Section className='bg-surface-secondary relative'>
+        <div className='absolute z-0 inset-0 overflow-hidden'>
+          <Container className='absolute inset-0'>
+            <div className='absolute top-0 left-0 size-64 opacity-50 bg-emerald-800 rounded-full blur-[128px]' />
+            <div className='absolute top-[85%] right-[20%] size-64 opacity-50 bg-emerald-700 rounded-full blur-[128px]' />
+          </Container>
+        </div>
+
+        <Container className='relative z-10'>
+          <Section
+            className='mt-0'
+            title={<Heading size='h2'>Now playing</Heading>}
+            columnClassName='gap-8'
+          >
+            <NowPlaying />
           </Section>
         </Container>
       </Section>
