@@ -141,12 +141,12 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
 
                 return (
                   <article key={project.repo}>
-                    <Box clickable>
-                      <Link
-                        href={`https://github.com/${project.repo}`}
-                        target='_blank'
-                        rel='noreferrer'
-                      >
+                    <Link
+                      href={`https://github.com/${project.repo}`}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      <Box clickable>
                         <Center className='relative aspect-video w-full overflow-hidden cursor-pointer'>
                           {project?.image ? (
                             <Image
@@ -179,19 +179,19 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
                             </div>
                           )}
                         </Center>
-                      </Link>
 
-                      <Divider />
+                        <Divider />
 
-                      <BoxContent>
-                        <Column className='gap-2'>
-                          <Heading size='h2'>{project.name}</Heading>
-                          {project.description && (
-                            <Text className='text-content-secondary'>{project.description}</Text>
-                          )}
-                        </Column>
-                      </BoxContent>
-                    </Box>
+                        <BoxContent>
+                          <Column className='gap-2'>
+                            <Heading size='h2'>{project.name}</Heading>
+                            {project.description && (
+                              <Text className='text-content-secondary'>{project.description}</Text>
+                            )}
+                          </Column>
+                        </BoxContent>
+                      </Box>
+                    </Link>
                   </article>
                 )
               })}
@@ -234,20 +234,17 @@ const Page: React.FC = async (): Promise<React.ReactNode> => {
 
       <Divider />
 
-      <Section className='bg-surface-secondary relative'>
-        <div className='absolute z-0 inset-0 overflow-hidden'>
+      <Section className='bg-surface-secondary relative overflow-hidden'>
+        <div className='absolute z-0 inset-0'>
           <Container className='absolute inset-0'>
             <div className='absolute top-0 left-0 size-64 opacity-50 bg-emerald-800 rounded-full blur-[128px]' />
-            <div className='absolute top-[85%] right-[20%] size-64 opacity-50 bg-emerald-700 rounded-full blur-[128px]' />
+            <div className='absolute top-[20%] left-[50%] size-64 opacity-50 bg-emerald-600 rounded-full blur-[128px]' />
+            <div className='absolute top-[85%] right-0 size-64 opacity-50 bg-emerald-700 rounded-full blur-[128px]' />
           </Container>
         </div>
 
-        <Container className='relative z-10'>
-          <Section
-            className='mt-0'
-            title={<Heading size='h2'>Now playing</Heading>}
-            columnClassName='gap-8'
-          >
+        <Container>
+          <Section className='mt-0' title={<Heading size='h2'>Now playing</Heading>}>
             <NowPlaying />
           </Section>
         </Container>

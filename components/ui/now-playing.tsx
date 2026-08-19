@@ -5,13 +5,13 @@ import { useEffect, useState } from 'react'
 
 import { Disc3, VolumeX } from 'lucide-react'
 import { Hourglass } from '@/lib/hourglass'
+import { SiSpotify } from 'react-icons/si'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { Box, BoxContent, Center, Column, Text, Row } from '@trash-kit/ui'
+import { Box, BoxContent, Heading, Center, Column, Text, Row } from '@trash-kit/ui'
 
 import type { Song } from '@/types/song'
-import { SiSpotify } from 'react-icons/si'
 
 export const NowPlaying: React.FC = () => {
   const [song, setSong] = useState<Song | null>(null)
@@ -39,22 +39,22 @@ export const NowPlaying: React.FC = () => {
   }, [])
 
   return (
-    <Box className='relative'>
-      <BoxContent padding='sm'>
-        <div className='absolute inset-0 blur-3xl opacity-75 w-full h-3/4 xs:h-full xs:w-1/4'>
-          {song?.image && (
-            <Image
-              height={50}
-              width={50}
-              src={song.image}
-              alt='album'
-              className='object-fill size-full'
-            />
-          )}
-        </div>
+    <Box className='relative overflow-visible! hover:scale-105 ease-out'>
+      <div className='absolute left-0 top-0 blur-2xl opacity-50 w-full h-3/4 xs:h-full xs:w-1/6'>
+        {song?.image && (
+          <Image
+            height={50}
+            width={50}
+            src={song.image}
+            alt='album'
+            className='object-fill size-full'
+          />
+        )}
+      </div>
 
+      <BoxContent padding='sm'>
         <Column className='xs:flex-row z-10 w-full items-center gap-3'>
-          <Center className='border border-outline aspect-square overflow-hidden shrink-0 rounded-2xl size-full xs:size-22'>
+          <Center className='border border-outline aspect-square overflow-hidden shrink-0 rounded-2xl size-full xs:size-24'>
             {song?.image ? (
               <Image
                 height={400}
@@ -70,25 +70,15 @@ export const NowPlaying: React.FC = () => {
 
           <Column className='gap-2 w-full p-2 xs:pe-2 xs:ps-0 xs:justify-center'>
             <Column className='gap-1'>
-              <Row className='justify-between'>
-                <Link
-                  href={song?.link || ''}
-                  target='_blank'
-                  className='flex items-center gap-1.5'
-                >
-                  <Disc3 className={song?.playback?.isPlaying ? 'animate-spin-slow' : ''} size={16} />
+              <Link href={song?.link || ''} target='_blank' className='flex items-center gap-1.5'>
+                <Disc3 className={song?.playback?.isPlaying ? 'animate-spin-slow' : ''} size={16} />
 
-                  <Text className='text-xl text-primary flex-1 font-bold leading-none'>
-                    {song?.title || 'Playing nothing'}
-                  </Text>
-                </Link>
+                <Heading size='h3' className='leading-0 font-black'>
+                  {song?.title || 'Playing nothing'}
+                </Heading>
+              </Link>
 
-                <SiSpotify size={16} />
-              </Row>
-
-              <Text className='text-md font-medium leading-none text-secondary/75'>
-                {song?.artist || '*****'}
-              </Text>
+              <Text className='text-content-secondary/75'>{song?.artist || '*****'}</Text>
             </Column>
 
             <Column className='gap-1'>
@@ -101,7 +91,7 @@ export const NowPlaying: React.FC = () => {
                 />
               </Row>
 
-              <Row className='text-sm text-primary/50 justify-between'>
+              <Row className='text-sm text-content-secondary/75 justify-between *:tabular-nums'>
                 <Text className='text-start'>{Hourglass.formatTime(song?.playback?.elapsed)}</Text>
 
                 <Text className='text-end'>{Hourglass.formatTime(song?.playback?.total)}</Text>

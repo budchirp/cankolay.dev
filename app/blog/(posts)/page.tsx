@@ -103,7 +103,7 @@ const Page: React.FC<DynamicPageProps> = async ({ searchParams }: DynamicPagePro
                     {posts.map((post) => (
                       <article key={post.slug}>
                         <Link aria-label='Go to the blog post' href={`/blog/${post.slug}`}>
-                          <Box>
+                          <Box clickable>
                             <Center className='relative aspect-video w-full overflow-hidden'>
                               <Image
                                 className='aspect-video object-cover transition duration-500 ease-out hover:scale-125'
