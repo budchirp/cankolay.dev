@@ -4,7 +4,7 @@ import { MetadataManager } from '@/lib/metadata-manager'
 import { markdownToReact } from '@/components/markdown'
 import { Hourglass } from '@/lib/hourglass'
 import { notFound } from 'next/navigation'
-import { Calendar, Pencil } from 'lucide-react'
+import { Calendar } from 'lucide-react'
 import { Post } from '@/lib/post'
 import Image from 'next/image'
 

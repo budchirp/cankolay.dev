@@ -1,7 +1,7 @@
 import type React from 'react'
 import type { ComponentProps } from 'react'
 
-import { Column, Container, Heading, cn } from '@trash-kit/ui'
+import { Column, Container, Heading } from '@trash-kit/ui'
 
 export type CenteredPageProps = {
   title: React.ReactNode

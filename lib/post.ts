@@ -23,11 +23,14 @@ export class Post {
             await fs.readFile(`${Post.path}/${file}`, 'utf-8')
           ) as any
 
-          return { ...{
+          return {
+            ...{
               ...metaData,
               id: metaData.slug,
               date: new Date(metaData.date)
-            }, body: content } as BlogPost
+            },
+            body: content
+          } as BlogPost
         })
     )
 

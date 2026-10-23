@@ -3,7 +3,7 @@
 import type React from 'react'
 import { useEffect, useState } from 'react'
 
-import { Code, Home, Pencil } from 'lucide-react'
+import { Home, Pencil } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 

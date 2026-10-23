@@ -13,7 +13,7 @@ import githubLightDefault from '@shikijs/themes/github-light-default'
 
 import { CopyButton } from '@/components/markdown/code/copy-button'
 
-import { Box, BoxContent, Divider, Row, Text } from '@trash-kit/ui'
+import { Box, BoxContent, Divider, Text } from '@trash-kit/ui'
 
 const shiki = await createHighlighter({
   themes: [githubDarkDefault, githubLightDefault],

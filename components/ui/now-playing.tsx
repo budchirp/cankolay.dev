@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 
 import { Disc3, VolumeX } from 'lucide-react'
 import { Hourglass } from '@/lib/hourglass'
-import { SiSpotify } from 'react-icons/si'
 import Image from 'next/image'
 import Link from 'next/link'
 
